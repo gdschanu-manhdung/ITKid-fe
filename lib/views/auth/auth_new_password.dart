@@ -55,8 +55,8 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
                         controller: passwordController,
                         hintText: "Password",
                         hintStyle: CustomTextStyles.titleMediumBlue400,
-                        textInputAction: TextInputAction.done,
-                        textInputType: TextInputType.emailAddress,
+                        showPasswordToggle: true, // Enable password toggle
+                        iconColor: appTheme.blue400,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please enter your new password";

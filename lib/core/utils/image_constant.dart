@@ -16,5 +16,7 @@ class ImageConstant {
 
   static String imgGridiconsvisible = '$imagePath/img_gridiconsvisible.svg';
 
+  // static String imgGridiconinsvisible = '$imagePath/img_gridiconinsvisible.svg';
+
   static String imageNotFound = 'assets/images/image_not_found.png';
 }

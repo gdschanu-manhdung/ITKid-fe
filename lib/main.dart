@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
           theme: theme,
           title: 'frontend',
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.authForgotPassword,
+          initialRoute: AppRoutes.authRegister,
           routes: AppRoutes.routes,
         );
       },

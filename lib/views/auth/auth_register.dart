@@ -1,6 +1,6 @@
-import 'package:frontend/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
+import 'package:frontend/widgets/custom_text_form_field.dart';
 
 class AuthRegister extends StatefulWidget {
   AuthRegister({Key? key}) : super(key: key);
@@ -21,12 +21,7 @@ class _AuthRegisterState extends State<AuthRegister> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Đã nhập đầy đủ thông tin, xử lý đăng ký ở đây
-      // Ví dụ: call API để xác thực thông tin đăng ký
-      // Nếu không hợp lệ, đặt _registerFailed thành true và hiển thị modal thông báo
-      setState(() {
-        _registerFailed = true; // Đặt biến trạng thái _registerFailed thành true
-      });
+      // Handle form submission
     }
   }
 
@@ -38,14 +33,14 @@ class _AuthRegisterState extends State<AuthRegister> {
         body: SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(20.0),
+            // padding: EdgeInsets.all(20.0),
             child: Form(
               key: _formKey,
               child: Column(
                 children: [
                   CustomImageView(
                     imagePath: ImageConstant.imgRegisterSmlogo,
-                    height: 260.v,
+                    height: 240.v,
                     width: 360.h,
                   ),
                   SizedBox(height: 13.v),
@@ -61,62 +56,79 @@ class _AuthRegisterState extends State<AuthRegister> {
                       ),
                     ),
                   SizedBox(height: 13.v),
-                  CustomTextFormField(
-                    controller: emailController,
-                    hintText: "Email",
-                    textInputType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter email";
-                      }
-                      return null;
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: CustomTextFormField(
+                      controller: emailController,
+                      hintText: "Email",
+                      textInputType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter email";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 13.v),
-                  CustomTextFormField(
-                    controller: passwordController,
-                    hintText: "Password",
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter password";
-                      }
-                      return null;
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: CustomTextFormField(
+                      controller: passwordController,
+                      hintText: "Password",
+                      obscureText: true, // Make it initially obscure
+                      showPasswordToggle: true, // Enable password toggle
+                      iconColor: appTheme.teal300,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter password";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 13.v),
-                  CustomTextFormField(
-                    controller: fullNameController,
-                    hintText: "Full Name",
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter full name";
-                      }
-                      return null;
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: CustomTextFormField(
+                      controller: fullNameController,
+                      hintText: "Full Name",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter full name";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 13.v),
-                  CustomTextFormField(
-                    controller: lgInputController,
-                    hintText: "MM/DD/YYYY",
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter date of birth";
-                      }
-                      return null;
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: CustomTextFormField(
+                      controller: lgInputController,
+                      hintText: "MM/DD/YYYY",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter date of birth";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 13.v),
-                  CustomTextFormField(
-                    controller: phoneNumberController,
-                    hintText: "Parent’s Phone Number",
-                    textInputType: TextInputType.phone,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter phone number";
-                      }
-                      return null;
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: CustomTextFormField(
+                      controller: phoneNumberController,
+                      hintText: "Parent’s Phone Number",
+                      textInputType: TextInputType.phone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter phone number";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 20.v),
                   GestureDetector(

@@ -25,12 +25,7 @@ class _AuthLoginState extends State<AuthLogin> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Đã nhập đầy đủ thông tin, xử lý đăng nhập ở đây
-      // Ví dụ: call API để xác thực thông tin đăng nhập
-      // Nếu không hợp lệ, đặt _loginFailed thành true và hiển thị modal thông báo
-      setState(() {
-        _loginFailed = true; // Đặt biến trạng thái _loginFailed thành true
-      });
+      // Handle form submission
     }
   }
 
@@ -62,65 +57,47 @@ class _AuthLoginState extends State<AuthLogin> {
                       child: Text(
                         "Login failed!",
                         style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 14.fSize,
-                            fontWeight: FontWeight.w500,
+                          color: Colors.red,
+                          fontSize: 14.fSize,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                   ],
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 19.h, right: 21.h),
-                        child: CustomTextFormField(
-                          controller: userNameController,
-                          hintText: "Email or username",
-                          hintStyle: CustomTextStyles.titleMediumBlue400,
-                          textInputType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please enter email or username";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
+                  SizedBox(height: 15.v),
+                  Padding(
+                    padding: EdgeInsets.only(left: 19.h, right: 21.h),
+                    child: CustomTextFormField(
+                      controller: userNameController,
+                      hintText: "Email or username",
+                      hintStyle: CustomTextStyles.titleMediumBlue400,
+                      textInputType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter email or username";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 15.v),
                   Padding(
                     padding: EdgeInsets.only(left: 19.h, right: 21.h),
-                    child: Stack(
-                      alignment: Alignment.centerRight,
-                      children: [
-                        CustomTextFormField(
-                          controller: passwordController,
-                          hintText: "**************",
-                          textInputAction: TextInputAction.done,
-                          textInputType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please enter password";
-                            }
-                            return null;
-                          },
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Handle show/hide password
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 21.v, horizontal: 22.h),
-                            child: CustomImageView(
-                              imagePath: ImageConstant.imgGridiconsvisible,
-                              height: 16.adaptSize,
-                              width: 16.adaptSize,
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: CustomTextFormField(
+                      controller: passwordController,
+                      hintStyle: CustomTextStyles.titleMediumBlue400,
+                      hintText: "Password",
+                      textInputAction: TextInputAction.done,
+                      textInputType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      showPasswordToggle: true,
+                      iconColor: appTheme.blue400,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter password";
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   SizedBox(height: 18.v),
