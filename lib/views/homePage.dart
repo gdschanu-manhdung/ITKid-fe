@@ -11,9 +11,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             }),
           ),
-          // 3 icon button
 
+          // 3 icon button
         ],
       ),
       bottomNavigationBar:  Row(
