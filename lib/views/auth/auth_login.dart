@@ -140,6 +140,7 @@ class _AuthLoginState extends State<AuthLogin> {
                             text: " Register",
                             style: CustomTextStyles.titleMediumff61b8b2.copyWith(
                               decoration: TextDecoration.underline,
+                              decorationColor: appTheme.teal300,
                             ),
                           ),
                         ],
