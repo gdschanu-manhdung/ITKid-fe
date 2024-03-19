@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_main.dart';
-import 'package:frontend/widgets/custom_text_form_field.dart';
 
 class AuthRegister extends StatefulWidget {
   AuthRegister({Key? key}) : super(key: key);
@@ -83,7 +82,7 @@ class _AuthRegisterState extends State<AuthRegister> {
                     child: CustomTextFormField(
                       controller: passwordController,
                       hintText: "Password",
-                      obscureText: false, // Make it initially obscure
+                      obscureText: true, // Make it initially obscure
                       showPasswordToggle: true, // Enable password toggle
                       iconColor: appTheme.teal300,
                       validator: (value) {
