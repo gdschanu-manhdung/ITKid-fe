@@ -8,13 +8,12 @@ class AuthRecovery extends StatelessWidget {
   AuthRecovery({Key? key}) : super(key: key);
 
   TextEditingController recoveryCodeController = TextEditingController();
-
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       // Xử lý khi mọi thông tin đã hợp lệ, chẳng hạn chuyển hướng đến trang AuthNewPassword
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => AuthNewPassword(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
-import 'package:frontend/views/auth/auth_main.dart';
+import 'package:frontend/views/auth/auth_login.dart';
 
 import '../../widgets/custom_text_form_field.dart';
 
@@ -15,6 +15,18 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
   TextEditingController passwordController = TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _submitForm(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      // Xử lý khi mọi thông tin đã hợp lệ, chẳng hạn chuyển hướng đến trang AuthLogin
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AuthLogin(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +80,7 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
                     SizedBox(height: 18.v),
                     GestureDetector(
                       onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Nếu mọi thông tin đã hợp lệ, xử lý ở đây
-                          // Ví dụ: chuyển hướng đến trang AuthMain
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AuthMain(),
-                            ),
-                          );
-                        }
+                        _submitForm(context);
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 100.h),
@@ -99,7 +102,7 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
                             borderRadius: BorderRadiusStyle.circleBorder25,
                           ),
                           child: Text(
-                            "Send code",
+                            "Change password",
                             style: CustomTextStyles.titleMediumWhiteA700,
                           ),
                         ),

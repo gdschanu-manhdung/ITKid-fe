@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
+import 'package:frontend/views/auth/auth_main.dart';
 import 'package:frontend/widgets/custom_text_form_field.dart';
 
 class AuthRegister extends StatefulWidget {
@@ -21,7 +22,13 @@ class _AuthRegisterState extends State<AuthRegister> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Handle form submission
+      // Xử lý khi mọi thông tin đã hợp lệ, chẳng hạn chuyển hướng đến trang AuthLogin
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AuthMain(),
+        ),
+      );
     }
   }
 
@@ -76,7 +83,7 @@ class _AuthRegisterState extends State<AuthRegister> {
                     child: CustomTextFormField(
                       controller: passwordController,
                       hintText: "Password",
-                      obscureText: true, // Make it initially obscure
+                      obscureText: false, // Make it initially obscure
                       showPasswordToggle: true, // Enable password toggle
                       iconColor: appTheme.teal300,
                       validator: (value) {
@@ -151,7 +158,7 @@ class _AuthRegisterState extends State<AuthRegister> {
                         "Register",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14.0,
+                          fontSize: 15.0,
                         ),
                       ),
                     ),

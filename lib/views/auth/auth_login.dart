@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import '../../widgets/custom_text_form_field.dart';
+import '../home/homePage.dart';
+import 'auth_forgot_password.dart';
+import 'auth_register.dart';
 
 class AuthLogin extends StatefulWidget {
   AuthLogin({Key? key}) : super(key: key);
@@ -15,17 +18,41 @@ class _AuthLoginState extends State<AuthLogin> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _loginFailed = false;
 
+  // void _navigateToForgotPassword(BuildContext context) {
+  //   Navigator.pushNamed(context, '/auth_forgot_password');
+  // }
+
+  // void _navigateToRegister(BuildContext context) {
+  //   Navigator.pushNamed(context, '/auth_register');
+  // }
+
+  // void _submitForm() {
+  //   if (_formKey.currentState!.validate()) {
+  //     // Handle form submission
+  //   }
+  // }
+
   void _navigateToForgotPassword(BuildContext context) {
-    Navigator.pushNamed(context, '/auth_forgot_password');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AuthForgotPassword()),
+    );
   }
 
   void _navigateToRegister(BuildContext context) {
-    Navigator.pushNamed(context, '/auth_register');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AuthRegister()),
+    );
   }
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Handle form submission
+      // Xác thực form thành công, chuyển hướng đến trang home
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MyHomePage()),
+      );
     }
   }
 

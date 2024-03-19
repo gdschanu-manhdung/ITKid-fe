@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_recovery.dart';
-
 import '../../widgets/custom_text_form_field.dart';
 
 class AuthForgotPassword extends StatelessWidget {
   AuthForgotPassword({Key? key}) : super(key: key);
 
   TextEditingController userNameController = TextEditingController();
-
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       // Xử lý khi mọi thông tin đã hợp lệ, chẳng hạn chuyển hướng đến trang AuthRecovery
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => AuthRecovery(),

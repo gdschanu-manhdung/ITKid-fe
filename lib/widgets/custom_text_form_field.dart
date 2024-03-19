@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../core/app_export.dart';
-import '../theme/theme_helper.dart';
 
 class CustomTextFormField extends StatefulWidget {
   CustomTextFormField({
@@ -69,7 +68,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   void initState() {
     super.initState();
-    _isPasswordVisible = !widget.obscureText!;
+    _isPasswordVisible = widget.obscureText!;
   }
 
   void initLogin() {
