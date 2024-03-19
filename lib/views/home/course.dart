@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:frontend/views/home/payment_course.dart';
 
 
@@ -179,53 +180,65 @@ class _Course extends State<Course> {
                   width: 1,
                    height: 100,
              ),
-            Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              //  crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('$first_lession',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+                          ),),
+                        Text('$second_lession',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+                          ),),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    // crossAxisAlignment: CrossAxisAlignment.end,
+                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('$first_lession',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                        ),),
-                      Text('$second_lession',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                        ),),
+              Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          onPressed:(){
+                            setState(() {
+                              _showNotification = true;
+                            });
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
+                            // );
+                          } ,
+                          style: ButtonStyle(
+                            shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                            elevation: MaterialStateProperty.all<double>(5),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                          ),
+                          child: Padding(
+                            padding:  EdgeInsets.fromLTRB(16,0,16,0),
+                            child: Text('Learn', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                          ),
+
+
+                        ),
+                      ),
                     ],
                   ),
-                ),
-
-                TextButton(
-                  onPressed:(){
-                    setState(() {
-                      _showNotification = true;
-                    });
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
-                    // );
-                  } ,
-                  style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
-                    elevation: MaterialStateProperty.all<double>(5),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-                  ),
-                  child: Padding(
-                    padding:  EdgeInsets.fromLTRB(16,0,16,0),
-                    child: Text('Learn', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-                  ),
-
-
-                ),
-
-              ],
+              
+                ],
+              ),
             )
             // Tiêu đề trong thẻ
 
@@ -245,7 +258,31 @@ class _Course extends State<Course> {
         fit: BoxFit.cover,
       ),
       'Python': Image.asset(
-        'assets/images/logo_python.jpeg',
+        'assets/images/logo_python.png',
+        width: 160,
+        height: 120,
+        fit: BoxFit.cover,
+      ),
+      'C++': Image.asset(
+        'assets/images/C++.png',
+        width: 170,
+        height: 100,
+        fit: BoxFit.cover,
+      ),
+      'C#': Image.asset(
+        'assets/images/C#.png',
+        width: 170,
+        height: 100,
+        fit: BoxFit.cover,
+      ),
+      'Dart': Image.asset(
+        'assets/images/logo_dart.png',
+        width: 170,
+        height: 100,
+        fit: BoxFit.cover,
+      ),
+      'JavaScript': Image.asset(
+        'assets/images/javascript.png',
         width: 170,
         height: 100,
         fit: BoxFit.cover,
