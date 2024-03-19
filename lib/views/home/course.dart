@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/home/payment_course.dart';
 
 
 import 'component/status_bar.dart';
@@ -13,6 +14,7 @@ class Course extends StatefulWidget {
 }
 
 class _Course extends State<Course> {
+  bool _showNotification= false;
 
   // @override
   // void initState() {
@@ -30,37 +32,117 @@ class _Course extends State<Course> {
           NavigationBar1(),
         ],
       ),
-      body: Container(
-        color: Colors.orange.shade50,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+      body: Stack(
+        children: [
+          Container(
+            color: Colors.orange.shade50,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
 
-            children: [
-               Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text('${widget.name_course}' ' Course',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30,shadows: [
-                    Shadow(
-                      offset: Offset(1.0, 1.0),
-                      blurRadius: 3.0,
-                      color: Colors.black,
+                children: [
+                   Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text('${widget.name_course}' ' Course',
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30,shadows: [
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 3.0,
+                          color: Colors.black,
+                        ),
+                      ],),
                     ),
-                  ],),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        getCard(widget.name_course, 'Lession 1: Tutorial'),
+                        getCard(widget.name_course, 'Lession 2: Fundamentals'),
+                        getCard(widget.name_course, 'Lession 3: Variable'),
+                        getCard(widget.name_course, 'Lession 4: Summary'),
+
+                      ],
+                    ),
+                  )
+                ],
+              ),
+          ),
+          if (_showNotification)
+            Container(
+              color: Colors.black.withOpacity(0.5), // Màu đen với độ mờ
+              child: Center(
+                child: Container(
+                  width: 350,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0), // Độ cong của góc
+                    color: Colors.white,
+                  ),
+                  padding: EdgeInsets.all(8.0),
+
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 8,8,0),
+                        child: const Text('You have to pay for the course to learn',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _showNotification = false;
+                                });
+                              },
+                              child: Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                              style: ButtonStyle(
+                                shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                                elevation: MaterialStateProperty.all<double>(5),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
+                              ),
+
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
+                                );
+                              },
+                              child: Text('Pay course',
+                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                            style:   ButtonStyle(
+                              shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                              elevation: MaterialStateProperty.all<double>(5),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(Colors.orange),
+                              ),
+
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    getCard(widget.name_course, 'Lession 1: Tutorial'),
-                    getCard(widget.name_course, 'Lession 2: Fundamentals'),
-                    getCard(widget.name_course, 'Lession 3: Variable'),
-                    getCard(widget.name_course, 'Lession 4: Summary'),
-
-                  ],
-                ),
-              )
-            ],
-          ),
+            ),
+        ],
       ),
 
     );
@@ -117,8 +199,17 @@ class _Course extends State<Course> {
 
                 TextButton(
                   onPressed:(){
+                    setState(() {
+                      _showNotification = true;
+                    });
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
+                    // );
                   } ,
                   style: ButtonStyle(
+                    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                    elevation: MaterialStateProperty.all<double>(5),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),

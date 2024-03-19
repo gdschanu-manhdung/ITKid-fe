@@ -75,7 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(' Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                          Row(
+                            children: [
+                              Text(' Trending ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                              Icon(Icons.trending_up, size: 40,color: Colors.orange,)
+                            ],
+                          ),
                           Row(
                             children: [
                             CardCourse('Java'),
@@ -98,7 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(' Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                        Row(
+                          children: [
+                            Text(' Top Free ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            Icon(Icons.money_off_sharp, size: 40,color: Colors.orange,)
+                          ],
+                        ),
                         Row(
                           children: [
                             CardCourse('C++'),
@@ -120,32 +130,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(' Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                        Row(
+                          children: [
+                            Text('Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            Icon(Icons.monetization_on, color: Colors.orange, size: 40,)
+                          ],
+                        ),
                         Row(
                           children: [
                             CardCourse('JavaScript'),
                             CardCourse('Dart'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0,10,0,10),
-                  child: Container(
-                    color: Color.fromRGBO(110, 237, 217, 1.0),
-                    width: 200,
-                    height: 220,
-                    child: Column(
-
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(' Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
-                        Row(
-                          children: [
-                            CardCourse('Java'),
-                            CardCourse('Python'),
                           ],
                         ),
                       ],

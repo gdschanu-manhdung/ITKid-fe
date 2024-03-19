@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/homePage.dart';
+import 'package:frontend/views/home/payment_course.dart';
 
 void main() {
   runApp(const MyApp());
