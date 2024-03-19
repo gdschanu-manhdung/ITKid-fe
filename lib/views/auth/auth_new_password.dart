@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_login.dart';
 
-import '../../widgets/custom_text_form_field.dart';
-
 class AuthNewPassword extends StatefulWidget {
   AuthNewPassword({Key? key}) : super(key: key);
 
@@ -67,6 +65,7 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
                         controller: passwordController,
                         hintText: "Password",
                         hintStyle: CustomTextStyles.titleMediumBlue400,
+                        obscureText: true,
                         showPasswordToggle: true, // Enable password toggle
                         iconColor: appTheme.blue400,
                         validator: (value) {

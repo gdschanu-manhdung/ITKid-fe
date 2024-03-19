@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_new_password.dart';
 
-import '../../widgets/custom_text_form_field.dart';
-
 class AuthRecovery extends StatelessWidget {
   AuthRecovery({Key? key}) : super(key: key);
 

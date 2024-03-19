@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_recovery.dart';
-import '../../widgets/custom_text_form_field.dart';
 
 class AuthForgotPassword extends StatelessWidget {
   AuthForgotPassword({Key? key}) : super(key: key);

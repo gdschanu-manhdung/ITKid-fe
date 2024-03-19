@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
-import '../../widgets/custom_text_form_field.dart';
 import '../home/homePage.dart';
 import 'auth_forgot_password.dart';
 import 'auth_register.dart';
@@ -17,20 +16,6 @@ class _AuthLoginState extends State<AuthLogin> {
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _loginFailed = false;
-
-  // void _navigateToForgotPassword(BuildContext context) {
-  //   Navigator.pushNamed(context, '/auth_forgot_password');
-  // }
-
-  // void _navigateToRegister(BuildContext context) {
-  //   Navigator.pushNamed(context, '/auth_register');
-  // }
-
-  // void _submitForm() {
-  //   if (_formKey.currentState!.validate()) {
-  //     // Handle form submission
-  //   }
-  // }
 
   void _navigateToForgotPassword(BuildContext context) {
     Navigator.push(
@@ -155,6 +140,7 @@ class _AuthLoginState extends State<AuthLogin> {
                             text: " Register",
                             style: CustomTextStyles.titleMediumff61b8b2.copyWith(
                               decoration: TextDecoration.underline,
+                              decorationColor: appTheme.teal300,
                             ),
                           ),
                         ],
