@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import '../home/homePage.dart';
 import 'auth_forgot_password.dart';
+import 'auth_main.dart';
 import 'auth_register.dart';
 
 class AuthLogin extends StatefulWidget {
@@ -45,6 +46,20 @@ class _AuthLoginState extends State<AuthLogin> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(231, 242, 251, 1),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AuthMain(),
+                ),
+              );
+            },
+          ),
+        ),
         resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: SizeUtils.width,
@@ -58,10 +73,10 @@ class _AuthLoginState extends State<AuthLogin> {
                 children: [
                   CustomImageView(
                     imagePath: ImageConstant.imgSmLogo,
-                    height: 261.v,
+                    height: 240.v,
                     width: 360.h,
                   ),
-                  SizedBox(height: 40.v),
+                  SizedBox(height: 30.v),
                   // Hiển thị modal thông báo nếu thông tin đăng nhập không hợp lệ
                   if (_loginFailed) ...[
                     Padding(
