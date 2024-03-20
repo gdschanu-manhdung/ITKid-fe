@@ -9,6 +9,13 @@ class AuthForgotPassword extends StatelessWidget {
   TextEditingController userNameController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool validateEmail(String email) {
+    String emailPattern =
+        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'; // Biểu thức chính quy cho email
+    RegExp regex = new RegExp(emailPattern);
+    return regex.hasMatch(email);
+  }
+
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       // Xử lý khi mọi thông tin đã hợp lệ, chẳng hạn chuyển hướng đến trang AuthRecovery
@@ -68,7 +75,9 @@ class AuthForgotPassword extends StatelessWidget {
                         textInputType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter your email or username";
+                            return "Please enter email or username";
+                          } else if (!validateEmail(value)) {
+                            return "Please enter a valid email address";
                           }
                           return null;
                         },

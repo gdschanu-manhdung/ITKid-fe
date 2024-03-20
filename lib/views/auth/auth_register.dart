@@ -47,6 +47,51 @@ class _AuthRegisterState extends State<AuthRegister> {
     }
   }
 
+  bool validateEmail(String email) {
+    String emailPattern =
+        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'; // Biểu thức chính quy cho email
+    RegExp regex = new RegExp(emailPattern);
+    return regex.hasMatch(email);
+  }
+
+  bool validateDateOfBirth(String dob) {
+    try {
+      List<String> dateParts = dob.split('/');
+      int day = int.parse(dateParts[1]);
+      int month = int.parse(dateParts[0]);
+      int year = int.parse(dateParts[2]);
+
+      bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+
+      int maxDaysInMonth;
+      if (month == 2) {
+        maxDaysInMonth = isLeapYear ? 29 : 28;
+      } else if ([4, 6, 9, 11].contains(month)) {
+        maxDaysInMonth = 30;
+      } else {
+        maxDaysInMonth = 31;
+      }
+
+      if (year < 1900 || year > DateTime.now().year) {
+        return false;
+      } else if (month < 1 || month > 12) {
+        return false;
+      } else if (day < 1 || day > maxDaysInMonth) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool validatePhoneNumber(String phoneNumber) {
+    String phonePattern = r'^[0-9]{10, 12}$'; // 10 digits
+    RegExp regex = new RegExp(phonePattern);
+    return regex.hasMatch(phoneNumber);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -116,6 +161,8 @@ class _AuthRegisterState extends State<AuthRegister> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Please enter email";
+                              } else if (!validateEmail(value)) {
+                                return "Please enter a valid email address";
                               }
                               return null;
                             },
@@ -152,6 +199,8 @@ class _AuthRegisterState extends State<AuthRegister> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Please enter date of birth";
+                              } else if (!validateDateOfBirth(value)) {
+                                return "Please enter a valid date of birth (MM/DD/YYYY)";
                               }
                               return null;
                             },
@@ -164,6 +213,8 @@ class _AuthRegisterState extends State<AuthRegister> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Please enter phone number";
+                              } else if (!validatePhoneNumber(value)) {
+                                return "Please enter a valid phone number";
                               }
                               return null;
                             },

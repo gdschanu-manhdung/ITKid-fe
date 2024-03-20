@@ -32,6 +32,13 @@ class _AuthLoginState extends State<AuthLogin> {
     );
   }
 
+  bool validateEmail(String email) {
+    String emailPattern =
+        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'; // Biểu thức chính quy cho email
+    RegExp regex = new RegExp(emailPattern);
+    return regex.hasMatch(email);
+  }
+
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // Xác thực form thành công, chuyển hướng đến trang home
@@ -102,6 +109,8 @@ class _AuthLoginState extends State<AuthLogin> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Please enter email or username";
+                        } else if (!validateEmail(value)) {
+                          return "Please enter a valid email address";
                         }
                         return null;
                       },
