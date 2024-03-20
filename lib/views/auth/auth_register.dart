@@ -31,21 +31,63 @@ class _AuthRegisterState extends State<AuthRegister> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController lgInputController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  bool _registerFailed = false;
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 3), () {
+          Navigator.of(context).pop();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AuthMain(),
+            ),
+          );
+        });
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          backgroundColor: Colors.transparent,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: 200,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Registration Successful!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: appTheme.blue400,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // Handle when all information is valid, for example navigate to AuthLogin screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AuthMain(),
-        ),
-      );
+      _showSuccessDialog(context);
     }
   }
+
 
   bool validateEmail(String email) {
     String emailPattern =
@@ -87,9 +129,18 @@ class _AuthRegisterState extends State<AuthRegister> {
   }
 
   bool validatePhoneNumber(String phoneNumber) {
-    String phonePattern = r'^[0-9]{10, 12}$'; // 10 digits
-    RegExp regex = new RegExp(phonePattern);
-    return regex.hasMatch(phoneNumber);
+    // Null or empty string is invalid phone number
+    if (phoneNumber == null || phoneNumber.isEmpty) {
+      return false;
+    }
+
+    const pattern = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$';
+    final regExp = RegExp(pattern);
+
+    if (!regExp.hasMatch(phoneNumber)) {
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -142,17 +193,6 @@ class _AuthRegisterState extends State<AuthRegister> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          if (_registerFailed)
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                "Register failed!",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 14.0,
-                                ),
-                              ),
-                            ),
                           SizedBox(height: 15.v),
                           CustomTextFormField(
                             controller: emailController,
