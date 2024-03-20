@@ -27,7 +27,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:frontend/views/auth/auth_main.dart';
-
 import 'core/utils/size_utils.dart';
 
 void main() {
@@ -49,7 +48,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
             useMaterial3: true,
           ),
-          home: const AuthMain(),
+          home: AuthMain(),
           debugShowCheckedModeBanner: false,
         );
       },

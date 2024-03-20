@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_login.dart';
+import 'package:frontend/views/auth/auth_recovery.dart';
 
 class AuthNewPassword extends StatefulWidget {
   AuthNewPassword({Key? key}) : super(key: key);
@@ -30,6 +31,20 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(231, 242, 251, 1),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AuthRecovery(),
+                ),
+              );
+            },
+          ),
+        ),
         resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: SizeUtils.width,

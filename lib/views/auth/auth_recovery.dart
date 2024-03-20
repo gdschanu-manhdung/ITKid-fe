@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
+import 'package:frontend/views/auth/auth_forgot_password.dart';
 import 'package:frontend/views/auth/auth_new_password.dart';
 
 class AuthRecovery extends StatelessWidget {
@@ -24,6 +25,20 @@ class AuthRecovery extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(231, 242, 251, 1),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AuthForgotPassword(),
+                ),
+              );
+            },
+          ),
+        ),
         resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: SizeUtils.width,
