@@ -15,15 +15,57 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AuthLogin(),
+            ),
+          );
+        });
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(horizontal: 5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          backgroundColor: Colors.transparent,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: 150,
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Change Password Successfully!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: appTheme.blue400,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      // Xử lý khi mọi thông tin đã hợp lệ, chẳng hạn chuyển hướng đến trang AuthLogin
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AuthLogin(),
-        ),
-      );
+      // Xử lý khi mọi thông tin đã hợp lệ, chuyển hướng đến trang AuthLogin
+      _showSuccessDialog(context);
     }
   }
 
