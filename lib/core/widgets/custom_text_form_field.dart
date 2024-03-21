@@ -123,18 +123,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       onPressed: _togglePasswordVisibility,
     )
         : null,
-    // suffixIcon: widget.showPasswordToggle
-    //     ? IconButton(
-    //   icon: Transform.scale(
-    //     scale: 1.2, // Adjust the scale factor to increase the size
-    //     child: Icon(
-    //       _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-    //       color: widget.iconColor,
-    //     ),
-    //   ),
-    //   onPressed: _togglePasswordVisibility,
-    // )
-    //     : null,
     suffixIconConstraints: widget.suffixConstraints,
     isDense: true,
     contentPadding: widget.contentPadding ?? EdgeInsets.all(12.h),
