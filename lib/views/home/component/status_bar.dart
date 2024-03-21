@@ -19,8 +19,8 @@ class _NavigationBar1State extends State<NavigationBar1> {
           SizedBox(width: MediaQuery.of(context).size.width * 0.45,),
           Image.asset(
             'assets/images/logo.png', // Đường dẫn tới ảnh trong thư mục assets
-            width: 40, // Chiều rộng của ảnh
-            height: 40, // Chiều cao của ảnh
+            width: MediaQuery.of(context).size.width * 0.09, // Chiều rộng của ảnh
+            height: MediaQuery.of(context).size.width * 0.09, // Chiều cao của ảnh
             fit: BoxFit.cover, // Cách hiển thị ảnh trong khung
           ),
 
