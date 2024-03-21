@@ -23,7 +23,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
             height: 40, // Chiều cao của ảnh
             fit: BoxFit.cover, // Cách hiển thị ảnh trong khung
           ),
-         // SizedBox(width: MediaQuery.of(context).size.width * 0.3,),
+
           Spacer(),
 
 

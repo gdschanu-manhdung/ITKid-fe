@@ -18,7 +18,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-int coin = 300;
+
+  int coin = 400;
+
 
 
   @override
@@ -29,8 +31,8 @@ int coin = 300;
         backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget> [
 
-      NavigationBar1(),
-      ],
+          NavigationBar1(),
+        ],
       ),
       body: Column(
         children: [
@@ -55,7 +57,7 @@ int coin = 300;
               ),
             ),
           ),
-           SearchBarApp(),
+          SearchBarApp(),
           Expanded(
             child: ListView(
               children: [
@@ -88,7 +90,9 @@ int coin = 300;
                             child: ListView(
                               scrollDirection: Axis.horizontal,
                               children: [
-                              CardCourse('Java'),
+
+                                CardCourse('Java'),
+
                                 CardCourse('Python'),
                                 CardCourse('C++'),
                                 CardCourse('C#'),

@@ -8,7 +8,7 @@ import 'component/status_bar.dart';
 
 class Course extends StatefulWidget {
   final String name_course;
-   Course(this.name_course,{super.key});
+  Course(this.name_course,{super.key});
 
   @override
   State<Course> createState() => _Course();
@@ -38,34 +38,34 @@ class _Course extends State<Course> {
           Container(
             color: Colors.orange.shade50,
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
 
-                children: [
-                   Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text('${widget.name_course}' ' Course',
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30,shadows: [
-                        Shadow(
-                          offset: Offset(1.0, 1.0),
-                          blurRadius: 3.0,
-                          color: Colors.black,
-                        ),
-                      ],),
-                    ),
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text('${widget.name_course}' ' Course',
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30,shadows: [
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 3.0,
+                        color: Colors.black,
+                      ),
+                    ],),
                   ),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        getCard(widget.name_course, 'Lession 1: Tutorial'),
-                        getCard(widget.name_course, 'Lession 2: Fundamentals'),
-                        getCard(widget.name_course, 'Lession 3: Variable'),
-                        getCard(widget.name_course, 'Lession 4: Summary'),
+                ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      getCard(widget.name_course, 'Lession 1: Tutorial'),
+                      getCard(widget.name_course, 'Lession 2: Fundamentals'),
+                      getCard(widget.name_course, 'Lession 3: Variable'),
+                      getCard(widget.name_course, 'Lession 4: Summary'),
 
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           if (_showNotification)
             Container(
@@ -123,9 +123,9 @@ class _Course extends State<Course> {
                               },
                               child: Text('Pay course',
                                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-                            style:   ButtonStyle(
-                              shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
-                              elevation: MaterialStateProperty.all<double>(5),
+                              style:   ButtonStyle(
+                                shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                                elevation: MaterialStateProperty.all<double>(5),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
@@ -153,7 +153,7 @@ class _Course extends State<Course> {
     String first_lession= lession.substring(0, 10);
     String second_lession= lession.substring(10, lession.length);
 
-   return Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -175,15 +175,17 @@ class _Course extends State<Course> {
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(15.0)),
                 child: getImage(name_course)
             ),
-             Container(
-                 color: Colors.grey,
-                  width: 1,
-                   height: 100,
-             ),
+
+            Container(
+              color: Colors.grey,
+              width: 1,
+              height: 100,
+            ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                 crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -201,9 +203,11 @@ class _Course extends State<Course> {
                   ),
                   Row(
                     // crossAxisAlignment: CrossAxisAlignment.end,
-                     mainAxisAlignment: MainAxisAlignment.center,
+
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-              Spacer(),
+                      Spacer(),
+
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextButton(
@@ -236,7 +240,8 @@ class _Course extends State<Course> {
                       ),
                     ],
                   ),
-              
+
+
                 ],
               ),
             )
