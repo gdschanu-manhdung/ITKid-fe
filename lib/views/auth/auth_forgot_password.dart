@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
+import 'package:frontend/views/auth/auth_login.dart';
 import 'package:frontend/views/auth/auth_recovery.dart';
 
 class AuthForgotPassword extends StatelessWidget {
@@ -7,6 +8,13 @@ class AuthForgotPassword extends StatelessWidget {
 
   TextEditingController userNameController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool validateEmail(String email) {
+    String emailPattern =
+        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'; // Biểu thức chính quy cho email
+    RegExp regex = new RegExp(emailPattern);
+    return regex.hasMatch(email);
+  }
 
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
@@ -24,6 +32,20 @@ class AuthForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(231, 242, 251, 1),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AuthLogin(),
+                ),
+              );
+            },
+          ),
+        ),
         resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: SizeUtils.width,
@@ -53,7 +75,9 @@ class AuthForgotPassword extends StatelessWidget {
                         textInputType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter your email or username";
+                            return "Please enter email or username";
+                          } else if (!validateEmail(value)) {
+                            return "Please enter a valid email address";
                           }
                           return null;
                         },
