@@ -73,7 +73,7 @@ class _Course extends State<Course> {
               child: Center(
                 child: Container(
                   width: 350,
-                  height: 150,
+                  height: 180,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0), // Độ cong của góc
                     color: Colors.white,
@@ -81,12 +81,14 @@ class _Course extends State<Course> {
                   padding: EdgeInsets.all(8.0),
 
                   child: Column(
+
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8.0, 8,8,0),
-                        child: const Text('You have to pay for the course to learn',
+                        child:  Text('You have to pay for the course to learn',
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                       ),
+                      Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -189,17 +191,18 @@ class _Course extends State<Course> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('$first_lession',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                          ),),
-                        Text('$second_lession',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                          ),),
-                      ],
-                    ),
+                    child: Text('$lession',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Text('$first_lession',
+                    //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+                    //       ),),
+                    //     Text('$second_lession',
+                    //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+                    //       ),),
+                    //   ],
+                    // ),
                   ),
                   Row(
                     // crossAxisAlignment: CrossAxisAlignment.end,
