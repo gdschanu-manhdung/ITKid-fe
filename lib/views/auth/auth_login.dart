@@ -133,7 +133,6 @@ class _AuthLoginState extends State<AuthLogin> {
                       controller: userNameController,
                       hintText: "Email or username",
                       hintStyle: CustomTextStyles.titleMediumBlue400,
-                      textInputType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Please enter email or username";
@@ -152,7 +151,6 @@ class _AuthLoginState extends State<AuthLogin> {
                       hintStyle: CustomTextStyles.titleMediumBlue400,
                       hintText: "Password",
                       textInputAction: TextInputAction.done,
-                      textInputType: TextInputType.visiblePassword,
                       obscureText: true,
                       showPasswordToggle: true,
                       iconColor: appTheme.blue400,
