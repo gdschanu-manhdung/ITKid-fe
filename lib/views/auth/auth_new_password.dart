@@ -74,7 +74,7 @@ class _AuthNewPasswordState extends State<AuthNewPassword> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(231, 242, 251, 1),
+          backgroundColor: Color.fromRGBO(207, 252, 255, 1),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
