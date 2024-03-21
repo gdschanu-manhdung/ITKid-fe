@@ -16,7 +16,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-
+  int coin = 400;
 
 
   @override
@@ -27,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget> [
 
-      NavigationBar1(),
-      ],
+          NavigationBar1(),
+        ],
       ),
       body: Column(
         children: [
@@ -41,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   const Text('HELLO, ',  style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.orangeAccent),),
                   Text('Hua Khanh Doan!', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
-                  SizedBox(width: 70),
-                  Text('300', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.2),
+                  Text('$coin', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
                   Image.asset(
                     'assets/images/coin.png', // Đường dẫn tới ảnh trong thư mục assets
                     width: 30, // Chiều rộng của ảnh
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-           SearchBarApp(),
+          SearchBarApp(),
           Expanded(
             child: ListView(
               children: [
@@ -81,11 +81,17 @@ class _MyHomePageState extends State<MyHomePage> {
                               Icon(Icons.trending_up, size: 40,color: Colors.orange,)
                             ],
                           ),
-                          Row(
-                            children: [
-                            CardCourse('Java'),
-                              CardCourse('Python'),
-                            ],
+                          Expanded(
+
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                CardCourse('Java'),
+                                CardCourse('Python'),
+                                CardCourse('C++'),
+                                CardCourse('C#'),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -106,14 +112,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         Row(
                           children: [
                             Text(' Top Free ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
-                            Icon(Icons.money_off_sharp, size: 40,color: Colors.orange,)
+                            Icon(Icons.money_off_rounded, size: 40,color: Colors.orange,)
                           ],
                         ),
-                        Row(
-                          children: [
-                            CardCourse('C++'),
-                            CardCourse('C#'),
-                          ],
+                        Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              CardCourse('C++'),
+                              CardCourse('C#'),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -136,11 +145,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             Icon(Icons.monetization_on, color: Colors.orange, size: 40,)
                           ],
                         ),
-                        Row(
-                          children: [
-                            CardCourse('JavaScript'),
-                            CardCourse('Dart'),
-                          ],
+                        Expanded (
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              CardCourse('JavaScript'),
+                              CardCourse('Dart'),
+                            ],
+                          ),
                         ),
                       ],
                     ),

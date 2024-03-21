@@ -62,7 +62,31 @@ class CardCourse extends StatelessWidget {
         fit: BoxFit.cover,
       ),
       'Python': Image.asset(
-        'assets/images/logo_python.jpeg',
+        'assets/images/logo_python.png',
+        width: 130,
+        height: 100,
+        fit: BoxFit.cover,
+      ),
+      'C++': Image.asset(
+        'assets/images/C++.png',
+        width: 140,
+        height: 90,
+        fit: BoxFit.cover,
+      ),
+      'C#': Image.asset(
+        'assets/images/C#.png',
+        width: 140,
+        height: 90,
+        fit: BoxFit.cover,
+      ),
+      'Dart': Image.asset(
+        'assets/images/logo_dart.png',
+        width: 140,
+        height: 90,
+        fit: BoxFit.cover,
+      ),
+      'JavaScript': Image.asset(
+        'assets/images/javascript.png',
         width: 140,
         height: 90,
         fit: BoxFit.cover,
