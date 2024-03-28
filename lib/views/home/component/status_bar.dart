@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/account/account_view.dart';
 
 
 class NavigationBar1 extends StatefulWidget {
@@ -78,6 +79,12 @@ class _NavigationBar1State extends State<NavigationBar1> {
                     ],
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Account()),
+                  );
+                },
               ),
             ],
           ),

@@ -88,7 +88,6 @@ class _AuthRegisterState extends State<AuthRegister> {
     }
   }
 
-
   bool validateEmail(String email) {
     String emailPattern =
         r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'; // Biểu thức chính quy cho email

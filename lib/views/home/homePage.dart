@@ -147,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Row(
                           children: [
-                            Text('Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            Text(' Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                             Icon(Icons.monetization_on, color: Colors.orange, size: 40,)
                           ],
                         ),

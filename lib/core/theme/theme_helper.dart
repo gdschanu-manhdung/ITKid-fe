@@ -89,9 +89,17 @@ class PrimaryColors {
 
   // Blue
   Color get blue400 => Color(0XFF4394DD);
+  Color get blue50 => Color(0XFFE7F2FB);
 
   // BlueGray
   Color get blueGray50 => Color(0XFFF1F1F1);
+  Color get blueGray100 => Color(0XFFCCCCCC);
+
+  // Gray50
+  Color get gray50 => Color(0XFFFCFCFC);
+
+  // Pink300
+  Color get pink300 => Color(0XFFFF6F8E);
 
   // Teal
   Color get teal300 => Color(0XFF61B8B2);
