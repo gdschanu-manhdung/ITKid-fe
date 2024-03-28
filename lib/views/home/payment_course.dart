@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/home/course.dart';
 
 import 'component/status_bar.dart';
 
@@ -92,7 +93,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                               fontSize: 22)),
                     ),
                     Container(
-                      width: 200,
+                      width: 250,
                       height: 1,
                       color: Colors.blue,
                     ),
@@ -190,13 +191,46 @@ class _PaymentCourseState extends State<PaymentCourse> {
                             color: Colors.white),
                       ),
                     ))
-                : Text(
-                    "Pay successfully! Let's learn",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                        color: Colors.orangeAccent),
-                  ),
+                : Column(
+                  children: [
+                    Text(
+                        "Pay successfully!",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: Colors.orangeAccent),
+                      ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Course(widget.name_course)),
+                        );
+                      },
+                      style: ButtonStyle(
+    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+    elevation: MaterialStateProperty.all<double>(5),
+    shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(30.0),
+    ),
+    ),
+    backgroundColor:
+    MaterialStateProperty.all(Colors.orangeAccent),
+    ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          " Let's learn",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
           )
         ],
       );

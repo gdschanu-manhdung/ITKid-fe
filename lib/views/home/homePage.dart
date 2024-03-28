@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   const Text('HELLO, ',  style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.orangeAccent),),
                   Text('Hua Khanh Doan!', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.2),
+                  Spacer(),
                   Text('$coin', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
                   Image.asset(
                     'assets/images/coin.png', // Đường dẫn tới ảnh trong thư mục assets
@@ -147,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Row(
                           children: [
-                            Text('Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            Text(' Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                             Icon(Icons.monetization_on, color: Colors.orange, size: 40,)
                           ],
                         ),

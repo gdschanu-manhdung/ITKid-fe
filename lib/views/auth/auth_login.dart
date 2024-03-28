@@ -36,7 +36,7 @@ class _AuthLoginState extends State<AuthLogin> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(Duration(seconds: 1), () {
           Navigator.of(context).pop();
           Navigator.pushReplacement(
             context,
@@ -97,7 +97,7 @@ class _AuthLoginState extends State<AuthLogin> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(231, 242, 251, 1),
+          backgroundColor: Color.fromRGBO(207, 252, 255, 1),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -133,7 +133,6 @@ class _AuthLoginState extends State<AuthLogin> {
                       controller: userNameController,
                       hintText: "Email or username",
                       hintStyle: CustomTextStyles.titleMediumBlue400,
-                      textInputType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Please enter email or username";
@@ -152,7 +151,6 @@ class _AuthLoginState extends State<AuthLogin> {
                       hintStyle: CustomTextStyles.titleMediumBlue400,
                       hintText: "Password",
                       textInputAction: TextInputAction.done,
-                      textInputType: TextInputType.visiblePassword,
                       obscureText: true,
                       showPasswordToggle: true,
                       iconColor: appTheme.blue400,

@@ -39,7 +39,7 @@ class _AuthRegisterState extends State<AuthRegister> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(Duration(seconds: 1), () {
           Navigator.of(context).pop();
           Navigator.pushReplacement(
             context,
@@ -87,7 +87,6 @@ class _AuthRegisterState extends State<AuthRegister> {
       _showSuccessDialog(context);
     }
   }
-
 
   bool validateEmail(String email) {
     String emailPattern =
