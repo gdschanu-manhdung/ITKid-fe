@@ -18,7 +18,7 @@ class CardCourse extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Course(name_course)),
+              MaterialPageRoute(builder: (context) => Course( false, name_course)),
             );
           },
           child: Card(
@@ -32,8 +32,8 @@ class CardCourse extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    '$name_course',
-                    style: TextStyle(
+                    name_course,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -41,7 +41,7 @@ class CardCourse extends StatelessWidget {
                 ),
                 // Ảnh trong thẻ
                 ClipRRect(
-                  borderRadius: BorderRadius.all( Radius.circular(15.0)),
+                  borderRadius: const BorderRadius.all( Radius.circular(15.0)),
                   child: getImage(name_course),
                 ),
                 // Tiêu đề trong thẻ

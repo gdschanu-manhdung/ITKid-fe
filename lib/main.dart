@@ -27,6 +27,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:frontend/views/auth/auth_main.dart';
+import 'package:frontend/views/lesson/lesson-question.dart';
+import 'package:frontend/views/lesson/lesson-theory.dart';
 
 import 'core/utils/size_utils.dart';
 

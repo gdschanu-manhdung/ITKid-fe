@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/course.dart';
 
@@ -26,7 +26,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
+        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget>[
           NavigationBar1(),
         ],
@@ -112,8 +112,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
     if (widget.balance < widget.course_fee) {
       return Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text('You need to fund in to pay',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -135,8 +135,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.orangeAccent),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Text(
                       'Fund In',
                       style: TextStyle(
@@ -156,7 +156,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                 'Rest                 '
                 '${widget.balance - widget.course_fee}'
                 ' ITK',
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
                     fontSize: 22)),
@@ -181,8 +181,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
                       backgroundColor:
                           MaterialStateProperty.all(Colors.orangeAccent),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(16.0),
                       child: Text(
                         'Pay',
                         style: TextStyle(
@@ -193,7 +193,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     ))
                 : Column(
                   children: [
-                    Text(
+                    const Text(
                         "Pay successfully!",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -204,7 +204,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Course(widget.name_course)),
+                          MaterialPageRoute(builder: (context) => Course( true, widget.name_course)),
                         );
                       },
                       style: ButtonStyle(
@@ -218,8 +218,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
     backgroundColor:
     MaterialStateProperty.all(Colors.orangeAccent),
     ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           " Let's learn",
                           style: TextStyle(

@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
 
-        backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
+        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget> [
 
           NavigationBar1(),
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   const Text('HELLO, ',  style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.orangeAccent),),
                   Text('Hua Khanh Doan!', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
-                  Spacer(),
+                  const Spacer(),
                   Text('$coin', style: TextStyle(fontSize:17 ,fontWeight: FontWeight.bold, color: Colors.blueAccent.shade200),),
                   Image.asset(
                     'assets/images/coin.png', // Đường dẫn tới ảnh trong thư mục assets
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          SearchBarApp(),
+          const SearchBarApp(),
           Expanded(
             child: ListView(
               children: [
@@ -67,19 +67,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Category()),
+                        MaterialPageRoute(builder: (context) => const Category()),
                       );
                     },
 
                     child: Container(
-                      color: Color.fromRGBO(207, 254, 255, 1.0),
+                      color: const Color.fromRGBO(207, 254, 255, 1.0),
                       width: 200,
                       height: 220,
                       child: Column(
 
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          const Row(
                             children: [
                               Text(' Trending ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                               Icon(Icons.trending_up, size: 40,color: Colors.orange,)
@@ -91,11 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               scrollDirection: Axis.horizontal,
                               children: [
 
-                                CardCourse('Java'),
+                                const CardCourse('Java'),
 
-                                CardCourse('Python'),
-                                CardCourse('C++'),
-                                CardCourse('C#'),
+                                const CardCourse('Python'),
+                                const CardCourse('C++'),
+                                const CardCourse('C#'),
                               ],
                             ),
                           ),
@@ -108,14 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0,10,0,10),
                   child: Container(
-                    color: Color.fromRGBO(110, 237, 217, 1.0),
+                    color: const Color.fromRGBO(110, 237, 217, 1.0),
                     width: 200,
                     height: 220,
                     child: Column(
 
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        const Row(
                           children: [
                             Text(' Top Free ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                             Icon(Icons.money_off_rounded, size: 40,color: Colors.orange,)
@@ -125,8 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              CardCourse('C++'),
-                              CardCourse('C#'),
+                              const CardCourse('C++'),
+                              const CardCourse('C#'),
                             ],
                           ),
                         ),
@@ -138,14 +138,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0,10,0,10),
                   child: Container(
-                    color: Color.fromRGBO(207, 254, 255, 1.0),
+                    color: const Color.fromRGBO(207, 254, 255, 1.0),
                     width: 200,
                     height: 220,
                     child: Column(
 
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        const Row(
                           children: [
                             Text('Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                             Icon(Icons.monetization_on, color: Colors.orange, size: 40,)
@@ -155,8 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              CardCourse('JavaScript'),
-                              CardCourse('Dart'),
+                              const CardCourse('JavaScript'),
+                              const CardCourse('Dart'),
                             ],
                           ),
                         ),

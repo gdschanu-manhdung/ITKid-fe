@@ -1,14 +1,16 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:frontend/views/home/payment_course.dart';
+import 'package:frontend/views/lesson/lesson-summary.dart';
+import 'package:frontend/views/lesson/lesson-theory.dart';
 
 
 import 'component/status_bar.dart';
 
 class Course extends StatefulWidget {
   final String name_course;
-  Course(this.name_course,{super.key});
+  final bool isFree;
+  const Course(this.isFree, this.name_course,{super.key});
 
   @override
   State<Course> createState() => _Course();
@@ -27,7 +29,7 @@ class _Course extends State<Course> {
     return Scaffold(
       appBar: AppBar(
 
-        backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
+        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget> [
 
           NavigationBar1(),
@@ -42,7 +44,7 @@ class _Course extends State<Course> {
 
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Text('${widget.name_course}' ' Course',
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30,shadows: [
                       Shadow(
@@ -56,10 +58,10 @@ class _Course extends State<Course> {
                 Expanded(
                   child: ListView(
                     children: [
-                      getCard(widget.name_course, 'Lession 1: Tutorial'),
-                      getCard(widget.name_course, 'Lession 2: Fundamentals'),
-                      getCard(widget.name_course, 'Lession 3: Variable'),
-                      getCard(widget.name_course, 'Lession 4: Summary'),
+                      getCard(widget.name_course, 'Lesson 1: Tutorial'),
+                      getCard(widget.name_course, 'Lesson 2: Fundamentals'),
+                      getCard(widget.name_course, 'Lesson 3: Variable'),
+                      getCard(widget.name_course, 'Lesson 4: Summary'),
 
                     ],
                   ),
@@ -78,17 +80,17 @@ class _Course extends State<Course> {
                     borderRadius: BorderRadius.circular(10.0), // Độ cong của góc
                     color: Colors.white,
                   ),
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
 
                   child: Column(
 
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 8,8,0),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(8.0, 8,8,0),
                         child:  Text('You have to pay for the course to learn',
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -100,7 +102,6 @@ class _Course extends State<Course> {
                                   _showNotification = false;
                                 });
                               },
-                              child: Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
                               style: ButtonStyle(
                                 shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
                                 elevation: MaterialStateProperty.all<double>(5),
@@ -111,6 +112,7 @@ class _Course extends State<Course> {
                                 ),
                                 backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
                               ),
+                              child: const Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
 
                             ),
                           ),
@@ -123,8 +125,6 @@ class _Course extends State<Course> {
                                   MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
                                 );
                               },
-                              child: Text('Pay course',
-                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
                               style:   ButtonStyle(
                                 shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
                                 elevation: MaterialStateProperty.all<double>(5),
@@ -135,6 +135,8 @@ class _Course extends State<Course> {
                                 ),
                                 backgroundColor: MaterialStateProperty.all(Colors.orange),
                               ),
+                              child: const Text('Pay course',
+                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
 
                             ),
                           ),
@@ -150,10 +152,10 @@ class _Course extends State<Course> {
 
     );
   }
-  Widget getCard(String name_course, String lession) {
+  Widget getCard(String name_course, String _lesson) {
 
-    String first_lession= lession.substring(0, 10);
-    String second_lession= lession.substring(10, lession.length);
+    // String first_lession= _lesson.substring(0, 10);
+    // String second_lession= _lesson.substring(10, _lesson.length);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -161,7 +163,7 @@ class _Course extends State<Course> {
         decoration: BoxDecoration(
           color: Colors.white,
 
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
           border: Border.all(
             color: Colors.black12,
             width: 2.0,
@@ -191,7 +193,7 @@ class _Course extends State<Course> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text('$lession',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
+                    child: Text(_lesson,style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
                     // Column(
                     //   crossAxisAlignment: CrossAxisAlignment.start,
                     //   children: [
@@ -209,19 +211,38 @@ class _Course extends State<Course> {
 
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Spacer(),
+                      const Spacer(),
 
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextButton(
                           onPressed:(){
                             setState(() {
-                              _showNotification = true;
+                              if(widget.isFree) {
+                                if(_lesson == 'Lesson 4: Summary') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) =>
+                                          LessonSummary(
+                                              title: widget.name_course))
+                                  );
+                                }
+                                else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) =>
+                                          LessonTheory(
+                                              title: widget.name_course))
+                                  );
+                                }
+                              }
+                              else
+                                {
+                                  _showNotification = true;
+                                }
+
                             });
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
-                            // );
+
                           } ,
                           style: ButtonStyle(
                             shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
@@ -233,7 +254,7 @@ class _Course extends State<Course> {
                             ),
                             backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding:  EdgeInsets.fromLTRB(16,0,16,0),
                             child: Text('Learn', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
                           ),
