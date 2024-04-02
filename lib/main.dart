@@ -26,7 +26,11 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:frontend/views/account/account_view.dart';
 import 'package:frontend/views/auth/auth_main.dart';
+import 'package:frontend/views/compete/compete_prematch.dart';
+import 'package:frontend/views/wallet/wallet.dart';
+import 'package:frontend/views/wallet/wallet_info.dart';
 
 import 'core/utils/size_utils.dart';
 
@@ -49,7 +53,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
             useMaterial3: true,
           ),
-          home: AuthMain(),
+          home: Compete(),
           debugShowCheckedModeBanner: false,
         );
       },

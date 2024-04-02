@@ -132,7 +132,8 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
             appBar: AppBar(
               backgroundColor: appTheme.blue50,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.arrow_back, size: 35),
+                color: appTheme.blue400,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,

@@ -152,7 +152,8 @@ class _AuthRegisterState extends State<AuthRegister> {
             SliverAppBar(
               backgroundColor: Color.fromRGBO(115, 219, 213, 1),
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.arrow_back, size: 35),
+                color: appTheme.blue400,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,

@@ -93,19 +93,24 @@ class PrimaryColors {
 
   // BlueGray
   Color get blueGray50 => Color(0XFFF1F1F1);
-  Color get blueGray100 => Color(0XFFCCCCCC);
+  Color get blueGray100 => Color(0XFFD9D9D9);
 
   // Gray50
   Color get gray50 => Color(0XFFFCFCFC);
+  Color get gray100 => Color(0XFFCCCCCC);
 
   // Pink300
   Color get pink300 => Color(0XFFFF6F8E);
+  Color get pink100 => Color(0XFFFF99AF);
 
   // Teal
   Color get teal300 => Color(0XFF61B8B2);
 
   // White
   Color get whiteA700 => Color(0XFFFFFFFF);
+
+  // Orange
+  Color get orange300 => Color(0XFFFFB039);
 }
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();

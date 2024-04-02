@@ -4,6 +4,7 @@ import 'package:frontend/views/account/account_change_password.dart';
 import 'package:frontend/views/account/account_edit_profile.dart';
 import 'package:frontend/views/home/homePage.dart';
 import '../home/component/status_bar.dart';
+import '../wallet/wallet.dart';
 
 class Account extends StatefulWidget {
   Account({Key? key}) : super(key: key);
@@ -40,7 +41,8 @@ class _AccountState extends State<Account> {
           appBar: AppBar(
             backgroundColor: appTheme.blue50,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(Icons.arrow_back, size: 35),
+              color: appTheme.blue400,
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -207,10 +209,21 @@ class _AccountState extends State<Account> {
               ),
             ),
           ),
-          Icon(
-            Icons.arrow_forward_ios_outlined,
-            color: appTheme.black900,
-            size: 20.h,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Wallet()),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.h),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: appTheme.black900,
+                size: 25,
+              ),
+            ),
           )
         ],
       ),

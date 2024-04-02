@@ -19,6 +19,10 @@ class AppDecoration {
     color: appTheme.pink300,
   );
 
+  static BoxDecoration get fillOrange => BoxDecoration(
+    color: appTheme.orange300,
+  );
+
   // Outline decorations
   static BoxDecoration get outlineBlack => BoxDecoration();
   static BoxDecoration get outlineBlueGray => BoxDecoration(
@@ -40,6 +44,10 @@ class AppDecoration {
 
 class BorderRadiusStyle {
   // Circle borders
+  static BorderRadius get circleBorder35 => BorderRadius.circular(
+    35.h,
+  );
+
   static BorderRadius get circleBorder25 => BorderRadius.circular(
     25.h,
   );
@@ -50,6 +58,10 @@ class BorderRadiusStyle {
 
   static BorderRadius get roundedBorder20 => BorderRadius.circular(
     20.h,
+  );
+
+  static BorderRadius get roundedBorder15 => BorderRadius.circular(
+    15.h,
   );
 }
 
