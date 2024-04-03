@@ -9,7 +9,6 @@ import '../home/homePage.dart';
 import './component/option_input.dart';
 import './component/inputscore_right.dart';
 import './component/inputscore_left.dart';
-// import './component/timecount.dart';
 
 class CompeteMatch extends StatefulWidget {
   CompeteMatch({Key? key}) : super(key: key);
@@ -23,13 +22,30 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
   List responseData = [];
   int number = 0;
   List<String> shuffledOptions = [];
-  // late Timer _timer;
-  int _secondRemaining = 10;
 
-  bool _isAnswered = false;
-  int _correctAns = 0;
-  int _selectedAns = 0;
-  int _numOfCorrectAns = 0;
+  int? selectedOptionIndex;
+  List<bool> selectedOptions = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    api();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    )..addListener(() {
+      setState(() {});
+    });
+    controller.forward().whenComplete(() {
+      // Reset trạng thái isSelected trong từng OptionInput về false
+      for (int i = 0; i < shuffledOptions.length; i++) {
+        setState(() {
+          selectedOptionIndex = null;
+        });
+      }
+    });
+  }
 
   Future api() async{
     final response = await http.get(Uri.parse('https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple'));
@@ -38,31 +54,10 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
       setState(() {
         responseData = data;
         updateShuffledOption();
+        selectedOptions = List.generate(responseData.length, (index) => false);
       });
-    }
-  }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    controller = AnimationController(
-      /// [AnimationController]s can be created with `vsync: this` because of
-      /// [TickerProviderStateMixin].
-      vsync: this,
-      duration: const Duration(seconds: 10),
-    )..addListener(() {
-      setState(() {
-        if (_secondRemaining > 0) {
-          _secondRemaining--;
-        } else {
-          _secondRemaining = 10;
-        }
-      });
-    });
-    controller.forward().whenComplete(nextQuestion);
-    super.initState();
-    api();
-    // startTimer();
+    }
   }
 
   void updateShuffledOption() {
@@ -89,7 +84,8 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
         number++;
         updateShuffledOption();
         controller.reset();
-        controller.forward().whenComplete(nextQuestion);
+        controller.forward();
+        selectedOptions = List.generate(responseData.length, (index) => false);
       }
       if (number == responseData.length - 1) {
         Navigator.pushReplacement(
@@ -102,36 +98,6 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
       }
     });
   }
-
-  void checkAns(int index) {
-    if (!_isAnswered) {
-      _isAnswered = true;
-      _selectedAns = index;
-      if (responseData[index]['correct_answer'] == shuffledOptions[index]) {
-        _correctAns = index;
-        _numOfCorrectAns++;
-      }
-      setState(() {
-        controller.stop();
-      });
-      Future.delayed(Duration(seconds: 1), nextQuestion);
-    }
-  }
-
-  // function for timer
-  // void startTimer() {
-  //   _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-  //     setState(() {
-  //       if (_secondRemaining > 0) {
-  //         _secondRemaining--;
-  //       } else {
-  //         nextQuestion();
-  //         _secondRemaining = 10;
-  //         updateShuffledOption();
-  //       }
-  //     });
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -185,14 +151,14 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                               children: [
                                 SizedBox(height: 15.v),
                                 Align(
-                                  child: Text(
-                                    "Question ${number + 1}/10",
-                                    style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color.fromRGBO(246, 0, 52, 1),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
+                                    child: Text(
+                                        "Question ${number + 1}/10",
+                                        style: theme.textTheme.headlineLarge!.copyWith(
+                                          color: Color.fromRGBO(246, 0, 52, 1),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 26,
+                                        )
                                     )
-                                  )
                                 ),
                                 SizedBox(height: 20.v),
                                 Row(
@@ -230,76 +196,63 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                 ),
                                 SizedBox(height: 20.v),
                                 Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 20.h),
-                                    padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 50.v),
-                                    decoration: AppDecoration.outlineBlueGray.copyWith(
-                                      borderRadius: BorderRadiusStyle.roundedBorder20,
-                                      color: Color(0xFFFCFCFC),
+                                  width: SizeUtils.width * 0.9,
+                                  height: SizeUtils.height * 0.3,
+                                  padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 50.v),
+                                  decoration: AppDecoration.outlineBlueGray.copyWith(
+                                    borderRadius: BorderRadiusStyle.roundedBorder20,
+                                    color: Color(0xFFFCFCFC),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    responseData.isNotEmpty? responseData[number]['question'] : 'Loading...',
+                                    style: TextStyle(
+                                      color: appTheme.black900,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    child: Padding(
-                                      padding:EdgeInsets.only(top: 1.v),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(height: 10.v),
-                                          Text(
-                                            responseData.isNotEmpty? responseData[number]['question'] : 'Loading...',
-                                            style: TextStyle(
-                                              color: appTheme.black900,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(height: 10.v),
-                                        ],
-                                      ),
-                                    )
+                                  ),
                                 ),
                                 SizedBox(height: 20.v),
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: (responseData.isNotEmpty && responseData[number]['incorrect_answers'] != null) ?
-                                      shuffledOptions.sublist(0, 2).map((option) {
-                                        return Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.v),
-                                            child: OptionInput(
-                                              option: option,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList() : [],
-                                    ),
-                                    Row(
-                                      children: (responseData.isNotEmpty && responseData[number]['incorrect_answers'] != null) ?
-                                      shuffledOptions.sublist(2, 4).map((option) {
-                                        return Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.v),
-                                            child: OptionInput(
-
-                                              option: option,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList() : [],
-                                    ),
-                                  ],
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15.h),
+                                  child: GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 15.v,
+                                    crossAxisSpacing: 15.h,
+                                    childAspectRatio: 2.6,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    children: List.generate(shuffledOptions.length, (index) {
+                                      bool isCorrect = index == shuffledOptions.indexOf(
+                                          responseData[number]['correct_answer']);
+                                      return OptionInput(
+                                          option: shuffledOptions[index],
+                                          isCorrect: isCorrect,
+                                          isSelected: selectedOptions[index],
+                                          onPressed: () {
+                                            setState(() {
+                                              selectedOptionIndex = index;
+                                              if (isCorrect) {
+                                                selectedOptions[index] = true;
+                                              } else {
+                                                selectedOptions[index] = true;
+                                                for (int i = 0; i < shuffledOptions.length; i++) {
+                                                  if (shuffledOptions[i] == responseData[number]['correct_answer']) {
+                                                    selectedOptions[i] = true;
+                                                  }
+                                                }
+                                              }
+                                              Future.delayed(Duration(milliseconds: 500), () {
+                                                nextQuestion();
+                                              });
+                                            });
+                                          }
+                                      );
+                                    }),
+                                  ),
                                 ),
                                 SizedBox(height: 10.v),
-                                // Row(
-                                //     mainAxisAlignment: MainAxisAlignment.center,
-                                //     children: [
-                                //       Expanded(
-                                //           child: Padding(
-                                //               padding: EdgeInsets.symmetric(horizontal: 25.h),
-                                //               child: TimeCount(
-                                //                 time: _secondRemaining.toString(),
-                                //               )
-                                //           )
-                                //       ),
-                                //     ]
-                                // ),
                               ]
                           )
                       )
