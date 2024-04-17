@@ -88,7 +88,6 @@ class _AuthRegisterState extends State<AuthRegister> {
     }
   }
 
-
   bool validateEmail(String email) {
     String emailPattern =
         r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'; // Biểu thức chính quy cho email
@@ -153,7 +152,8 @@ class _AuthRegisterState extends State<AuthRegister> {
             SliverAppBar(
               backgroundColor: Color.fromRGBO(115, 219, 213, 1),
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.arrow_back, size: 35),
+                color: appTheme.blue400,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,

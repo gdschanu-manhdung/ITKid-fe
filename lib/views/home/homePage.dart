@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/views/home/component/card_course.dart';
 import 'package:frontend/views/home/component/search_bar.dart';
-import 'package:frontend/views/home/component/status_bar.dart';
+
 
 import 'category.dart';
 
@@ -25,17 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-
-        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
-        actions: <Widget> [
-
-          NavigationBar1(),
-        ],
-      ),
-      body: Column(
+    return  Column(
         children: [
+          const SizedBox(height: 80,),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.08,
             width: double.infinity,
@@ -89,13 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
                             child: ListView(
                               scrollDirection: Axis.horizontal,
-                              children: [
+                              children: const [
 
-                                const CardCourse('Java'),
+                                CardCourse('Java'),
 
-                                const CardCourse('Python'),
-                                const CardCourse('C++'),
-                                const CardCourse('C#'),
+                                CardCourse('Python'),
+                                CardCourse('C++'),
+                                CardCourse('C#'),
                               ],
                             ),
                           ),
@@ -124,9 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Expanded(
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: [
-                              const CardCourse('C++'),
-                              const CardCourse('C#'),
+                            children: const [
+                              CardCourse('C++'),
+                              CardCourse('C#'),
                             ],
                           ),
                         ),
@@ -147,16 +139,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         const Row(
                           children: [
-                            Text('Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            Text(' Top fee ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                             Icon(Icons.monetization_on, color: Colors.orange, size: 40,)
                           ],
                         ),
                         Expanded (
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: [
-                              const CardCourse('JavaScript'),
-                              const CardCourse('Dart'),
+                            children: const [
+                              CardCourse('JavaScript'),
+                              CardCourse('Dart'),
                             ],
                           ),
                         ),
@@ -164,12 +156,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-
+                const SizedBox(height: 80,),
               ],
             ),
           ),
+
         ],
-      ),
     );
   }
 }

@@ -26,9 +26,10 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:frontend/views/auth/auth_main.dart';
-import 'package:frontend/views/lesson/lesson-question.dart';
-import 'package:frontend/views/lesson/lesson-theory.dart';
+import 'package:frontend/base.dart';
+
+import 'package:frontend/views/compete/compete_inmatch.dart';
+
 
 import 'core/utils/size_utils.dart';
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
             useMaterial3: true,
           ),
-          home: const AuthMain(),
+          home: Menu(),
           debugShowCheckedModeBanner: false,
         );
       },

@@ -22,6 +22,7 @@ class CardCourse extends StatelessWidget {
             );
           },
           child: Card(
+            color: Colors.white,
 
             elevation: 5.0,
             shape: RoundedRectangleBorder(
