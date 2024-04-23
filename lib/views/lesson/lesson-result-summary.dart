@@ -93,7 +93,7 @@ class _LessonResultSummaryStage extends State<LessonResultSummary> {
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => Course(true, widget.title)),
                   );

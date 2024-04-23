@@ -250,7 +250,7 @@ void checkResult(Question question, int choice) {
           count++;
           progress = (count)/10;
       } else {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LessonResultSummary(title: widget.title, point: point,)),
         );

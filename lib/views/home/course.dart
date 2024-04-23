@@ -120,7 +120,7 @@ class _Course extends State<Course> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextButton(
                               onPressed: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
                                 );

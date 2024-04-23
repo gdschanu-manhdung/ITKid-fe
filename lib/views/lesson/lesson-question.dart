@@ -148,7 +148,7 @@ class _LessonQuestion extends State<LessonQuestion> {
             }
           });
           Future.delayed(const Duration(seconds: 3), () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => LessonResult(title: widget.title)),
             );

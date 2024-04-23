@@ -285,7 +285,7 @@ class _LessonTheory extends State<LessonTheory> {
                   backgroundColor: MaterialStateProperty.all(Colors.orange),
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => LessonQuestion(title: widget.title),
