@@ -5,11 +5,13 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/base.dart';
 import 'package:frontend/game/component/ViewQuestion.dart';
 import 'package:frontend/game/config.dart';
 import 'package:frontend/game/entity/box_question.dart';
 
 import '../repository/question.dart';
+import '../views/home/component/status_bar.dart';
 import 'entity/entity.dart';
 import 'entity/none.dart';
 import 'entity/player.dart';
@@ -17,6 +19,7 @@ import 'entity/treasure.dart';
 import 'entity/wall.dart';
 
 ValueNotifier<bool> viewQuestionNotifier = ValueNotifier<bool>(false);
+ValueNotifier<bool> viewButton = ValueNotifier<bool>(false);
 const double UNIT = GameUnit.UNIT;
 late TextComponent textComponent;
 late Player player;
@@ -46,31 +49,35 @@ class _MyGameState extends State<MyGame> {
     Colors.black45
   ];
   List<Question> list_quesiton = [
+  Question(
+  question: "What is the common file extension for Python scripts?",
+  option: [".py", ".cpp", ".js", ".java"],
+  correctAnswer: 0,
+  ),
+
+  Question(
+  question: "In comments, how do you write a single line in Python?",
+  option: ["// This is a comment", "# This is a comment", "; This is a comment", "* This is a comment"],
+  correctAnswer: 1,
+  ),
+
+  Question(
+  question: "Which of these operators is used for printing output in Python?",
+  option: ["print()", "echo()", "output()", "display()"],
+  correctAnswer: 0,
+  ),
+
+  Question(
+  question: " What is the keyword used to define a function in Python?",
+  option: ["function", "define", "def", "create"],
+  correctAnswer: 2,
+  ),
+
     Question(
-      question: "The extension part of Python files",
-      option: [".py", ".c", ".java", ".python"],
-      correctAnswer: 0,
-    ),
-    Question(
-      question: "Who is the most handsome in the group?",
-      option: ["Panda", "SpiderMan", "dark armpits", "chill"],
-      correctAnswer: 2,
-    ),
-    Question(
-      question: "The extension part of Python files",
-      option: [".py", ".c", ".java", ".python"],
-      correctAnswer: 0,
-    ),
-    Question(
-      question: "The extension part of Python files",
-      option: [".py", ".c", ".java", ".python"],
-      correctAnswer: 0,
-    ),
-    Question(
-      question: "The extension part of Python files5",
-      option: [".py", ".c", ".java", ".python"],
-      correctAnswer: 0,
-    ),
+      question: "How do you indicate the end of a line of code in Python (assuming no semicolon is used)?",
+  option: ["Semicolon (;) required", "Enter key", "Line break", "Commas"],
+  correctAnswer: 1,
+  ),
   ];
   int count = 0;
   late var game;
@@ -84,120 +91,232 @@ class _MyGameState extends State<MyGame> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 100,
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Treasure Game',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                color: Colors.orange),
-          ),
-        ),
-        Stack(children: [
-          SizedBox(
-            width: double.infinity,
-            height: 420,
-            child: game,
-          ),
-          ValueListenableBuilder<bool>(
-            valueListenable: viewQuestionNotifier,
-            builder: (context, value, child) {
-              return Visibility(
-                visible: value,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Center(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 2.1,
-                      width: MediaQuery.of(context).size.width - 32,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors
-                              .orangeAccent // Bo góc tròn với bán kính 10.0
+    return Scaffold(
+      appBar: AppBar(
 
-                          ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Text(
-                              list_quesiton[count].question,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Expanded(
-                            child: GridView.count(
-                              shrinkWrap: true,
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.7,
-                              children: [
-                                getButton(0),
-                                getButton(1),
-                                getButton(2),
-                                getButton(3),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-          )
-        ]),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                width: 160,
-                height: 160,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100.0),
-                    // Bán kính bo góc (tính bằng pixel)
-                    // Thuộc tính để thêm viền
-                    border: Border.all(
-                      color: Colors.orange, // Màu viền
-                      width: 5.0, // Độ dày viền (tính bằng pixel)
-                    ),
-                    color: Colors.amberAccent.shade200),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    getDirection(Icons.arrow_circle_up, 1),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        getDirection(Icons.arrow_circle_left_outlined, 0),
-                        const SizedBox(
-                          width: 30,
+        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
+        actions: <Widget> [
+
+          NavigationBar1(),
+        ],
+      ),
+      body: Column(
+        children: [
+
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Treasure Game',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  color: Colors.orange),
+            ),
+          ),
+          Stack(children: [
+            SizedBox(
+              width: double.infinity,
+              height: 420,
+              child: game,
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: viewButton,
+                  builder: (context, value, child) {
+                    return Visibility(
+                      visible: value,
+                      child: Container(
+                        width: 300,
+                        height: 200,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.orange.shade200,
+
                         ),
-                        getDirection(Icons.arrow_circle_right_outlined, 2)
-                      ],
-                    ),
-                    getDirection(Icons.arrow_circle_down, 3),
-                  ],
+
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Column(
+                                children: [
+                                  Text("Congratulations!.",
+                                  style: TextStyle(fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 21),),
+                                  Text("Select your options?",
+
+                                    style: TextStyle(fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 21),),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  style: ButtonStyle(
+                                    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                                    elevation: MaterialStateProperty.all<double>(5),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                    backgroundColor: MaterialStateProperty.all(Colors.orange),
+                                  ),
+                                  onPressed:() {
+                                    setState(() {
+                                      isWin = false;
+                                      viewButton.value = false;
+                                    });
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const MyGame()),
+                                    );
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text("Play Again",style: TextStyle(fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.white),),
+                                  ),
+                                ),
+                                const SizedBox(width: 20,),
+                                TextButton(
+                                  style: ButtonStyle(
+                                    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                                    elevation: MaterialStateProperty.all<double>(5),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                    backgroundColor: MaterialStateProperty.all(Colors.orange),
+                                  ),
+                                  onPressed:() {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Menu(index: 3,)),
+                                    );
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text("Exit",style: TextStyle(fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.white),),
+                                  ),
+                                ),
+                              ],
+                            )
+
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-          ],
-        )
-      ],
+            ValueListenableBuilder<bool>(
+              valueListenable: viewQuestionNotifier,
+              builder: (context, value, child) {
+                return Visibility(
+                  visible: value,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Center(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height / 2.1,
+                        width: MediaQuery.of(context).size.width - 32,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors
+                                .orangeAccent // Bo góc tròn với bán kính 10.0
+
+                            ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                list_quesiton[count].question,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                              child: GridView.count(
+                                shrinkWrap: true,
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.7,
+                                children: [
+                                  getButton(0),
+                                  getButton(1),
+                                  getButton(2),
+                                  getButton(3),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  width: 160,
+                  height: 160,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100.0),
+                      // Bán kính bo góc (tính bằng pixel)
+                      // Thuộc tính để thêm viền
+                      border: Border.all(
+                        color: Colors.orange, // Màu viền
+                        width: 5.0, // Độ dày viền (tính bằng pixel)
+                      ),
+                      color: Colors.amberAccent.shade200),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      getDirection(Icons.arrow_circle_up, 1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          getDirection(Icons.arrow_circle_left_outlined, 0),
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          getDirection(Icons.arrow_circle_right_outlined, 2)
+                        ],
+                      ),
+                      getDirection(Icons.arrow_circle_down, 3),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -295,7 +414,7 @@ class MyWorld extends FlameGame with TapDetector, HasCollisionDetection {
   @override
   Future<FutureOr<void>> onLoad() async {
      textComponent = TextComponent(
-       text: 'Winner',
+       text: 'You Win!',
        textRenderer: TextPaint(
          style: const TextStyle(
            fontSize: 52.0,
@@ -470,6 +589,9 @@ class MyWorld extends FlameGame with TapDetector, HasCollisionDetection {
     if(isWin) {
       if(textComponent.y>100) {
         textComponent.y = textComponent.y -4;
+      }
+      else if(textComponent.y==100){
+        viewButton.value = true;
       }
 
     }

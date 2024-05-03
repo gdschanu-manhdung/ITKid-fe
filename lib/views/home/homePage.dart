@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:frontend/views/home/component/card_course.dart';
 import 'package:frontend/views/home/component/search_bar.dart';
 
@@ -83,11 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               scrollDirection: Axis.horizontal,
                               children: const [
 
-                                CardCourse('Java'),
+                                CardCourse(false,'Java'),
 
-                                CardCourse('Python'),
-                                CardCourse('C++'),
-                                CardCourse('C#'),
+                                CardCourse(false, 'Python'),
+                                CardCourse(false,'C++'),
+                                CardCourse(false,'C#'),
                               ],
                             ),
                           ),
@@ -117,8 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: const [
-                              CardCourse('C++'),
-                              CardCourse('C#'),
+                              CardCourse(true,'C++'),
+                              CardCourse(true,'C#'),
                             ],
                           ),
                         ),
@@ -147,8 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: const [
-                              CardCourse('JavaScript'),
-                              CardCourse('Dart'),
+                              CardCourse(false,'JavaScript'),
+                              CardCourse(false,'Dart'),
                             ],
                           ),
                         ),

@@ -3,6 +3,7 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/game/my_game.dart';
+import 'package:frontend/game/screen/listGame.dart';
 import 'package:frontend/views/account/account_view.dart';
 import 'package:frontend/views/compete/compete_prematch.dart';
 import 'package:frontend/views/home/homePage.dart';
@@ -53,7 +54,7 @@ class _MenuState extends State<Menu> {
           children: [
             Container(
                 color: AppColors.backgroundColor,
-                child: (_index==0)?const MyHomePage():(_index==2)?  Account() : (_index==1) ?  Compete() :const MyGame()
+                child: (_index==0)?const MyHomePage():(_index==2)?  Account() : (_index==1) ?  Compete() : ListGame()
             ),
 
 

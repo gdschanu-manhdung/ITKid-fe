@@ -5,7 +5,8 @@ import '../course.dart';
 
 class CardCourse extends StatelessWidget {
   final String name_course;
-  const CardCourse(this.name_course,{super.key});
+  final bool ?isFree;
+  const CardCourse(this.isFree,this.name_course,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CardCourse extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Course( false, name_course)),
+              MaterialPageRoute(builder: (context) => Course( isFree!, name_course)),
             );
           },
           child: Card(
