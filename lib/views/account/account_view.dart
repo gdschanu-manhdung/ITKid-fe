@@ -50,14 +50,7 @@ class _AccountState extends State<Account> {
                     child: Column(
                       children: [
                         SizedBox(height: 10.v),
-                        Text(
-                            "Account",
-                            style: theme.textTheme.headlineLarge!.copyWith(
-                                color: appTheme.blue400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                            )
-                        ),
+
                         SizedBox(height: 15.v),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.h),

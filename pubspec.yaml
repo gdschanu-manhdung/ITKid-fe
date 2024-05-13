@@ -41,6 +41,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   curved_labeled_navigation_bar: ^2.0.2
   flame: ^1.17.0
+  flutter_joystick: ^0.0.4
 
 dev_dependencies:
   flutter_test:

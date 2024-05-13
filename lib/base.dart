@@ -54,7 +54,7 @@ class _MenuState extends State<Menu> {
           children: [
             Container(
                 color: AppColors.backgroundColor,
-                child: (_index==0)?const MyHomePage():(_index==2)?  Account() : (_index==1) ?  Compete() : ListGame()
+                child: (_index==0)?const MyHomePage():(_index==2)?  Account() : (_index==1) ?  Compete() : const ListGame()
             ),
 
 
@@ -79,7 +79,7 @@ class _MenuState extends State<Menu> {
                               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
                         ),
 
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.error_outline, color: Colors.white, size: 35,))
+                        IconButton(onPressed: (){}, icon: const Icon(Icons.logout, color: Colors.white, size: 30,))
                       ],
                     ),
                   ),

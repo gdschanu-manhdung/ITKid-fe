@@ -132,6 +132,7 @@ class ListGame extends StatelessWidget {
 
                   ),
                 ),
+                const SizedBox(height: 90,),
               ],
             ),
           )

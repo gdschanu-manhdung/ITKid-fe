@@ -29,7 +29,7 @@ class _LessonTheory extends State<LessonTheory> {
           question:
               "Find the cue's balance point, place your dominant hand on the "
               "cue with your thumb directly below the balance point, wrap your"
-              " fingers around the cue",
+             ,
           image: 'assets/images/C++.png'),
       Question(
           question: "Do you know Apphe",
@@ -161,7 +161,7 @@ class _LessonTheory extends State<LessonTheory> {
             ),
           ),
           const SizedBox(
-            height: 100,
+            height: 80,
           ),
           SizedBox(
             width: 200,

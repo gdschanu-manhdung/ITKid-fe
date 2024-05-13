@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CardCategory extends StatelessWidget {
@@ -23,7 +22,7 @@ class CardCategory extends StatelessWidget {
 
               // Ảnh trong thẻ
               ClipRRect(
-                borderRadius: BorderRadius.all( Radius.circular(15.0)),
+                borderRadius: const BorderRadius.all( Radius.circular(15.0)),
                 child: Image.asset(
                   'assets/images/img_course.jpeg',
                   width: 130,
@@ -34,11 +33,11 @@ class CardCategory extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Text('Course Name',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                  getButton(this.type),
 
                 ],
@@ -81,7 +80,7 @@ class CardCategory extends StatelessWidget {
           ),
           backgroundColor: MaterialStateProperty.all(Colors.green),
         ),
-        child: Padding(
+        child: const Padding(
           padding: EdgeInsets.fromLTRB(16,0,16,0),
           child: Text('Start', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
         ),
@@ -98,14 +97,14 @@ class CardCategory extends StatelessWidget {
           ),
           backgroundColor: MaterialStateProperty.all(Colors.orangeAccent),
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16,0,16,0),
+        child: const Padding(
+          padding: EdgeInsets.fromLTRB(16,0,16,0),
           child: Text('Review', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
         ),
 
       ),
     };
 
-    return buttons[type] ?? Text('Invalid type');
+    return buttons[type] ?? const Text('Invalid type');
   }
 }
