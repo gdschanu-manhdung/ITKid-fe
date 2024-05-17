@@ -7,7 +7,10 @@ import '../../base.dart';
 
 
 class CompeteResult extends StatefulWidget {
-  CompeteResult({Key? key}) : super(key: key);
+  final int you_point;
+  final int opp_point;
+  CompeteResult({Key? key, required this.you_point, required this.opp_point})
+      : super(key: key);
 
   @override
   _CompeteResultState createState() => _CompeteResultState();
@@ -92,7 +95,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                                 context,
                                                 buildColor: const Color(0xFFFF99AF),
                                                 name: "You",
-                                                point: "80"
+                                                point: widget.you_point.toString(),
                                             ),
                                           ),
                                           SizedBox(height: 15.v),
@@ -102,18 +105,10 @@ class _CompeteResultState extends State<CompeteResult> {
                                                 context,
                                                 buildColor: const Color(0xFFB3B3B3),
                                                 name: "Opponent",
-                                                point: "60"
+                                                point: widget.opp_point.toString(),
                                             ),
                                           ),
                                           SizedBox(height: 15.v),
-                                          const Text(
-                                            "You earn 10 points",
-                                            style: TextStyle(
-                                              color: Color(0xFFF60034),
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     )

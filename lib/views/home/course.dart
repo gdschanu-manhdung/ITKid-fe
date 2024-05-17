@@ -5,6 +5,8 @@ import 'package:frontend/views/lesson/lesson-summary.dart';
 import 'package:frontend/views/lesson/lesson-theory.dart';
 
 
+import '../../base.dart';
+import '../../core/theme/theme_helper.dart';
 import 'component/status_bar.dart';
 
 class Course extends StatefulWidget {
@@ -30,6 +32,18 @@ class _Course extends State<Course> {
       appBar: AppBar(
 
         backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, size: 25,),
+          color: appTheme.black900,
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Menu(),
+              ),
+            );
+          },
+        ),
         actions: <Widget> [
 
           NavigationBar1(),

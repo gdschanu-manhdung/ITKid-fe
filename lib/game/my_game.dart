@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_joystick/flutter_joystick.dart';
 import 'package:frontend/base.dart';
 import 'package:frontend/game/component/ViewQuestion.dart';
 import 'package:frontend/game/config.dart';
@@ -49,35 +50,38 @@ class _MyGameState extends State<MyGame> {
     Colors.black45
   ];
   List<Question> list_quesiton = [
-  Question(
-  question: "What is the common file extension for Python scripts?",
-  option: [".py", ".cpp", ".js", ".java"],
-  correctAnswer: 0,
-  ),
-
-  Question(
-  question: "In comments, how do you write a single line in Python?",
-  option: ["// This is a comment", "# This is a comment", "; This is a comment", "* This is a comment"],
-  correctAnswer: 1,
-  ),
-
-  Question(
-  question: "Which of these operators is used for printing output in Python?",
-  option: ["print()", "echo()", "output()", "display()"],
-  correctAnswer: 0,
-  ),
-
-  Question(
-  question: " What is the keyword used to define a function in Python?",
-  option: ["function", "define", "def", "create"],
-  correctAnswer: 2,
-  ),
-
     Question(
-      question: "How do you indicate the end of a line of code in Python (assuming no semicolon is used)?",
-  option: ["Semicolon (;) required", "Enter key", "Line break", "Commas"],
-  correctAnswer: 1,
-  ),
+      question: "What is the common file extension for Python scripts?",
+      option: [".py", ".cpp", ".js", ".java"],
+      correctAnswer: 0,
+    ),
+    Question(
+      question: "In comments, how do you write a single line in Python?",
+      option: [
+        "// This is a comment",
+        "# This is a comment",
+        "; This is a comment",
+        "* This is a comment"
+      ],
+      correctAnswer: 1,
+    ),
+    Question(
+      question:
+      "Which of these operators is used for printing output in Python?",
+      option: ["print()", "echo()", "output()", "display()"],
+      correctAnswer: 0,
+    ),
+    Question(
+      question: " What is the keyword used to define a function in Python?",
+      option: ["function", "define", "def", "create"],
+      correctAnswer: 2,
+    ),
+    Question(
+      question:
+      "How do you indicate the end of a line of code in Python (assuming no semicolon is used)?",
+      option: ["Semicolon (;) required", "Enter key", "Line break", "Commas"],
+      correctAnswer: 1,
+    ),
   ];
   int count = 0;
   late var game;
@@ -131,9 +135,16 @@ class _MyGameState extends State<MyGame> {
                         width: 300,
                         height: 200,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
                           color: Colors.orange.shade200,
-
+                          borderRadius: BorderRadius.circular(20.0),
+                          // Set rounded corners
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black54, // Set shadow color
+                              blurRadius: 10.0, // Set blur radius
+                              offset: Offset(0.0, 10.0), // Set offset
+                            ),
+                          ],
                         ),
 
                         child: Column(
@@ -144,18 +155,24 @@ class _MyGameState extends State<MyGame> {
                               padding: EdgeInsets.all(12.0),
                               child: Column(
                                 children: [
-                                  Text("Congratulations!.",
-                                  style: TextStyle(fontWeight: FontWeight.bold,
+                                Text(
+                                  "Congratulations!.",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      fontSize: 21),),
-                                  Text("Select your options?",
-
-                                    style: TextStyle(fontWeight: FontWeight.bold,
+                                      fontSize: 21),
+                                  ),
+                                Text(
+                                  "Select your options?",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
                                         color: Colors.white,
-                                        fontSize: 21),),
+                                        fontSize: 21),
+                                  ),
                                 ],
                               ),
                             ),
+                            const SizedBox(height: 30,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -235,11 +252,17 @@ class _MyGameState extends State<MyGame> {
                         height: MediaQuery.of(context).size.height / 2.1,
                         width: MediaQuery.of(context).size.width - 32,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors
-                                .orangeAccent // Bo góc tròn với bán kính 10.0
-
+                          color: Colors.orange.shade200,
+                          borderRadius: BorderRadius.circular(20.0),
+                          // Set rounded corners
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black54, // Set shadow color
+                              blurRadius: 10.0, // Set blur radius
+                              offset: Offset(0.0, 10.0), // Set offset
                             ),
+                          ],
+                        ),
                         child: Column(
                           children: [
                             Padding(
@@ -277,39 +300,68 @@ class _MyGameState extends State<MyGame> {
               },
             )
           ]),
+          const SizedBox(height: 30,),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100.0),
-                      // Bán kính bo góc (tính bằng pixel)
-                      // Thuộc tính để thêm viền
-                      border: Border.all(
-                        color: Colors.orange, // Màu viền
-                        width: 5.0, // Độ dày viền (tính bằng pixel)
-                      ),
-                      color: Colors.amberAccent.shade200),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      getDirection(Icons.arrow_circle_up, 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          getDirection(Icons.arrow_circle_left_outlined, 0),
-                          const SizedBox(
-                            width: 30,
-                          ),
-                          getDirection(Icons.arrow_circle_right_outlined, 2)
-                        ],
-                      ),
-                      getDirection(Icons.arrow_circle_down, 3),
-                    ],
+                padding: const EdgeInsets.all(8.0),
+                child: Joystick(
+                  // base: Container(
+                  //   width: 150,
+                  //   height: 150,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.black38,
+                  //     borderRadius: BorderRadius.circular(1000),
+                  //   ),
+                  // ),
+                  stick: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  mode: JoystickMode.horizontalAndVertical,
+                  listener: (details) {
+                    if (!isUp && !isLeft && !isRight && !isDown) {
+                      if (details.x > 0) {
+                        isRight = true;
+                      } else if (details.x < 0) {
+                        isLeft = true;
+                      } else if (details.y > 0) {
+                        isDown = true;
+                      } else if (details.y < 0) {
+                        isUp = true;
+                      }
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(width: 25,),
+              Container(
+                width: MediaQuery.of(context).size.width / 2.3,
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade100,
+                  borderRadius: BorderRadius.circular(20.0),
+                  // Set rounded corners
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black54, // Set shadow color
+                      blurRadius: 10.0, // Set blur radius
+                      offset: Offset(0.0, 10.0), // Set offset
+                    ),
+                  ],
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(20.0), // Add padding
+                  child: Text(
+                    'Instruction: Press directional buttons to move your character to the treasure location.',
+                    style: TextStyle(
+                        fontSize: 18.0, // Set font size
+                        fontWeight: FontWeight.bold, // Set font weight
+                        color: Colors.orange),
                   ),
                 ),
               ),
@@ -318,43 +370,6 @@ class _MyGameState extends State<MyGame> {
         ],
       ),
     );
-  }
-
-  Widget getDirection(IconData icon, int type) {
-    return GestureDetector(
-        onTapDown: (details) {
-          if (!isUp && !isLeft && !isRight && !isDown) {
-            switch (type) {
-              case 0:
-                isLeft = true;
-                break;
-              case 1:
-                isUp = true;
-                break;
-              case 2:
-                isRight = true;
-                break;
-              case 3:
-                isDown = true;
-                break;
-            }
-          }
-          setState(() {
-            // Thay đổi màu sắc khi click chuột xuống
-            containerColor[type] = Colors.orange;
-          });
-        },
-        onTapUp: (details) {
-          setState(() {
-            // Thay đổi màu sắc khi nhả chuột
-            containerColor[type] = Colors.black45;
-          });
-        },
-        child: Icon(
-          icon,
-          size: 50,
-          color: containerColor[type],
-        ));
   }
 
   Widget getButton(int option) {

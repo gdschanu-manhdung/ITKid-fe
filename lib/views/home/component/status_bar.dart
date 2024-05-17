@@ -29,12 +29,10 @@ class _NavigationBar1State extends State<NavigationBar1> {
           ),
 
           const Spacer(),
-
-
           PopupMenuButton<String>(
 
 
-            icon: Icon(Icons.menu, color: Colors.blueAccent.shade200,size: 35,),
+            icon: Icon(Icons.menu, color: Colors.black, size: 25,),
             offset: const Offset(0, 50),
             onSelected: (value) {
               // Xử lý khi một tùy chọn được chọn
@@ -54,6 +52,12 @@ class _NavigationBar1State extends State<NavigationBar1> {
                     ],
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Menu(index: 3,)),
+                  );
+                },
               ),
               PopupMenuItem<String>(
                 value: 'Option 2',
@@ -91,7 +95,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Account()),
+                    MaterialPageRoute(builder: (context) => Menu(index: 2,)),
                   );
                 },
               ),

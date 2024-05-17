@@ -78,8 +78,8 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
             appBar: AppBar(
               backgroundColor: appTheme.blue50,
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back, size: 35),
-                color: appTheme.blue400,
+                icon: const Icon(Icons.arrow_back, size: 25),
+                color: appTheme.black900,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
@@ -123,7 +123,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
                                 children: [
                                   SizedBox(height: 10.v),
                                   Text(
-                                      "Account",
+                                      "Profile",
                                       style: theme.textTheme.headlineLarge!.copyWith(
                                         color: appTheme.blue400,
                                         fontWeight: FontWeight.bold,

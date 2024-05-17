@@ -107,7 +107,7 @@ class ListGame extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(100, 20, 100, 0),
                   child: TextButton(
                     onPressed:(){
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const MyGame()),
                       );

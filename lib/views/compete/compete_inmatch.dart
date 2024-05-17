@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:frontend/core/app_export.dart';
@@ -21,6 +22,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
   late AnimationController controller;
   List responseData = [];
   int number = 0;
+  int you_point = 0, opp_point = 0;
   List<String> shuffledOptions = [];
 
   int? selectedOptionIndex;
@@ -91,7 +93,10 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => CompeteResult(),
+            pageBuilder: (context, animation, secondaryAnimation) => CompeteResult(
+              you_point: you_point,
+              opp_point: opp_point,
+            ),
             transitionDuration: const Duration(seconds: 2),
           ),
         );
@@ -169,7 +174,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                               padding: EdgeInsets.only(left: 20.h, right: 8.h),
                                               child: InputScoreLeft(
                                                 player: "You",
-                                                point: "40",
+                                                point: you_point.toString(),
                                               )
                                           )
                                       ),
@@ -177,7 +182,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                           child: Padding(
                                               padding: EdgeInsets.only(left: 8.h, right: 20.h),
                                               child: InputScoreRight(
-                                                point: "30",
+                                                point: opp_point.toString(),
                                                 player: "Opp",
                                               )
                                           )
@@ -243,6 +248,8 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                                   }
                                                 }
                                               }
+                                              you_point += (isCorrect ? 10 : 0);
+                                              opp_point += 10 * (Random().nextInt(2));
                                               Future.delayed(const Duration(milliseconds: 500), () {
                                                 nextQuestion();
                                               });

@@ -18,11 +18,28 @@ class _AccountState extends State<Account> {
   TextEditingController phoneNumberController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    super.initState();
+
+    emailController.text = "huakhanhdoan@gmail.com";
+    lgInputController.text = "30/02/2024";
+    phoneNumberController.text = "0123456789";
+  }
+
   void _navigateToEditProfile(BuildContext context) async {
-    final result = await Navigator.push(
+    final Map<String, dynamic>? newValues = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AccountEditProfile()),
     );
+    if (newValues != null) {
+      setState(() {
+        // Cập nhật các biến email, dob, và phone từ giá trị mới
+        emailController.text = newValues['newEmail'];
+        lgInputController.text = newValues['newDob'];
+        phoneNumberController.text = newValues['newPhoneNumber'];
+      });
+    }
   }
 
   void _navigateToChangePassword(BuildContext context) {
@@ -50,14 +67,14 @@ class _AccountState extends State<Account> {
                     child: Column(
                       children: [
                         SizedBox(height: 10.v),
-                        Text(
-                            "Account",
-                            style: theme.textTheme.headlineLarge!.copyWith(
-                                color: appTheme.blue400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                            )
-                        ),
+                        // Text(
+                        //     "Profile",
+                        //     style: theme.textTheme.headlineLarge!.copyWith(
+                        //         color: appTheme.blue400,
+                        //         fontWeight: FontWeight.bold,
+                        //         fontSize: 30,
+                        //     )
+                        // ),
                         SizedBox(height: 15.v),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.h),
@@ -73,7 +90,7 @@ class _AccountState extends State<Account> {
                             child: AccountInput(
                               context,
                               leftText: "Email",
-                              rightText: "huakhanhdoan@gmail.com",
+                              rightText: emailController.text,
                             )
                         ),
                         SizedBox(height: 20.v),
@@ -82,7 +99,7 @@ class _AccountState extends State<Account> {
                             child: AccountInput(
                               context,
                               leftText: "Dob",
-                              rightText: "30/02/2024",
+                              rightText: lgInputController.text,
                             )
                         ),
                         SizedBox(height: 20.v),
@@ -91,7 +108,7 @@ class _AccountState extends State<Account> {
                             child: AccountInput(
                               context,
                               leftText: "Phone",
-                              rightText: "0123456789",
+                              rightText: phoneNumberController.text,
                             )
                         ),
                         SizedBox(height: 20.v),
@@ -169,7 +186,7 @@ class _AccountState extends State<Account> {
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "30 ITK",
+              "250 ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold
@@ -188,7 +205,7 @@ class _AccountState extends State<Account> {
               child: Icon(
                 Icons.arrow_forward_ios,
                 color: appTheme.black900,
-                size: 25,
+                size: 24,
               ),
             ),
           )

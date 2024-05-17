@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/account/account_view.dart';
 
+import '../../../base.dart';
 import '../compete_prematch.dart';
 
 
@@ -46,6 +47,12 @@ class _NavigationBar2State extends State<NavigationBar2> {
                     ],
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Menu(index: 3,)),
+                  );
+                },
               ),
               PopupMenuItem<String>(
                 value: 'Option 2',
@@ -63,7 +70,7 @@ class _NavigationBar2State extends State<NavigationBar2> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Compete()),
+                    MaterialPageRoute(builder: (context) => Menu(index: 1,)),
                   );
                 },
               ),
@@ -83,7 +90,7 @@ class _NavigationBar2State extends State<NavigationBar2> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Account()),
+                    MaterialPageRoute(builder: (context) => Menu(index: 2,)),
                   );
                 },
               ),

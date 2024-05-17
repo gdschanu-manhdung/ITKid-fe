@@ -7,10 +7,10 @@ const num FIGMA_DESIGN_WIDTH = 360;
 const num FIGMA_DESIGN_HEIGHT = 659;
 const num FIGMA_DESIGN_STATUS_BAR = 0;
 typedef ResponsiveBuild = Widget Function(
-  BuildContext context,
-  Orientation orientation,
-  DeviceType deviceType,
-);
+    BuildContext context,
+    Orientation orientation,
+    DeviceType deviceType,
+    );
 
 class Sizer extends StatelessWidget {
   const Sizer({
@@ -25,7 +25,7 @@ class Sizer extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return OrientationBuilder(builder: (context, orientation) {
-        SizeUtils.setScreenSize(constraints, orientation);
+        //   SizeUtils.setScreenSize(constraints, orientation);
         return builder(context, orientation, SizeUtils.deviceType);
       });
     });
@@ -45,31 +45,31 @@ class SizeUtils {
   static late DeviceType deviceType;
 
   /// Device's Height
-  static late double height;
+  static  double height = 853.3333333333334;
 
   /// Device's Width
-  static late double width;
+  static  double width = 480;
 
-  static void setScreenSize(
-    BoxConstraints constraints,
-    Orientation currentOrientation,
-  ) {
-    // Sets boxConstraints and orientation
-    boxConstraints = constraints;
-    orientation = currentOrientation;
-
-    // Sets screen width and height
-    if (orientation == Orientation.portrait) {
-      width =
-          boxConstraints.maxWidth.isNonZero(defaultValue: FIGMA_DESIGN_WIDTH);
-      height = boxConstraints.maxHeight.isNonZero();
-    } else {
-      width =
-          boxConstraints.maxHeight.isNonZero(defaultValue: FIGMA_DESIGN_WIDTH);
-      height = boxConstraints.maxWidth.isNonZero();
-    }
-    deviceType = DeviceType.mobile;
-  }
+// static void setScreenSize(
+//   BoxConstraints constraints,
+//   Orientation currentOrientation,
+// ) {
+//   // Sets boxConstraints and orientation
+//   boxConstraints = constraints;
+//   orientation = currentOrientation;
+//
+//   // Sets screen width and height
+//   if (orientation == Orientation.portrait) {
+//     width =
+//         boxConstraints.maxWidth.isNonZero(defaultValue: FIGMA_DESIGN_WIDTH);
+//     height = boxConstraints.maxHeight.isNonZero();
+//   } else {
+//     width =
+//         boxConstraints.maxHeight.isNonZero(defaultValue: FIGMA_DESIGN_WIDTH);
+//     height = boxConstraints.maxWidth.isNonZero();
+//   }
+//   deviceType = DeviceType.mobile;
+// }
 }
 
 /// This extension is used to set padding/margin (for the top and bottom side) &

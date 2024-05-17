@@ -20,6 +20,7 @@ class _LessonTheory extends State<LessonTheory> {
   Color themesColor = Colors.pinkAccent;  // color themes
   List<int> statusQuestion = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   int count = 0;          // câu hiện tại
+  List<String> list_header = []; // header
 
   @override
   void initState() {
@@ -27,35 +28,55 @@ class _LessonTheory extends State<LessonTheory> {
     list_quesiton = [
       Question(
           question:
-              "Find the cue's balance point, place your dominant hand on the "
-              "cue with your thumb directly below the balance point, wrap your"
-              " fingers around the cue",
-          image: 'assets/images/C++.png'),
+              "Learn about Java's history, key features, and its write once, run anywhere "
+              "capability, making it versatile for various applications.",
+          image: 'assets/images/java_1.jpg'),
       Question(
-          question: "Do you know Apphe",
-          image: 'assets/images/img_course.jpeg'),
-      Question(question: "Can you play bee", image: 'assets/images/logo.png'),
+          question: "Step-by-step instructions for downloading and installing JDK,"
+            "setting up environment variables, and configuring an IDE like IntelliJ IDEA or Eclipse.",
+          image: 'assets/images/java_2.jpg'),
+      Question(question: "Understand the structure of a Java program, including the main method, class declarations, "
+            "and basic syntax elements like semicolons and braces.",
+          image: 'assets/images/java_3.jpg'),
       Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
+            question: "Learn about Java's primitive data types (int, double, char, boolean), reference types, "
+            "how to declare and initialize variables, and type conversion.",
+          image: 'assets/images/java_4.jpg'),
       Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
+          question: "Explore the different operators in Java, including arithmetic, relational, "
+            "logical, bitwise, and assignment operators, with practical examples.",
+          image: 'assets/images/java_5.png'),
       Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
+          question: "Master the use of control flow statements such as if-else, switch, while loop, for loop, "
+            "and enhanced for loop, with practical coding examples.",
+          image: 'assets/images/java_6.jpg'),
       Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
+          question: "Dive into OOP principles: classes, objects, inheritance, polymorphism, "
+              "encapsulation, and abstraction, with illustrative examples.",
+          image: 'assets/images/java_7.jpg'),
       Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
+          question: "Learn to handle exceptions using try-catch blocks, multiple catch clauses, the finally block, "
+            "the throw keyword, and creating custom exceptions.",
+          image: 'assets/images/java_8.png'),
       Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
-      Question(
-          question: "Can you kick girl friend",
-          image: 'assets/images/coin.png'),
+          question: "Get acquainted with the Java Collections Framework, including interfaces like List, Set, Map, and classes "
+            "like ArrayList, HashSet, and HashMap, for managing groups of objects.",
+          image: 'assets/images/java_9.jpg'),
+      // Question(
+      //     question: "Can you kick girl friend",
+      //     image: 'assets/images/coin.png'),
+    ];
+
+    list_header = [
+      'Introduction to Java',
+      'Setting up Java Environment',
+      'Basic Syntax',
+      'Data Types and Variables',
+      'Operators in Java',
+      'Control Flow Statements',
+      'Object-Oriented Programming',
+      'Exception Handling',
+      'Java Collections Framework'
     ];
   }
 
@@ -139,7 +160,7 @@ class _LessonTheory extends State<LessonTheory> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Step ' '${count + 1}' ': Open new file',
+                            'Step ' '${count + 1}' ': ${list_header[count]}',
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
@@ -173,6 +194,20 @@ class _LessonTheory extends State<LessonTheory> {
                     iconButton = Icons.check;
                     statusQuestion[count] = 1;
                   });
+                  setState(() {
+                    if(textButton == 'Good job!') {
+                      count++;
+                      checkStatus();
+                    }
+                  });
+                // onPressed: () {
+                //     setState(() {
+                //       textButton = 'Good job!';
+                //       themesColor = Colors.greenAccent;
+                //       iconButton = Icons.check;
+                //       count++;
+                //       checkStatus();
+                //     });
                 },
                 style: ButtonStyle(
                   shadowColor: MaterialStateProperty.all<Color>(Colors.grey),

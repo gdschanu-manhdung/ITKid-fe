@@ -56,8 +56,8 @@ class WalletInfo extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: appTheme.blue50,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 35,),
-            color: appTheme.blue400,
+            icon: const Icon(Icons.arrow_back, size: 25,),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,

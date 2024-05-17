@@ -30,49 +30,49 @@ List <Color> listColorButton = [Colors.white, Colors.white, Colors.white, Colors
         correctAnswer: 0,
       ),
       Question(
-        question: "Who is the most handsome in the group?",
-        option: ["Panda", "SpiderMan", "dark armpits", "chill"],
+        question: "Which one is a primitive data type in Java?",
+        option: ["Integer", "String", "Array", "Boolean"],
+        correctAnswer: 0,
+      ),
+      Question(
+        question: "What is the scope of a local variable in C++?",
+        option: ["Global", "Local", "Static", "Dynamic"],
+        correctAnswer: 1,
+      ),
+      Question(
+        question: "Which command is used to take input from the user in Python?",
+        option: ["read()", "input()", "get()", "scanf()"],
+        correctAnswer: 1,
+      ),
+      Question(
+        question: "What is the purpose of the System.out object in Java?",
+        option: ["Input data", "Output data to the screen", "Handle exceptions", "Perform calculations"],
+        correctAnswer: 1,
+      ),
+      Question(
+        question: "The operator used to increment the value of an integer variable in C++ is",
+        option: ["++", "+=", "--", "*="],
+        correctAnswer: 0,
+      ),
+      Question(
+        question: "Which syntax is used to create a while loop in Python?",
+        option: ["while()", "for()", "loop()", "repeat()"],
+        correctAnswer: 0,
+      ),
+      Question(
+        question: "Which command is used to create a new object in Java?",
+        option: ["create", "make", "new", "instance"],
         correctAnswer: 2,
       ),
       Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
+        question: "What is the correct syntax to declare a pointer in C++?",
+        option: ["int ptr;", "*int ptr;", "int *ptr;", "ptr *int;"],
+        correctAnswer: 2,
       ),
       Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
-      ),
-      Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
-      ),
-      Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
-      ),
-      Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
-      ),
-      Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
-      ),
-      Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
-      ),
-      Question(
-        question: "The extension part of Python files",
-        option: [".py", ".c", ".java", ".python"],
-        correctAnswer: 0,
+        question: "Which command is used to reverse a string in Python?",
+        option: ["reverse()", "invert()", "flip()", "[::-1]"],
+        correctAnswer: 3,
       ),
     ];
   }
@@ -96,7 +96,7 @@ List <Color> listColorButton = [Colors.white, Colors.white, Colors.white, Colors
               children: [
                 const Icon(Icons.run_circle_sharp,color: Colors.teal,size: 35,),
                 Container(
-                  width: 120,
+                  width: 300,
                   height: 25,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),

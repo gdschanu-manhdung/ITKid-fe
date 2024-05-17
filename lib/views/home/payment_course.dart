@@ -84,7 +84,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          'Course free    ' '${widget.course_fee}' ' ITK',
+                          'Course fee    ' '${widget.course_fee}' ' ITK',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: !this.PaySuccessfully
@@ -162,7 +162,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     fontSize: 22)),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(1.0),
             child: !this.PaySuccessfully
                 ? ElevatedButton(
                     onPressed: () {
@@ -175,14 +175,17 @@ class _PaymentCourseState extends State<PaymentCourse> {
                       elevation: MaterialStateProperty.all<double>(5),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
                       ),
                       backgroundColor:
                           MaterialStateProperty.all(Colors.orangeAccent),
+                      fixedSize: MaterialStateProperty.all<Size>(
+                        const Size(120, 60), // Cố định chiều rộng của nút
+                      ),
                     ),
                     child: const Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(1.0),
                       child: Text(
                         'Pay',
                         style: TextStyle(
@@ -208,16 +211,16 @@ class _PaymentCourseState extends State<PaymentCourse> {
                         );
                       },
                       style: ButtonStyle(
-    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
-    elevation: MaterialStateProperty.all<double>(5),
-    shape: MaterialStateProperty.all(
-    RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(30.0),
-    ),
-    ),
-    backgroundColor:
-    MaterialStateProperty.all(Colors.orangeAccent),
-    ),
+                        shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                        elevation: MaterialStateProperty.all<double>(5),
+                        shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        ),
+                        backgroundColor:
+                        MaterialStateProperty.all(Colors.orangeAccent),
+                        ),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(

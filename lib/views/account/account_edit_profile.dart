@@ -66,6 +66,17 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      String newEmail = emailController.text;
+      String newDob = lgInputController.text;
+      String newPhoneNumber = phoneNumberController.text;
+      // Tạo map chứa các giá trị mới
+      Map<String, dynamic> newValues = {
+        'newEmail': newEmail,
+        'newDob': newDob,
+        'newPhoneNumber': newPhoneNumber,
+      };
+      // Truyền giá trị mới sang trang Account
+      Navigator.pop(context, newValues);
       _showSuccessDialog(context);
     }
   }
@@ -132,8 +143,8 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
             appBar: AppBar(
               backgroundColor: appTheme.blue50,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, size: 35),
-                color: appTheme.blue400,
+                icon: Icon(Icons.arrow_back, size: 25),
+                color: appTheme.black900,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
@@ -177,7 +188,7 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
                                 children: [
                                   SizedBox(height: 10.v),
                                   Text(
-                                      "Account",
+                                      "Profile",
                                       style: theme.textTheme.headlineLarge!.copyWith(
                                         color: appTheme.blue400,
                                         fontWeight: FontWeight.bold,
@@ -391,7 +402,7 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "30 ITK",
+              "250 ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold

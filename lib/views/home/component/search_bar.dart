@@ -23,6 +23,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
               controller: controller,
               padding: const MaterialStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(horizontal: 16.0)),
+
               onTap: () {
                 controller.openView();
               },

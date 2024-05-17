@@ -30,20 +30,20 @@ class CompeteState extends State<Compete> {
                             width: double.maxFinite,
                             child: Column(
                                 children: [
-                                  SizedBox(height: 15.v),
-                                  Text(
-                                      "Find A Match",
-                                      style: theme.textTheme.headlineLarge!.copyWith(
-                                        color: const Color.fromRGBO(246, 0, 52, 1),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                      )
-                                  ),
-                                  SizedBox(height: 25.v),
+                                  // SizedBox(height: 10.v),
+                                  // Text(
+                                  //     "Find A Match",
+                                  //     style: theme.textTheme.headlineLarge!.copyWith(
+                                  //       color: const Color.fromRGBO(246, 0, 52, 1),
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 30,
+                                  //     )
+                                  // ),
+                                  SizedBox(height: 9.v),
                                   ResultBox(),
-                                  SizedBox(height: 25.v),
+                                  SizedBox(height: 15.v),
                                   InstructionBox(),
-                                  SizedBox(height: 26.v),
+                                  SizedBox(height: 15.v),
                                   Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 20.h),
                                     child: buildButton(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/auth/auth_main.dart';
 
+import '../../base.dart';
+
 class AuthRegister extends StatefulWidget {
   AuthRegister({Key? key}) : super(key: key);
 
@@ -44,7 +46,7 @@ class _AuthRegisterState extends State<AuthRegister> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => AuthMain(),
+              builder: (context) => Menu(index: 0),
             ),
           );
         });

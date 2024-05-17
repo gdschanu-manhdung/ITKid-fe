@@ -147,7 +147,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Compete(),
+            builder: (context) => Menu(index: 1),
           ),
         );
       },

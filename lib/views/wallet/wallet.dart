@@ -17,8 +17,8 @@ class Wallet extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: appTheme.blue50,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 35),
-            color: appTheme.blue400,
+            icon: const Icon(Icons.arrow_back, size: 25),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,
@@ -86,7 +86,7 @@ class Wallet extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "Your Wallet: 30",
+                                              "Your Wallet: 250",
                                               style: TextStyle(
                                                 color: appTheme.black900,
                                                 fontSize: 26,

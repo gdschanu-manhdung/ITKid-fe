@@ -13,11 +13,11 @@ class CardCourse extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width/2-16,
+        width: MediaQuery.of(context).size.width/2 - 16,
         height: 150,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Course( isFree!, name_course)),
             );
