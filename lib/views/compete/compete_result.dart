@@ -3,12 +3,14 @@ import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_finding.dart';
 import 'package:frontend/views/compete/compete_ranking.dart';
 import 'package:frontend/views/compete/component/status_bar_compete.dart';
-import '../../core/theme/theme_helper.dart';
-import '../../core/utils/size_utils.dart';
-import '../home/homePage.dart';
+import '../../base.dart';
+
 
 class CompeteResult extends StatefulWidget {
-  CompeteResult({Key? key}) : super(key: key);
+  final int you_point;
+  final int opp_point;
+  CompeteResult({Key? key, required this.you_point, required this.opp_point})
+      : super(key: key);
 
   @override
   _CompeteResultState createState() => _CompeteResultState();
@@ -20,15 +22,15 @@ class _CompeteResultState extends State<CompeteResult> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 35,),
-            color: Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 35,),
+            color: const Color.fromRGBO(246, 0, 52, 1),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
+                  builder: (context) =>  Menu(),
                 ),
               );
             },
@@ -37,7 +39,7 @@ class _CompeteResultState extends State<CompeteResult> {
             NavigationBar2(),
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
+            preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white, // Màu nền của container
@@ -46,7 +48,7 @@ class _CompeteResultState extends State<CompeteResult> {
                     color: Colors.grey.withOpacity(0.5), // Màu của bóng
                     spreadRadius: 4, // Bán kính phân tán của bóng
                     blurRadius: 5, // Độ mờ của bóng
-                    offset: Offset(0, 2), // Độ lệch của bóng
+                    offset: const Offset(0, 2), // Độ lệch của bóng
                   ),
                 ],
               ),
@@ -69,7 +71,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                 Text(
                                     "Final Result",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color.fromRGBO(246, 0, 52, 1),
+                                      color: const Color.fromRGBO(246, 0, 52, 1),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 35,
                                     )
@@ -80,7 +82,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                     padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 10.v),
                                     decoration: AppDecoration.outlineBlueGray.copyWith(
                                       borderRadius: BorderRadiusStyle.roundedBorder20,
-                                      color: Color(0xFFFCFCFC),
+                                      color: const Color(0xFFFCFCFC),
                                     ),
                                     child: Padding(
                                       padding:EdgeInsets.only(top: 1.v),
@@ -91,9 +93,9 @@ class _CompeteResultState extends State<CompeteResult> {
                                             padding: EdgeInsets.symmetric(horizontal: 1.h),
                                             child: buildInput(
                                                 context,
-                                                buildColor: Color(0xFFFF99AF),
+                                                buildColor: const Color(0xFFFF99AF),
                                                 name: "You",
-                                                point: "80"
+                                                point: widget.you_point.toString(),
                                             ),
                                           ),
                                           SizedBox(height: 15.v),
@@ -101,20 +103,12 @@ class _CompeteResultState extends State<CompeteResult> {
                                             padding: EdgeInsets.symmetric(horizontal: 1.h),
                                             child: buildInput(
                                                 context,
-                                                buildColor: Color(0xFFB3B3B3),
+                                                buildColor: const Color(0xFFB3B3B3),
                                                 name: "Opponent",
-                                                point: "60"
+                                                point: widget.opp_point.toString(),
                                             ),
                                           ),
                                           SizedBox(height: 15.v),
-                                          Text(
-                                            "You earn 10 points",
-                                            style: TextStyle(
-                                              color: Color(0xFFF60034),
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     )
@@ -125,7 +119,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                   child: buildButton(
                                     context,
                                     type: "Back To Home",
-                                    buttonColor: Color(0xff4394DD),
+                                    buttonColor: const Color(0xff4394DD),
                                     boxDecoration: AppDecoration.fillBlue.copyWith(
                                       borderRadius: BorderRadiusStyle.circleBorder35,
                                     ),
@@ -137,7 +131,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                   child: buildButton(
                                     context,
                                     type: "Find A Match",
-                                    buttonColor: Color.fromRGBO(255, 112, 142, 1),
+                                    buttonColor: const Color.fromRGBO(255, 112, 142, 1),
                                     boxDecoration: AppDecoration.fillPink.copyWith(
                                       borderRadius: BorderRadiusStyle.circleBorder35,
                                     ),
@@ -149,7 +143,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                   child: buildButton(
                                     context,
                                     type: "Rankings",
-                                    buttonColor: Color.fromRGBO(255, 176, 57, 1),
+                                    buttonColor: const Color.fromRGBO(255, 176, 57, 1),
                                     boxDecoration: AppDecoration.fillOrange.copyWith(
                                       borderRadius: BorderRadiusStyle.circleBorder35,
                                     ),
@@ -193,13 +187,13 @@ class _CompeteResultState extends State<CompeteResult> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
                 padding: EdgeInsets.only(top: 3.v),
                 child: Text(
                   point,
                   style: theme.textTheme.titleMedium!.copyWith(
-                    color: Color(0xFFF60034),
+                    color: const Color(0xFFF60034),
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -235,7 +229,7 @@ class _CompeteResultState extends State<CompeteResult> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => MyHomePage(),
+              builder: (context) => Menu(),
             ),
           );
         }

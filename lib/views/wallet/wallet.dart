@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/home/component/status_bar.dart';
 import 'package:frontend/views/wallet/wallet_info.dart';
+import '../../base.dart';
 import '../../core/theme/theme_helper.dart';
 import '../../core/utils/size_utils.dart';
 import '../account/account_view.dart';
@@ -16,13 +17,13 @@ class Wallet extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: appTheme.blue50,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 35),
-            color: appTheme.blue400,
+            icon: const Icon(Icons.arrow_back, size: 25),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Account(),
+                  builder: (context) => Menu(index: 2,),
                 ),
               );
             },
@@ -31,7 +32,7 @@ class Wallet extends StatelessWidget {
             NavigationBar1(),
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
+            preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white, // Màu nền của container
@@ -40,7 +41,7 @@ class Wallet extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5), // Màu của bóng
                     spreadRadius: 4, // Bán kính phân tán của bóng
                     blurRadius: 5, // Độ mờ của bóng
-                    offset: Offset(0, 2), // Độ lệch của bóng
+                    offset: const Offset(0, 2), // Độ lệch của bóng
                   ),
                 ],
               ),
@@ -63,7 +64,7 @@ class Wallet extends StatelessWidget {
                                 Text(
                                     "Wallet",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color(0xFFFFB039),
+                                      color: const Color(0xFFFFB039),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
                                     )
@@ -74,7 +75,7 @@ class Wallet extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 25.v),
                                   decoration: AppDecoration.outlineBlueGray.copyWith(
                                     borderRadius: BorderRadiusStyle.roundedBorder20,
-                                    color: Color(0xFFFCFCFC),
+                                    color: const Color(0xFFFCFCFC),
                                   ),
                                   child: Padding(
                                     padding:EdgeInsets.only(top: 1.v),
@@ -85,7 +86,7 @@ class Wallet extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "Your Wallet: 30",
+                                              "Your Wallet: 250",
                                               style: TextStyle(
                                                 color: appTheme.black900,
                                                 fontSize: 26,
@@ -105,7 +106,7 @@ class Wallet extends StatelessWidget {
                                         buildButton(
                                             context,
                                             type: "Fund In",
-                                            buttonColor: Color.fromRGBO(255, 112, 142, 1),
+                                            buttonColor: const Color.fromRGBO(255, 112, 142, 1),
                                             boxDecoration: AppDecoration.fillOrange.copyWith(
                                               borderRadius: BorderRadiusStyle.circleBorder23,
                                             ),

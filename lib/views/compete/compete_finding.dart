@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/base.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_inmatch.dart';
 import 'package:frontend/views/compete/compete_prematch.dart';
@@ -25,15 +26,15 @@ class _CompeteFindingState extends State<CompeteFinding> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 35,),
-            color: Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 35,),
+            color: const Color.fromRGBO(246, 0, 52, 1),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Compete(),
+                  builder: (context) => Menu(index: 1,),
                 ),
               );
             },
@@ -42,7 +43,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
             NavigationBar2(),
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
+            preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white, // Màu nền của container
@@ -51,7 +52,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                     color: Colors.grey.withOpacity(0.5), // Màu của bóng
                     spreadRadius: 4, // Bán kính phân tán của bóng
                     blurRadius: 5, // Độ mờ của bóng
-                    offset: Offset(0, 2), // Độ lệch của bóng
+                    offset: const Offset(0, 2), // Độ lệch của bóng
                   ),
                 ],
               ),
@@ -74,7 +75,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                                 Text(
                                     "Find A Match",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color.fromRGBO(246, 0, 52, 1),
+                                      color: const Color.fromRGBO(246, 0, 52, 1),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
                                     )
@@ -87,7 +88,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                                   child: buildButton(
                                     context,
                                     type: "Stop",
-                                    buttonColor: Color.fromRGBO(255, 112, 142, 1),
+                                    buttonColor: const Color.fromRGBO(255, 112, 142, 1),
                                     boxDecoration: AppDecoration.fillPink.copyWith(
                                       borderRadius: BorderRadiusStyle.circleBorder35,
                                     ),
@@ -110,13 +111,13 @@ class _CompeteFindingState extends State<CompeteFinding> {
       padding: EdgeInsets.symmetric(horizontal: 25.h, vertical: 15.v),
       decoration: AppDecoration.outlineBlueGray.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder20,
-        color: Color(0xFFFCFCFC),
+        color: const Color(0xFFFCFCFC),
       ),
       child: Padding(
           padding:EdgeInsets.only(top: 1.v),
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Waiting for your opponent",
                 style: TextStyle(
                   color: Color(0xFFF60034),
@@ -125,7 +126,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                 ),
               ),
               SizedBox(height: 4.v),
-              Icon(
+              const Icon(
                 Icons.search,
                 size: 100,
                 color: Color(0xFFF60034),
@@ -146,7 +147,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Compete(),
+            builder: (context) => Menu(index: 1),
           ),
         );
       },
@@ -179,13 +180,13 @@ class _CompeteFindingState extends State<CompeteFinding> {
   }
 
   void _showSuccessDialog(BuildContext context) {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Dialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 20),
+            insetPadding: const EdgeInsets.symmetric(horizontal: 20),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -198,7 +199,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20.h),
               ),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -226,7 +227,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
         },
       );
       // Move to CompeteMatch after 1 second
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

@@ -13,11 +13,11 @@ class WalletInfo extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 1), () {
           Navigator.of(context).pop();
         });
         return Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.h),
           ),
@@ -25,7 +25,7 @@ class WalletInfo extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
             height: 150,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20.h),
@@ -56,8 +56,8 @@ class WalletInfo extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: appTheme.blue50,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 35,),
-            color: appTheme.blue400,
+            icon: const Icon(Icons.arrow_back, size: 25,),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,
@@ -71,7 +71,7 @@ class WalletInfo extends StatelessWidget {
             NavigationBar1(),
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
+            preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white, // Màu nền của container
@@ -80,7 +80,7 @@ class WalletInfo extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5), // Màu của bóng
                     spreadRadius: 4, // Bán kính phân tán của bóng
                     blurRadius: 5, // Độ mờ của bóng
-                    offset: Offset(0, 2), // Độ lệch của bóng
+                    offset: const Offset(0, 2), // Độ lệch của bóng
                   ),
                 ],
               ),
@@ -103,7 +103,7 @@ class WalletInfo extends StatelessWidget {
                                 Text(
                                     "Wallet",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color(0xFFFFB039),
+                                      color: const Color(0xFFFFB039),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
                                     )
@@ -114,7 +114,7 @@ class WalletInfo extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 25.v),
                                   decoration: AppDecoration.outlineBlueGray.copyWith(
                                     borderRadius: BorderRadiusStyle.roundedBorder20,
-                                    color: Color(0xFFFCFCFC),
+                                    color: const Color(0xFFFCFCFC),
                                   ),
                                   child: Padding(
                                     padding:EdgeInsets.only(top: 1.v),
@@ -353,7 +353,7 @@ class WalletInfo extends StatelessWidget {
                                 buildButton(
                                   context,
                                   type: "Fund In",
-                                  buttonColor: Color.fromRGBO(255, 112, 142, 1),
+                                  buttonColor: const Color.fromRGBO(255, 112, 142, 1),
                                   boxDecoration: AppDecoration.fillOrange.copyWith(
                                     borderRadius: BorderRadiusStyle.circleBorder23,
                                   ),

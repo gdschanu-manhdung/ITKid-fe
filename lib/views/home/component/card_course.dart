@@ -5,23 +5,25 @@ import '../course.dart';
 
 class CardCourse extends StatelessWidget {
   final String name_course;
-  const CardCourse(this.name_course,{super.key});
+  final bool ?isFree;
+  const CardCourse(this.isFree,this.name_course,{super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width/2-16,
+        width: MediaQuery.of(context).size.width/2 - 16,
         height: 150,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => Course(name_course)),
+              MaterialPageRoute(builder: (context) => Course( isFree!, name_course)),
             );
           },
           child: Card(
+            color: Colors.white,
 
             elevation: 5.0,
             shape: RoundedRectangleBorder(
@@ -32,8 +34,8 @@ class CardCourse extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    '$name_course',
-                    style: TextStyle(
+                    name_course,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -41,7 +43,7 @@ class CardCourse extends StatelessWidget {
                 ),
                 // Ảnh trong thẻ
                 ClipRRect(
-                  borderRadius: BorderRadius.all( Radius.circular(15.0)),
+                  borderRadius: const BorderRadius.all( Radius.circular(15.0)),
                   child: getImage(name_course),
                 ),
                 // Tiêu đề trong thẻ

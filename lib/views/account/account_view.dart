@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/account/account_change_password.dart';
 import 'package:frontend/views/account/account_edit_profile.dart';
-import 'package:frontend/views/home/homePage.dart';
-import '../home/component/status_bar.dart';
+
 import '../wallet/wallet.dart';
 
 class Account extends StatefulWidget {
@@ -19,11 +18,28 @@ class _AccountState extends State<Account> {
   TextEditingController phoneNumberController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    super.initState();
+
+    emailController.text = "huakhanhdoan@gmail.com";
+    lgInputController.text = "30/02/2024";
+    phoneNumberController.text = "0123456789";
+  }
+
   void _navigateToEditProfile(BuildContext context) async {
-    final result = await Navigator.push(
+    final Map<String, dynamic>? newValues = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AccountEditProfile()),
     );
+    if (newValues != null) {
+      setState(() {
+        // Cập nhật các biến email, dob, và phone từ giá trị mới
+        emailController.text = newValues['newEmail'];
+        lgInputController.text = newValues['newDob'];
+        phoneNumberController.text = newValues['newPhoneNumber'];
+      });
+    }
   }
 
   void _navigateToChangePassword(BuildContext context) {
@@ -35,112 +51,80 @@ class _AccountState extends State<Account> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: appTheme.blue50,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, size: 35),
-              color: appTheme.blue400,
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
-                  ),
-                );
-              },
-            ),
-            actions: <Widget>[
-              NavigationBar1(),
-            ],
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white, // Màu nền của container
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5), // Màu của bóng
-                      spreadRadius: 4, // Bán kính phân tán của bóng
-                      blurRadius: 5, // Độ mờ của bóng
-                      offset: Offset(0, 2), // Độ lệch của bóng
-                    ),
-                  ],
+    return
+          Column(
+            children: [
+              const SizedBox(height: 80,),
+              SizedBox(
+              width: SizeUtils.width,
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom
                 ),
-              ),
-            ),
-          ),
-          body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom
-            ),
-            child: Form(
-              child: SizedBox(
-                width: double.maxFinite,
-                child: Column(
-                  children: [
-                    SizedBox(height: 10.v),
-                    Text(
-                        "Account",
-                        style: theme.textTheme.headlineLarge!.copyWith(
-                            color: appTheme.blue400,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                        )
-                    ),
-                    SizedBox(height: 15.v),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.h),
-                      child: AccountInput(
-                        context,
-                        leftText: "Name",
-                        rightText: "Hua Khanh Doan",
-                      )
-                    ),
-                    SizedBox(height: 20.v),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.h),
-                        child: AccountInput(
-                          context,
-                          leftText: "Email",
-                          rightText: "huakhanhdoan@gmail.com",
-                        )
-                    ),
-                    SizedBox(height: 20.v),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.h),
-                        child: AccountInput(
-                          context,
-                          leftText: "Dob",
-                          rightText: "30/02/2024",
-                        )
-                    ),
-                    SizedBox(height: 20.v),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.h),
-                        child: AccountInput(
-                          context,
-                          leftText: "Phone",
-                          rightText: "0123456789",
-                        )
-                    ),
-                    SizedBox(height: 20.v),
-                    AccountInputMore(context),
-                    SizedBox(height: 25.v),
-                    AccountButton(context),
-                    SizedBox(height: 75.v),
-                  ]
+                child: Form(
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 10.v),
+                        // Text(
+                        //     "Profile",
+                        //     style: theme.textTheme.headlineLarge!.copyWith(
+                        //         color: appTheme.blue400,
+                        //         fontWeight: FontWeight.bold,
+                        //         fontSize: 30,
+                        //     )
+                        // ),
+                        SizedBox(height: 15.v),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.h),
+                          child: AccountInput(
+                            context,
+                            leftText: "Name",
+                            rightText: "Hua Khanh Doan",
+                          )
+                        ),
+                        SizedBox(height: 20.v),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.h),
+                            child: AccountInput(
+                              context,
+                              leftText: "Email",
+                              rightText: emailController.text,
+                            )
+                        ),
+                        SizedBox(height: 20.v),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.h),
+                            child: AccountInput(
+                              context,
+                              leftText: "Dob",
+                              rightText: lgInputController.text,
+                            )
+                        ),
+                        SizedBox(height: 20.v),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.h),
+                            child: AccountInput(
+                              context,
+                              leftText: "Phone",
+                              rightText: phoneNumberController.text,
+                            )
+                        ),
+                        SizedBox(height: 20.v),
+                        AccountInputMore(context),
+                        SizedBox(height: 25.v),
+                        AccountButton(context),
+                        SizedBox(height: 75.v),
+                      ]
+                    )
+                  )
                 )
               )
-            )
-          )
-        )
-      )
-    );
+                      ),
+            ],
+          );
+
   }
 
   /// AccountLine
@@ -202,7 +186,7 @@ class _AccountState extends State<Account> {
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "30 ITK",
+              "250 ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold
@@ -221,7 +205,7 @@ class _AccountState extends State<Account> {
               child: Icon(
                 Icons.arrow_forward_ios,
                 color: appTheme.black900,
-                size: 25,
+                size: 24,
               ),
             ),
           )

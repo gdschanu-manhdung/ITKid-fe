@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/account/account_view.dart';
-import 'package:frontend/views/home/homePage.dart';
+
+import '../../base.dart';
 import '../home/component/status_bar.dart';
 
 class AccountChangePassword extends StatefulWidget {
@@ -21,17 +22,17 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 1), () {
           Navigator.of(context).pop();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Account(),
+              builder: (context) => Menu(index: 2,),
             ),
           );
         });
         return Dialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -39,7 +40,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
             height: 200,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -77,13 +78,13 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
             appBar: AppBar(
               backgroundColor: appTheme.blue50,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, size: 35),
-                color: appTheme.blue400,
+                icon: const Icon(Icons.arrow_back, size: 25),
+                color: appTheme.black900,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Account(),
+                      builder: (context) => Menu(index: 2,),
                     ),
                   );
                 },
@@ -92,7 +93,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
                 NavigationBar1(),
               ],
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
+                preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white, // Màu nền của container
@@ -101,7 +102,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
                         color: Colors.grey.withOpacity(0.5), // Màu của bóng
                         spreadRadius: 4, // Bán kính phân tán của bóng
                         blurRadius: 5, // Độ mờ của bóng
-                        offset: Offset(0, 2), // Độ lệch của bóng
+                        offset: const Offset(0, 2), // Độ lệch của bóng
                       ),
                     ],
                   ),
@@ -122,7 +123,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
                                 children: [
                                   SizedBox(height: 10.v),
                                   Text(
-                                      "Account",
+                                      "Profile",
                                       style: theme.textTheme.headlineLarge!.copyWith(
                                         color: appTheme.blue400,
                                         fontWeight: FontWeight.bold,
@@ -209,7 +210,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
   /// AccountLine
   Widget AccountInput(BuildContext context, {required String leftText, required Widget rightWidget}) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 150.0),
+      constraints: const BoxConstraints(maxHeight: 150.0),
       padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.v),
       decoration: AppDecoration.outlineBlueGray.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder20
@@ -277,7 +278,7 @@ class _AccountChangePasswordState extends State<AccountChangePassword> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Account(),
+                      builder: (context) => Menu(index: 2,),
                     ),
                   );
                 },

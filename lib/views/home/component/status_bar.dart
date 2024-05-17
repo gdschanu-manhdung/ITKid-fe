@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/account/account_view.dart';
 
+import '../../../base.dart';
 import '../../compete/compete_prematch.dart';
 
 
@@ -27,14 +28,12 @@ class _NavigationBar1State extends State<NavigationBar1> {
             fit: BoxFit.cover, // Cách hiển thị ảnh trong khung
           ),
 
-          Spacer(),
-
-
+          const Spacer(),
           PopupMenuButton<String>(
 
 
-            icon: Icon(Icons.menu, color: Colors.blueAccent.shade200,size: 35,),
-            offset: Offset(0, 50),
+            icon: Icon(Icons.menu, color: Colors.black, size: 25,),
+            offset: const Offset(0, 50),
             onSelected: (value) {
               // Xử lý khi một tùy chọn được chọn
               print('Chọn: $value');
@@ -47,12 +46,18 @@ class _NavigationBar1State extends State<NavigationBar1> {
                   child: Row(
                     children: [
                       Icon(Icons.play_circle_fill, color: Colors.blueAccent.shade200, size: 23,),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Text('Play Treasure Game',
                         style: TextStyle(fontSize:20,fontWeight: FontWeight.bold, color:Colors.blueAccent.shade200 ),),
                     ],
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Menu(index: 3,)),
+                  );
+                },
               ),
               PopupMenuItem<String>(
                 value: 'Option 2',
@@ -61,7 +66,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                   child: Row(
                     children: [
                       Icon(Icons.search, color: Colors.blueAccent.shade200, size: 23,),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Text('Find A Match',
                         style: TextStyle(fontSize:20,fontWeight: FontWeight.bold, color:Colors.blueAccent.shade200 ),),
                     ],
@@ -70,7 +75,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Compete()),
+                    MaterialPageRoute(builder: (context) => Menu(index: 1,)),
                   );
                 },
               ),
@@ -81,7 +86,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                   child: Row(
                     children: [
                       Icon(Icons.account_box, color: Colors.blueAccent.shade200, size: 23,),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Text('Account',
                         style: TextStyle(fontSize:20,fontWeight: FontWeight.bold, color:Colors.blueAccent.shade200 ),),
                     ],
@@ -90,7 +95,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Account()),
+                    MaterialPageRoute(builder: (context) => Menu(index: 2,)),
                   );
                 },
               ),

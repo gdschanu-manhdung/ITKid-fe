@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_finding.dart';
 import 'package:frontend/views/compete/compete_ranking.dart';
-import 'package:frontend/views/compete/component/status_bar_compete.dart';
-import '../../core/theme/theme_helper.dart';
-import '../../core/utils/size_utils.dart';
-import '../home/homePage.dart';
+
 
 class Compete extends StatefulWidget {
   Compete({Key? key}) : super(key: key);
@@ -17,99 +14,70 @@ class Compete extends StatefulWidget {
 class CompeteState extends State<Compete> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(255, 153, 175, 1),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 35,),
-          color: Color.fromRGBO(246, 0, 52, 1),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MyHomePage(),
-              ),
-            );
-          },
-        ),
-        actions: <Widget>[
-          NavigationBar2(),
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white, // Màu nền của container
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // Màu của bóng
-                  spreadRadius: 4, // Bán kính phân tán của bóng
-                  blurRadius: 5, // Độ mờ của bóng
-                  offset: Offset(0, 2), // Độ lệch của bóng
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-        body: SizedBox(
-            width: SizeUtils.width,
-            child: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom
-                ),
-                child: Column(
-                    children: [
-                      SizedBox(
-                        width: double.maxFinite,
-                        child: Column(
-                            children: [
-                              SizedBox(height: 15.v),
-                              Text(
-                                  "Find A Match",
-                                  style: theme.textTheme.headlineLarge!.copyWith(
-                                    color: Color.fromRGBO(246, 0, 52, 1),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30,
-                                  )
-                              ),
-                              SizedBox(height: 25.v),
-                              ResultBox(),
-                              SizedBox(height: 25.v),
-                              InstructionBox(),
-                              SizedBox(height: 26.v),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20.h),
-                                child: buildButton(
-                                  context,
-                                  type: "Find A Match",
-                                  buttonColor: Color.fromRGBO(255, 112, 142, 1),
-                                  boxDecoration: AppDecoration.fillPink.copyWith(
-                                    borderRadius: BorderRadiusStyle.circleBorder35,
+    return
+         ListView(
+           children: [
+             const SizedBox(height: 90,),
+             SizedBox(
+                width: SizeUtils.width,
+                child: SingleChildScrollView(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom
+                    ),
+                    child: Column(
+                        children: [
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: Column(
+                                children: [
+                                  // SizedBox(height: 10.v),
+                                  // Text(
+                                  //     "Find A Match",
+                                  //     style: theme.textTheme.headlineLarge!.copyWith(
+                                  //       color: const Color.fromRGBO(246, 0, 52, 1),
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 30,
+                                  //     )
+                                  // ),
+                                  SizedBox(height: 9.v),
+                                  ResultBox(),
+                                  SizedBox(height: 15.v),
+                                  InstructionBox(),
+                                  SizedBox(height: 15.v),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 20.h),
+                                    child: buildButton(
+                                      context,
+                                      type: "Find A Match",
+                                      buttonColor: const Color.fromRGBO(255, 112, 142, 1),
+                                      boxDecoration: AppDecoration.fillPink.copyWith(
+                                        borderRadius: BorderRadiusStyle.circleBorder35,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              SizedBox(height: 12.v),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20.h),
-                                child: buildButton(
-                                  context,
-                                  type: "Rankings",
-                                  buttonColor: Color.fromRGBO(255, 176, 57, 1),
-                                  boxDecoration: AppDecoration.fillOrange.copyWith(
-                                    borderRadius: BorderRadiusStyle.circleBorder35,
+                                  SizedBox(height: 12.v),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 20.h),
+                                    child: buildButton(
+                                      context,
+                                      type: "Rankings",
+                                      buttonColor: const Color.fromRGBO(255, 176, 57, 1),
+                                      boxDecoration: AppDecoration.fillOrange.copyWith(
+                                        borderRadius: BorderRadiusStyle.circleBorder35,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ]
+                                ]
+                            )
                         )
+                      ]
                     )
-                  ]
                 )
-            )
-        )
-    );
+                     ),
+             const SizedBox(height: 100,),
+           ],
+         );
+
   }
 
   Widget ResultBox() {
@@ -118,13 +86,13 @@ class CompeteState extends State<Compete> {
       padding: EdgeInsets.symmetric(horizontal: 25.h, vertical: 15.v),
       decoration: AppDecoration.outlineBlueGray.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder20,
-          color: Color.fromRGBO(255, 153, 175, 1),
+          color: const Color.fromRGBO(255, 153, 175, 1),
       ),
       child: Padding(
           padding:EdgeInsets.only(top: 1.v),
           child: Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -146,7 +114,7 @@ class CompeteState extends State<Compete> {
                   ],
                 ),
                 SizedBox(height: 8.v),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -179,7 +147,7 @@ class CompeteState extends State<Compete> {
       padding: EdgeInsets.symmetric(horizontal: 25.h, vertical: 15.v),
       decoration: AppDecoration.outlineBlueGray.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder20,
-        color: Color.fromRGBO(232, 175, 187, 1),
+        color: const Color.fromRGBO(232, 175, 187, 1),
       ),
       child: Padding(
           padding:EdgeInsets.only(top: 1.v),
@@ -188,13 +156,13 @@ class CompeteState extends State<Compete> {
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.circle,
                       color: Colors.white,
                       size: 8,
                     ),
                     SizedBox(width: 5.h),
-                    Text(
+                    const Text(
                       "Press 'Find A Match'",
                       style: TextStyle(
                         color: Colors.white,
@@ -207,13 +175,13 @@ class CompeteState extends State<Compete> {
                 SizedBox(height: 4.v),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.circle,
                       color: Colors.white,
                       size: 8,
                     ),
                     SizedBox(width: 5.h),
-                    Text(
+                    const Text(
                       "Waiting for your opponent",
                       style: TextStyle(
                         color: Colors.white,
@@ -226,13 +194,13 @@ class CompeteState extends State<Compete> {
                 SizedBox(height: 4.v),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.circle,
                       color: Colors.white,
                       size: 8,
                     ),
                     SizedBox(width: 5.h),
-                    Text(
+                    const Text(
                       "If you win, you earn 10 points",
                       style: TextStyle(
                         color: Colors.white,
@@ -245,13 +213,13 @@ class CompeteState extends State<Compete> {
                 SizedBox(height: 4.v),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.circle,
                       color: Colors.white,
                       size: 8,
                     ),
                     SizedBox(width: 5.h),
-                    Text(
+                    const Text(
                       "More points, higher position on",
                       style: TextStyle(
                         color: Colors.white,
@@ -262,7 +230,7 @@ class CompeteState extends State<Compete> {
                   ],
                 ),
                 SizedBox(height: 4.v),
-                Text(
+                const Text(
                   "the rankings board",
                   style: TextStyle(
                     color: Colors.white,
@@ -272,13 +240,13 @@ class CompeteState extends State<Compete> {
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.circle,
                       color: Colors.white,
                       size: 8,
                     ),
                     SizedBox(width: 5.h),
-                    Text(
+                    const Text(
                       "Every month, 3 users with highest",
                       style: TextStyle(
                         color: Colors.white,
@@ -289,7 +257,7 @@ class CompeteState extends State<Compete> {
                   ],
                 ),
                 SizedBox(height: 4.v),
-                Text(
+                const Text(
                   "rankings will receive a special gift",
                   style: TextStyle(
                     color: Colors.white,

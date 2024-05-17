@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:frontend/views/home/component/card_category.dart';
 
 import 'component/status_bar.dart';
@@ -18,7 +16,7 @@ class _CategoryState extends State<Category> {
     return Scaffold(
       appBar: AppBar(
 
-        backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
+        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget> [
 
           NavigationBar1(),
@@ -42,7 +40,7 @@ class _CategoryState extends State<Category> {
           ),
           Expanded(
             child: ListView(
-              children: [
+              children: const [
               CardCategory(1),
                 CardCategory(2),
                 CardCategory(3),

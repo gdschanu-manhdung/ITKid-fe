@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../base.dart';
 import '../home/homePage.dart';
 import 'auth_forgot_password.dart';
 import 'auth_main.dart';
@@ -31,7 +33,10 @@ class _AuthLoginState extends State<AuthLogin> {
     );
   }
 
-  void _showSuccessDialog(BuildContext context) {
+  Future<void> _showSuccessDialog(BuildContext context) async {
+    // Set the value of hasUserData to true
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('hasUserData', true);
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -41,7 +46,7 @@ class _AuthLoginState extends State<AuthLogin> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => MyHomePage(),
+              builder: (context) => Menu(index: 0),
             ),
           );
         });

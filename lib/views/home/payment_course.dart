@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/course.dart';
 
@@ -26,7 +26,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(207, 254, 255, 1.0),
+        backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
         actions: <Widget>[
           NavigationBar1(),
         ],
@@ -84,7 +84,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          'Course free    ' '${widget.course_fee}' ' ITK',
+                          'Course fee    ' '${widget.course_fee}' ' ITK',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: !this.PaySuccessfully
@@ -112,8 +112,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
     if (widget.balance < widget.course_fee) {
       return Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text('You need to fund in to pay',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -135,8 +135,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.orangeAccent),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Text(
                       'Fund In',
                       style: TextStyle(
@@ -156,13 +156,13 @@ class _PaymentCourseState extends State<PaymentCourse> {
                 'Rest                 '
                 '${widget.balance - widget.course_fee}'
                 ' ITK',
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
                     fontSize: 22)),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(1.0),
             child: !this.PaySuccessfully
                 ? ElevatedButton(
                     onPressed: () {
@@ -175,14 +175,17 @@ class _PaymentCourseState extends State<PaymentCourse> {
                       elevation: MaterialStateProperty.all<double>(5),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
                       ),
                       backgroundColor:
                           MaterialStateProperty.all(Colors.orangeAccent),
+                      fixedSize: MaterialStateProperty.all<Size>(
+                        const Size(120, 60), // Cố định chiều rộng của nút
+                      ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(1.0),
                       child: Text(
                         'Pay',
                         style: TextStyle(
@@ -193,7 +196,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     ))
                 : Column(
                   children: [
-                    Text(
+                    const Text(
                         "Pay successfully!",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -202,24 +205,24 @@ class _PaymentCourseState extends State<PaymentCourse> {
                       ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => Course(widget.name_course)),
+                          MaterialPageRoute(builder: (context) => Course( true, widget.name_course)),
                         );
                       },
                       style: ButtonStyle(
-    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
-    elevation: MaterialStateProperty.all<double>(5),
-    shape: MaterialStateProperty.all(
-    RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(30.0),
-    ),
-    ),
-    backgroundColor:
-    MaterialStateProperty.all(Colors.orangeAccent),
-    ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                        elevation: MaterialStateProperty.all<double>(5),
+                        shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        ),
+                        backgroundColor:
+                        MaterialStateProperty.all(Colors.orangeAccent),
+                        ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           " Let's learn",
                           style: TextStyle(

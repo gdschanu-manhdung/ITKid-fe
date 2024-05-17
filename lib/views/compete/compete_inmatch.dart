@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_result.dart';
 import 'package:frontend/views/compete/component/status_bar_compete.dart';
-import '../home/homePage.dart';
+import '../../base.dart';
 import './component/option_input.dart';
 import './component/inputscore_right.dart';
 import './component/inputscore_left.dart';
-// import './component/timecount.dart';
 
 class CompeteMatch extends StatefulWidget {
   CompeteMatch({Key? key}) : super(key: key);
@@ -22,14 +22,32 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
   late AnimationController controller;
   List responseData = [];
   int number = 0;
+  int you_point = 0, opp_point = 0;
   List<String> shuffledOptions = [];
-  // late Timer _timer;
-  int _secondRemaining = 10;
 
-  bool _isAnswered = false;
-  int _correctAns = 0;
-  int _selectedAns = 0;
-  int _numOfCorrectAns = 0;
+  int? selectedOptionIndex;
+  List<bool> selectedOptions = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    api();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    )..addListener(() {
+      setState(() {});
+    });
+    controller.forward().whenComplete(() {
+      // Reset trạng thái isSelected trong từng OptionInput về false
+      for (int i = 0; i < shuffledOptions.length; i++) {
+        setState(() {
+          selectedOptionIndex = null;
+        });
+      }
+    });
+  }
 
   Future api() async{
     final response = await http.get(Uri.parse('https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple'));
@@ -38,31 +56,10 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
       setState(() {
         responseData = data;
         updateShuffledOption();
+        selectedOptions = List.generate(responseData.length, (index) => false);
       });
-    }
-  }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    controller = AnimationController(
-      /// [AnimationController]s can be created with `vsync: this` because of
-      /// [TickerProviderStateMixin].
-      vsync: this,
-      duration: const Duration(seconds: 10),
-    )..addListener(() {
-      setState(() {
-        if (_secondRemaining > 0) {
-          _secondRemaining--;
-        } else {
-          _secondRemaining = 10;
-        }
-      });
-    });
-    controller.forward().whenComplete(nextQuestion);
-    super.initState();
-    api();
-    // startTimer();
+    }
   }
 
   void updateShuffledOption() {
@@ -89,64 +86,38 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
         number++;
         updateShuffledOption();
         controller.reset();
-        controller.forward().whenComplete(nextQuestion);
+        controller.forward();
+        selectedOptions = List.generate(responseData.length, (index) => false);
       }
       if (number == responseData.length - 1) {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => CompeteResult(),
-            transitionDuration: Duration(seconds: 2),
+            pageBuilder: (context, animation, secondaryAnimation) => CompeteResult(
+              you_point: you_point,
+              opp_point: opp_point,
+            ),
+            transitionDuration: const Duration(seconds: 2),
           ),
         );
       }
     });
   }
 
-  void checkAns(int index) {
-    if (!_isAnswered) {
-      _isAnswered = true;
-      _selectedAns = index;
-      if (responseData[index]['correct_answer'] == shuffledOptions[index]) {
-        _correctAns = index;
-        _numOfCorrectAns++;
-      }
-      setState(() {
-        controller.stop();
-      });
-      Future.delayed(Duration(seconds: 1), nextQuestion);
-    }
-  }
-
-  // function for timer
-  // void startTimer() {
-  //   _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-  //     setState(() {
-  //       if (_secondRemaining > 0) {
-  //         _secondRemaining--;
-  //       } else {
-  //         nextQuestion();
-  //         _secondRemaining = 10;
-  //         updateShuffledOption();
-  //       }
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 35,),
-            color: Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 35,),
+            color: const Color.fromRGBO(246, 0, 52, 1),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
+                  builder: (context) => Menu(),
                 ),
               );
             },
@@ -155,7 +126,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
             NavigationBar2(),
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(4.0),
+            preferredSize: const Size.fromHeight(4.0),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -164,7 +135,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 4,
                     blurRadius: 5,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
@@ -185,14 +156,14 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                               children: [
                                 SizedBox(height: 15.v),
                                 Align(
-                                  child: Text(
-                                    "Question ${number + 1}/10",
-                                    style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color.fromRGBO(246, 0, 52, 1),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
+                                    child: Text(
+                                        "Question ${number + 1}/10",
+                                        style: theme.textTheme.headlineLarge!.copyWith(
+                                          color: const Color.fromRGBO(246, 0, 52, 1),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 26,
+                                        )
                                     )
-                                  )
                                 ),
                                 SizedBox(height: 20.v),
                                 Row(
@@ -203,7 +174,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                               padding: EdgeInsets.only(left: 20.h, right: 8.h),
                                               child: InputScoreLeft(
                                                 player: "You",
-                                                point: "40",
+                                                point: you_point.toString(),
                                               )
                                           )
                                       ),
@@ -211,7 +182,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                           child: Padding(
                                               padding: EdgeInsets.only(left: 8.h, right: 20.h),
                                               child: InputScoreRight(
-                                                point: "30",
+                                                point: opp_point.toString(),
                                                 player: "Opp",
                                               )
                                           )
@@ -224,82 +195,71 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                   child: LinearProgressIndicator(
                                     value: controller.value,
                                     borderRadius: BorderRadius.circular(20),
-                                    color: Color(0xFFF60034),
-                                    backgroundColor: Color(0xFFE5E5E5),
+                                    color: const Color(0xFFF60034),
+                                    backgroundColor: const Color(0xFFE5E5E5),
                                   ),
                                 ),
                                 SizedBox(height: 20.v),
                                 Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 20.h),
-                                    padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 50.v),
-                                    decoration: AppDecoration.outlineBlueGray.copyWith(
-                                      borderRadius: BorderRadiusStyle.roundedBorder20,
-                                      color: Color(0xFFFCFCFC),
+                                  width: SizeUtils.width * 0.9,
+                                  height: SizeUtils.height * 0.3,
+                                  padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 50.v),
+                                  decoration: AppDecoration.outlineBlueGray.copyWith(
+                                    borderRadius: BorderRadiusStyle.roundedBorder20,
+                                    color: const Color(0xFFFCFCFC),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    responseData.isNotEmpty? responseData[number]['question'] : 'Loading...',
+                                    style: TextStyle(
+                                      color: appTheme.black900,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    child: Padding(
-                                      padding:EdgeInsets.only(top: 1.v),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(height: 10.v),
-                                          Text(
-                                            responseData.isNotEmpty? responseData[number]['question'] : 'Loading...',
-                                            style: TextStyle(
-                                              color: appTheme.black900,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(height: 10.v),
-                                        ],
-                                      ),
-                                    )
+                                  ),
                                 ),
                                 SizedBox(height: 20.v),
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: (responseData.isNotEmpty && responseData[number]['incorrect_answers'] != null) ?
-                                      shuffledOptions.sublist(0, 2).map((option) {
-                                        return Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.v),
-                                            child: OptionInput(
-                                              option: option,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList() : [],
-                                    ),
-                                    Row(
-                                      children: (responseData.isNotEmpty && responseData[number]['incorrect_answers'] != null) ?
-                                      shuffledOptions.sublist(2, 4).map((option) {
-                                        return Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.v),
-                                            child: OptionInput(
-
-                                              option: option,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList() : [],
-                                    ),
-                                  ],
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15.h),
+                                  child: GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 15.v,
+                                    crossAxisSpacing: 15.h,
+                                    childAspectRatio: 2.6,
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    children: List.generate(shuffledOptions.length, (index) {
+                                      bool isCorrect = index == shuffledOptions.indexOf(
+                                          responseData[number]['correct_answer']);
+                                      return OptionInput(
+                                          option: shuffledOptions[index],
+                                          isCorrect: isCorrect,
+                                          isSelected: selectedOptions[index],
+                                          onPressed: () {
+                                            setState(() {
+                                              selectedOptionIndex = index;
+                                              if (isCorrect) {
+                                                selectedOptions[index] = true;
+                                              } else {
+                                                selectedOptions[index] = true;
+                                                for (int i = 0; i < shuffledOptions.length; i++) {
+                                                  if (shuffledOptions[i] == responseData[number]['correct_answer']) {
+                                                    selectedOptions[i] = true;
+                                                  }
+                                                }
+                                              }
+                                              you_point += (isCorrect ? 10 : 0);
+                                              opp_point += 10 * (Random().nextInt(2));
+                                              Future.delayed(const Duration(milliseconds: 500), () {
+                                                nextQuestion();
+                                              });
+                                            });
+                                          }
+                                      );
+                                    }),
+                                  ),
                                 ),
                                 SizedBox(height: 10.v),
-                                // Row(
-                                //     mainAxisAlignment: MainAxisAlignment.center,
-                                //     children: [
-                                //       Expanded(
-                                //           child: Padding(
-                                //               padding: EdgeInsets.symmetric(horizontal: 25.h),
-                                //               child: TimeCount(
-                                //                 time: _secondRemaining.toString(),
-                                //               )
-                                //           )
-                                //       ),
-                                //     ]
-                                // ),
                               ]
                           )
                       )

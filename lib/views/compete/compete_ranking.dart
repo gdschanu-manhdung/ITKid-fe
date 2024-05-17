@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_prematch.dart';
 import 'package:frontend/views/compete/component/status_bar_compete.dart';
+import '../../base.dart';
 import '../../core/theme/theme_helper.dart';
 import '../../core/utils/size_utils.dart';
 import '../home/homePage.dart';
@@ -19,15 +20,15 @@ class _CompeteRankingState extends State<CompeteRanking> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 35,),
-            color: Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 35,),
+            color: const Color.fromRGBO(246, 0, 52, 1),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Compete(),
+                  builder: (context) => Menu(index: 1,),
                 ),
               );
             },
@@ -36,7 +37,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
             NavigationBar2(),
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
+            preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white, // Màu nền của container
@@ -45,7 +46,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                     color: Colors.grey.withOpacity(0.5), // Màu của bóng
                     spreadRadius: 4, // Bán kính phân tán của bóng
                     blurRadius: 5, // Độ mờ của bóng
-                    offset: Offset(0, 2), // Độ lệch của bóng
+                    offset: const Offset(0, 2), // Độ lệch của bóng
                   ),
                 ],
               ),
@@ -68,7 +69,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                 Text(
                                     "Rankings",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: Color.fromRGBO(246, 0, 52, 1),
+                                      color: const Color.fromRGBO(246, 0, 52, 1),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
                                     )
@@ -79,13 +80,13 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                   padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.v),
                                   decoration: AppDecoration.outlineBlueGray.copyWith(
                                     borderRadius: BorderRadiusStyle.roundedBorder20,
-                                    color: Color(0xFFFCFCFC),
+                                    color: const Color(0xFFFCFCFC),
                                   ),
                                   child: Padding(
                                     padding:EdgeInsets.only(top: 1.v),
                                     child: Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Your rank: 20",
                                           style: TextStyle(
                                             color: Color(0xFFF60034),
@@ -98,7 +99,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFFFB039),
+                                              buildColor: const Color(0xFFFFB039),
                                               index: "1",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -109,7 +110,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFC0C0C0),
+                                              buildColor: const Color(0xFFC0C0C0),
                                               index: "2",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -120,7 +121,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFCD7F32),
+                                              buildColor: const Color(0xFFCD7F32),
                                               index: "3",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -131,7 +132,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFFCFCFC),
+                                              buildColor: const Color(0xFFFCFCFC),
                                               index: "4",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -142,7 +143,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFFCFCFC),
+                                              buildColor: const Color(0xFFFCFCFC),
                                               index: "5",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -153,7 +154,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFFCFCFC),
+                                              buildColor: const Color(0xFFFCFCFC),
                                               index: "6",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -164,7 +165,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFFCFCFC),
+                                              buildColor: const Color(0xFFFCFCFC),
                                               index: "7",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -175,7 +176,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
                                           padding: EdgeInsets.symmetric(horizontal: 1.h),
                                           child: buildInput(
                                               context,
-                                              buildColor: Color(0xFFFCFCFC),
+                                              buildColor: const Color(0xFFFCFCFC),
                                               index: "8",
                                               name: "Nguyen Van A",
                                               point: "150"
@@ -235,7 +236,7 @@ class _CompeteRankingState extends State<CompeteRanking> {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
               padding: EdgeInsets.only(top: 3.v),
               child: Text(
