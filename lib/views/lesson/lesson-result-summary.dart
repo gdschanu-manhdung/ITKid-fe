@@ -69,7 +69,7 @@ class _LessonResultSummaryStage extends State<LessonResultSummary> {
                 backgroundColor: MaterialStateProperty.all(Colors.green),
               ),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LessonSummary(  title: 'widget.title',)),
                 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/account/account_change_password.dart';
 import 'package:frontend/views/account/account_edit_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../wallet/wallet.dart';
 
@@ -17,28 +18,39 @@ class _AccountState extends State<Account> {
   TextEditingController lgInputController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  int coin = 0;
 
   @override
   void initState() {
     super.initState();
+    loadCoin();
 
     emailController.text = "huakhanhdoan@gmail.com";
     lgInputController.text = "30/02/2024";
     phoneNumberController.text = "0123456789";
   }
 
+  Future<void> loadCoin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      coin = prefs.getInt('coin') ?? 400;
+    });
+  }
+
   void _navigateToEditProfile(BuildContext context) async {
-    final Map<String, dynamic>? newValues = await Navigator.push(
+    final Map<String, dynamic>? newValues = await Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => AccountEditProfile()),
     );
     if (newValues != null) {
       setState(() {
-        // Cập nhật các biến email, dob, và phone từ giá trị mới
         emailController.text = newValues['newEmail'];
         lgInputController.text = newValues['newDob'];
         phoneNumberController.text = newValues['newPhoneNumber'];
       });
+      print("New Email: ${emailController.text}");
+      print("New Dob: ${lgInputController.text}");
+      print("New Phone Number: ${phoneNumberController.text}");
     }
   }
 
@@ -67,14 +79,6 @@ class _AccountState extends State<Account> {
                     child: Column(
                       children: [
                         SizedBox(height: 10.v),
-                        // Text(
-                        //     "Profile",
-                        //     style: theme.textTheme.headlineLarge!.copyWith(
-                        //         color: appTheme.blue400,
-                        //         fontWeight: FontWeight.bold,
-                        //         fontSize: 30,
-                        //     )
-                        // ),
                         SizedBox(height: 15.v),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.h),
@@ -90,7 +94,7 @@ class _AccountState extends State<Account> {
                             child: AccountInput(
                               context,
                               leftText: "Email",
-                              rightText: emailController.text,
+                              rightText: "${emailController.text}",
                             )
                         ),
                         SizedBox(height: 20.v),
@@ -99,7 +103,7 @@ class _AccountState extends State<Account> {
                             child: AccountInput(
                               context,
                               leftText: "Dob",
-                              rightText: lgInputController.text,
+                              rightText: "${lgInputController.text}",
                             )
                         ),
                         SizedBox(height: 20.v),
@@ -108,7 +112,7 @@ class _AccountState extends State<Account> {
                             child: AccountInput(
                               context,
                               leftText: "Phone",
-                              rightText: phoneNumberController.text,
+                              rightText: "${phoneNumberController.text}",
                             )
                         ),
                         SizedBox(height: 20.v),
@@ -182,11 +186,11 @@ class _AccountState extends State<Account> {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "250 ITK",
+              "$coin" " ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold
@@ -195,7 +199,7 @@ class _AccountState extends State<Account> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => Wallet()),
               );
@@ -232,7 +236,7 @@ class _AccountState extends State<Account> {
             ),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 33.h, vertical: 10.v),
-              decoration: AppDecoration.fillBlue.copyWith(
+              decoration: AppDecoration.fillTeal.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder20
               ),
               child: Column(

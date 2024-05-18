@@ -23,6 +23,18 @@ class AppDecoration {
     color: appTheme.orange300,
   );
 
+  static BoxDecoration get fillBlueHeavy => BoxDecoration(
+    color: const Color.fromRGBO(68, 212, 220, 1.0),
+  );
+
+  static BoxDecoration get fillRed => BoxDecoration(
+    color: const Color.fromRGBO(68, 212, 220, 1.0),
+  );
+
+  static BoxDecoration get fillTeal00 => BoxDecoration(
+    color: appTheme.teal00,
+  );
+
   // Outline decorations
   static BoxDecoration get outlineBlack => BoxDecoration();
   static BoxDecoration get outlineBlueGray => BoxDecoration(

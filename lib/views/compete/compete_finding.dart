@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/base.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_inmatch.dart';
-import 'package:frontend/views/compete/compete_prematch.dart';
-import 'package:frontend/views/compete/component/status_bar_compete.dart';
+import 'package:frontend/views/home/component/status_bar.dart';
 import '../../core/theme/theme_helper.dart';
 import '../../core/utils/size_utils.dart';
 
@@ -26,10 +25,10 @@ class _CompeteFindingState extends State<CompeteFinding> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 35,),
-            color: const Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 25,),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,
@@ -40,7 +39,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
             },
           ),
           actions: <Widget>[
-            NavigationBar2(),
+            NavigationBar1(),
           ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
@@ -75,7 +74,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                                 Text(
                                     "Find A Match",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: const Color.fromRGBO(246, 0, 52, 1),
+                                      color: appTheme.pink300,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
                                     )
@@ -88,7 +87,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                                   child: buildButton(
                                     context,
                                     type: "Stop",
-                                    buttonColor: const Color.fromRGBO(255, 112, 142, 1),
+                                    buttonColor: const Color.fromRGBO(68, 212, 220, 1.0),
                                     boxDecoration: AppDecoration.fillPink.copyWith(
                                       borderRadius: BorderRadiusStyle.circleBorder35,
                                     ),
@@ -120,7 +119,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
               const Text(
                 "Waiting for your opponent",
                 style: TextStyle(
-                  color: Color(0xFFF60034),
+                  color: Color(0XFFFF6F8E),
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -129,7 +128,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
               const Icon(
                 Icons.search,
                 size: 100,
-                color: Color(0xFFF60034),
+                color: Color(0XFFFF6F8E),
               )
             ],
           ),
@@ -206,7 +205,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                     'Opponent Found!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.red, // Change color if necessary
+                      color: Color(0XFFFF6F8E), // Change color if necessary
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -215,7 +214,7 @@ class _CompeteFindingState extends State<CompeteFinding> {
                     'GOOOOOO!!!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.red, // Change color if necessary
+                      color: Color(0XFFFF6F8E), // Change color if necessary
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),

@@ -69,13 +69,17 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
       String newEmail = emailController.text;
       String newDob = lgInputController.text;
       String newPhoneNumber = phoneNumberController.text;
-      // Tạo map chứa các giá trị mới
+
       Map<String, dynamic> newValues = {
         'newEmail': newEmail,
         'newDob': newDob,
         'newPhoneNumber': newPhoneNumber,
       };
-      // Truyền giá trị mới sang trang Account
+
+      print("New Email: $newEmail");
+      print("New Dob: $newDob");
+      print("New Phone Number: $newPhoneNumber");
+
       Navigator.pop(context, newValues);
       _showSuccessDialog(context);
     }
@@ -187,14 +191,6 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
                             child: Column(
                                 children: [
                                   SizedBox(height: 10.v),
-                                  Text(
-                                      "Profile",
-                                      style: theme.textTheme.headlineLarge!.copyWith(
-                                        color: appTheme.blue400,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                      )
-                                  ),
                                   SizedBox(height: 15.v),
                                   Padding(
                                       padding: EdgeInsets.symmetric(horizontal: 10.h),

@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/payment_course.dart';
 import 'package:frontend/views/lesson/lesson-summary.dart';
@@ -136,7 +137,7 @@ class _Course extends State<Course> {
                               onPressed: () {
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, balance: 400, course_fee: 150),),
+                                  MaterialPageRoute(builder: (context) => PaymentCourse(name_course: widget.name_course, course_fee: 150),),
                                 );
                               },
                               style:   ButtonStyle(
@@ -251,9 +252,9 @@ class _Course extends State<Course> {
                                 }
                               }
                               else
-                                {
-                                  _showNotification = true;
-                                }
+                              {
+                                _showNotification = true;
+                              }
 
                             });
 

@@ -30,8 +30,6 @@ class _NavigationBar1State extends State<NavigationBar1> {
 
           const Spacer(),
           PopupMenuButton<String>(
-
-
             icon: Icon(Icons.menu, color: Colors.black, size: 25,),
             offset: const Offset(0, 50),
             onSelected: (value) {
@@ -45,9 +43,9 @@ class _NavigationBar1State extends State<NavigationBar1> {
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     children: [
-                      Icon(Icons.play_circle_fill, color: Colors.blueAccent.shade200, size: 23,),
+                      Icon(Icons.home, color: Colors.blueAccent.shade200, size: 23,),
                       const SizedBox(width: 10,),
-                      Text('Play Treasure Game',
+                      Text('Home',
                         style: TextStyle(fontSize:20,fontWeight: FontWeight.bold, color:Colors.blueAccent.shade200 ),),
                     ],
                   ),
@@ -55,7 +53,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Menu(index: 3,)),
+                    MaterialPageRoute(builder: (context) => Menu(index: 0,)),
                   );
                 },
               ),
@@ -87,7 +85,7 @@ class _NavigationBar1State extends State<NavigationBar1> {
                     children: [
                       Icon(Icons.account_box, color: Colors.blueAccent.shade200, size: 23,),
                       const SizedBox(width: 10,),
-                      Text('Account',
+                      Text('Profile',
                         style: TextStyle(fontSize:20,fontWeight: FontWeight.bold, color:Colors.blueAccent.shade200 ),),
                     ],
                   ),
@@ -99,10 +97,28 @@ class _NavigationBar1State extends State<NavigationBar1> {
                   );
                 },
               ),
+              PopupMenuItem<String>(
+                value: 'Option 4',
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    children: [
+                      Icon(Icons.play_circle_fill, color: Colors.blueAccent.shade200, size: 23,),
+                      const SizedBox(width: 10,),
+                      Text('Play Treasure Game',
+                        style: TextStyle(fontSize:20,fontWeight: FontWeight.bold, color:Colors.blueAccent.shade200 ),),
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Menu(index: 3,)),
+                  );
+                },
+              ),
             ],
           ),
-
-
         ],
       ),
     );

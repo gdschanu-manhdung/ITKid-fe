@@ -6,6 +6,7 @@ import 'package:frontend/game/my_game.dart';
 import 'package:frontend/game/screen/listGame.dart';
 import 'package:frontend/views/account/account_view.dart';
 import 'package:frontend/views/auth/auth_login.dart';
+import 'package:frontend/views/auth/auth_main.dart';
 import 'package:frontend/views/compete/compete_prematch.dart';
 import 'package:frontend/views/home/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,24 +46,42 @@ class _MenuState extends State<Menu> {
     }
   }
 
-  // Future<void> _logout() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('hasUserData', false);
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => AuthLogin(),
-  //     ),
-  //   );
-  // }
-
-  void _logout() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AuthLogin(),
-      ),
+  void _logout(BuildContext context) async {
+    bool confirmed = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actionsAlignment: MainAxisAlignment.center,
+          title: const Text("Confirm Log out", textAlign: TextAlign.center),
+          content: Text("Are you sure you want to log out?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop(false); // Return false when canceled
+              },
+            ),
+            TextButton(
+              child: Text("Confirm"),
+              onPressed: () {
+                Navigator.of(context).pop(true); // Return true when confirmed
+              },
+            ),
+          ],
+        );
+      },
     );
+
+    if (confirmed ?? false) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('hasUserData', false);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AuthMain(),
+        ),
+      );
+    }
   }
 
   @override
@@ -99,7 +118,7 @@ class _MenuState extends State<Menu> {
                               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
                         ),
 
-                        IconButton(onPressed: _logout, icon: const Icon(Icons.logout, color: Colors.white, size: 30,))
+                        IconButton(onPressed: () => _logout(context), icon: const Icon(Icons.logout, color: Colors.white, size: 30,))
                       ],
                     ),
                   ),
