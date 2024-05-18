@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/home/component/status_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_result.dart';
@@ -109,10 +110,10 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 35,),
-            color: const Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 25,),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,
@@ -123,7 +124,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
             },
           ),
           actions: <Widget>[
-            NavigationBar2(),
+            NavigationBar1(),
           ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
@@ -159,7 +160,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                     child: Text(
                                         "Question ${number + 1}/10",
                                         style: theme.textTheme.headlineLarge!.copyWith(
-                                          color: const Color.fromRGBO(246, 0, 52, 1),
+                                          color: appTheme.teal00,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 26,
                                         )
@@ -195,7 +196,7 @@ class _CompeteMatchState extends State<CompeteMatch> with SingleTickerProviderSt
                                   child: LinearProgressIndicator(
                                     value: controller.value,
                                     borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0xFFF60034),
+                                    color: appTheme.teal00,
                                     backgroundColor: const Color(0xFFE5E5E5),
                                   ),
                                 ),

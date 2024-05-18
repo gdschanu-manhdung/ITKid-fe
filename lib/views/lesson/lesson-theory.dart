@@ -195,19 +195,11 @@ class _LessonTheory extends State<LessonTheory> {
                     statusQuestion[count] = 1;
                   });
                   setState(() {
-                    if(textButton == 'Good job!') {
+                    if(textButton == 'Good job!' && count < list_quesiton.length - 1) {
                       count++;
                       checkStatus();
                     }
                   });
-                // onPressed: () {
-                //     setState(() {
-                //       textButton = 'Good job!';
-                //       themesColor = Colors.greenAccent;
-                //       iconButton = Icons.check;
-                //       count++;
-                //       checkStatus();
-                //     });
                 },
                 style: ButtonStyle(
                   shadowColor: MaterialStateProperty.all<Color>(Colors.grey),

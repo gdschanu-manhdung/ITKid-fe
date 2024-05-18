@@ -105,6 +105,7 @@ class PrimaryColors {
 
   // Teal
   Color get teal300 => Color(0XFF61B8B2);
+  Color get teal00 => const Color.fromRGBO(57, 210, 218, 1.0);
 
   // White
   Color get whiteA700 => Color(0XFFFFFFFF);

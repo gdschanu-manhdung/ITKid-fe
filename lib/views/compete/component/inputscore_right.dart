@@ -12,7 +12,7 @@ class InputScoreRight extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 15.v),
       decoration: BoxDecoration(
-        color: appTheme.pink100,
+        color: appTheme.teal00,
         borderRadius: BorderRadiusStyle.roundedBorder15,
         boxShadow: [
           BoxShadow(
@@ -31,7 +31,7 @@ class InputScoreRight extends StatelessWidget {
             child: Text(
               point,
               style: theme.textTheme.titleMedium!.copyWith(
-                color: Color(0xFFF60034),
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),

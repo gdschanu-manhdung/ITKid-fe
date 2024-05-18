@@ -1,27 +1,42 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/course.dart';
+import 'package:frontend/views/wallet/wallet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'component/status_bar.dart';
 
 class PaymentCourse extends StatefulWidget {
   final String name_course;
-  final int balance;
+
   final int course_fee;
 
   const PaymentCourse(
       {super.key,
-      required this.name_course,
-      required this.balance,
-      required this.course_fee});
+        required this.name_course,
+        required this.course_fee});
 
   @override
   State<PaymentCourse> createState() => _PaymentCourseState();
 }
 
 class _PaymentCourseState extends State<PaymentCourse> {
+  int balance = 0;
   bool PaySuccessfully = false;
-
+  @override
+  void initState()  {
+    loadBalance();
+    super.initState();
+  }
+  Future<void> loadBalance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      setState(() {
+        balance = prefs.getInt('coin') ?? 400;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +88,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('Your Wallet    ' '${widget.balance}' ' ITK',
+                      child: Text('Your Wallet    ' '$balance' ' ITK',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: !this.PaySuccessfully
@@ -109,7 +124,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
   }
 
   Widget resultPay() {
-    if (widget.balance < widget.course_fee) {
+    if (balance < widget.course_fee) {
       return Column(
         children: [
           const Padding(
@@ -123,7 +138,14 @@ class _PaymentCourseState extends State<PaymentCourse> {
           Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Wallet(),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                     shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
                     elevation: MaterialStateProperty.all<double>(5),
@@ -133,7 +155,7 @@ class _PaymentCourseState extends State<PaymentCourse> {
                       ),
                     ),
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.orangeAccent),
+                    MaterialStateProperty.all(Colors.orangeAccent),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(16.0),
@@ -154,8 +176,8 @@ class _PaymentCourseState extends State<PaymentCourse> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
                 'Rest                 '
-                '${widget.balance - widget.course_fee}'
-                ' ITK',
+                    '${balance - widget.course_fee}'
+                    ' ITK',
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
@@ -165,75 +187,77 @@ class _PaymentCourseState extends State<PaymentCourse> {
             padding: const EdgeInsets.all(1.0),
             child: !this.PaySuccessfully
                 ? ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        PaySuccessfully = true;
-                      });
-                    },
-                    style: ButtonStyle(
-                      shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
-                      elevation: MaterialStateProperty.all<double>(5),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                      ),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.orangeAccent),
-                      fixedSize: MaterialStateProperty.all<Size>(
-                        const Size(120, 60), // Cố định chiều rộng của nút
-                      ),
+                onPressed: () {
+                  setState(() {
+                    PaySuccessfully = true;
+                  });
+                },
+                style: ButtonStyle(
+                  shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                  elevation: MaterialStateProperty.all<double>(5),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(1.0),
-                      child: Text(
-                        'Pay',
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ))
-                : Column(
-                  children: [
-                    const Text(
-                        "Pay successfully!",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            color: Colors.orangeAccent),
-                      ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => Course( true, widget.name_course)),
-                        );
-                      },
-                      style: ButtonStyle(
-                        shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
-                        elevation: MaterialStateProperty.all<double>(5),
-                        shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        ),
-                        backgroundColor:
-                        MaterialStateProperty.all(Colors.orangeAccent),
-                        ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          " Let's learn",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
+                  backgroundColor:
+                  MaterialStateProperty.all(Colors.orangeAccent),
+                  fixedSize: MaterialStateProperty.all<Size>(
+                    const Size(120, 60), // Cố định chiều rộng của nút
+                  ),
                 ),
+                child: const Padding(
+                  padding: EdgeInsets.all(1.0),
+                  child: Text(
+                    'Pay',
+                    style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ))
+                : Column(
+              children: [
+                const Text(
+                  "Pay successfully!",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: Colors.orangeAccent),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setInt('coin', balance - widget.course_fee);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Course( true, widget.name_course)),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+                    elevation: MaterialStateProperty.all<double>(5),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    backgroundColor:
+                    MaterialStateProperty.all(Colors.orangeAccent),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      " Let's learn",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       );

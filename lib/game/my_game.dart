@@ -49,6 +49,8 @@ class _MyGameState extends State<MyGame> {
     Colors.black45,
     Colors.black45
   ];
+  int _time = 300;
+
   List<Question> list_quesiton = [
     Question(
       question: "What is the common file extension for Python scripts?",
@@ -91,6 +93,14 @@ class _MyGameState extends State<MyGame> {
     game = GameWidget(game: MyWorld());
     // TODO: implement initState
     super.initState();
+    Stream<int> timerStream = Stream.periodic(const Duration(seconds: 1), (_) => 1);
+    timerStream.listen((_) {
+      setState(() {
+        if (_time > 0) {
+          _time--;
+        }
+      });
+    });
   }
 
   @override
@@ -194,7 +204,7 @@ class _MyGameState extends State<MyGame> {
                                     });
                                     Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(builder: (context) => const MyGame()),
+                                      MaterialPageRoute(builder: (context) => Menu(index: 3,)),
                                     );
                                   },
                                   child: const Padding(
@@ -302,7 +312,7 @@ class _MyGameState extends State<MyGame> {
           ]),
           const SizedBox(height: 30,),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -341,7 +351,8 @@ class _MyGameState extends State<MyGame> {
               ),
               const SizedBox(width: 25,),
               Container(
-                width: MediaQuery.of(context).size.width / 2.3,
+                width: MediaQuery.of(context).size.width / 3.2,
+                height: 130,
                 decoration: BoxDecoration(
                   color: Colors.orange.shade100,
                   borderRadius: BorderRadius.circular(20.0),
@@ -354,14 +365,20 @@ class _MyGameState extends State<MyGame> {
                     ),
                   ],
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(20.0), // Add padding
-                  child: Text(
-                    'Instruction: Press directional buttons to move your character to the treasure location.',
-                    style: TextStyle(
-                        fontSize: 18.0, // Set font size
-                        fontWeight: FontWeight.bold, // Set font weight
-                        color: Colors.orange),
+                child:  Padding(
+                  padding: const EdgeInsets.all(20.0), // Add padding
+                  child: Column(
+                    children: [
+                      const Icon(Icons.timer, color: Colors.red,size: 45,),
+                      const SizedBox(height: 10,),
+                      Text(
+                        'Time: ' '$_time',
+                        style: const TextStyle(
+                            fontSize: 18.0, // Set font size
+                            fontWeight: FontWeight.bold, // Set font weight
+                            color: Colors.orange),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -429,7 +446,7 @@ class MyWorld extends FlameGame with TapDetector, HasCollisionDetection {
   @override
   Future<FutureOr<void>> onLoad() async {
      textComponent = TextComponent(
-       text: 'You Win!',
+       text: '',
        textRenderer: TextPaint(
          style: const TextStyle(
            fontSize: 52.0,

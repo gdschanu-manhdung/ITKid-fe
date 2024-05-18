@@ -3,6 +3,7 @@ import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_finding.dart';
 import 'package:frontend/views/compete/compete_ranking.dart';
 import 'package:frontend/views/compete/component/status_bar_compete.dart';
+import 'package:frontend/views/home/component/status_bar.dart';
 import '../../base.dart';
 
 
@@ -22,10 +23,10 @@ class _CompeteResultState extends State<CompeteResult> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 153, 175, 1),
+          backgroundColor: const Color.fromRGBO(207, 254, 255, 1.0),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 35,),
-            color: const Color.fromRGBO(246, 0, 52, 1),
+            icon: const Icon(Icons.arrow_back, size: 25,),
+            color: appTheme.black900,
             onPressed: () {
               Navigator.pushReplacement(
                 context,
@@ -36,7 +37,7 @@ class _CompeteResultState extends State<CompeteResult> {
             },
           ),
           actions: <Widget>[
-            NavigationBar2(),
+            NavigationBar1(),
           ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0), // Đặt chiều cao của vùng chứa bóng
@@ -71,7 +72,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                 Text(
                                     "Final Result",
                                     style: theme.textTheme.headlineLarge!.copyWith(
-                                      color: const Color.fromRGBO(246, 0, 52, 1),
+                                      color: appTheme.black900,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 35,
                                     )
@@ -93,7 +94,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                             padding: EdgeInsets.symmetric(horizontal: 1.h),
                                             child: buildInput(
                                                 context,
-                                                buildColor: const Color(0xFFFF99AF),
+                                                buildColor: appTheme.teal00,
                                                 name: "You",
                                                 point: widget.you_point.toString(),
                                             ),
@@ -103,7 +104,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                             padding: EdgeInsets.symmetric(horizontal: 1.h),
                                             child: buildInput(
                                                 context,
-                                                buildColor: const Color(0xFFB3B3B3),
+                                                buildColor: appTheme.pink300,
                                                 name: "Opponent",
                                                 point: widget.opp_point.toString(),
                                             ),
@@ -120,7 +121,7 @@ class _CompeteResultState extends State<CompeteResult> {
                                     context,
                                     type: "Back To Home",
                                     buttonColor: const Color(0xff4394DD),
-                                    boxDecoration: AppDecoration.fillBlue.copyWith(
+                                    boxDecoration: AppDecoration.fillTeal00.copyWith(
                                       borderRadius: BorderRadiusStyle.circleBorder35,
                                     ),
                                   ),
@@ -193,7 +194,7 @@ class _CompeteResultState extends State<CompeteResult> {
                 child: Text(
                   point,
                   style: theme.textTheme.titleMedium!.copyWith(
-                    color: const Color(0xFFF60034),
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -235,7 +236,7 @@ class _CompeteResultState extends State<CompeteResult> {
         }
       },
       child: Container(
-        width: 200,
+        width: SizeUtils.width / 2.5,
         decoration: AppDecoration.outlineBlueGray.copyWith(
           borderRadius: BorderRadiusStyle.circleBorder35,
           color: buttonColor,
