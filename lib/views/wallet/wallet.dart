@@ -2,14 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/home/component/status_bar.dart';
 import 'package:frontend/views/wallet/wallet_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../base.dart';
 import '../../core/theme/theme_helper.dart';
 import '../../core/utils/size_utils.dart';
 import '../account/account_view.dart';
 
-class Wallet extends StatelessWidget {
-  Wallet({Key? key}) : super(key: key);
+class Wallet extends StatefulWidget {
+  const Wallet({super.key});
 
+  @override
+  State<Wallet> createState() => _WalletState();
+}
+
+class _WalletState extends State<Wallet> {
+  int coin = 0;
+
+  @override
+  void initState() {
+loadCoin();
+    // TODO: implement initState
+    super.initState();
+  }
+  Future<void> loadCoin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      coin = prefs.getInt('coin') ?? 400;
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +107,7 @@ class Wallet extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "Your Wallet: 250",
+                                              "Your Wallet: " "$coin",
                                               style: TextStyle(
                                                 color: appTheme.black900,
                                                 fontSize: 26,
@@ -131,7 +152,11 @@ class Wallet extends StatelessWidget {
     required BoxDecoration boxDecoration
   }) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        int coin = prefs.getInt('coin') ?? 400;
+
+        prefs.setInt('coin', coin + 300);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

@@ -18,6 +18,7 @@ class _LessonSummary extends State<LessonSummary> {
   int count = 0;
   int point = 0;
   double progress = 0;
+  bool isChoose = false;
 List <Color> listColorButton = [Colors.white, Colors.white, Colors.white, Colors.white, Colors.white];
 
   @override
@@ -209,8 +210,14 @@ List <Color> listColorButton = [Colors.white, Colors.white, Colors.white, Colors
       padding: const EdgeInsets.all(20.0),
       child: TextButton(
           onPressed: () {
-            checkResult(question, option);
-            resetStatus(option);
+            if(!isChoose) {
+              isChoose = true;
+              checkResult(question, option);
+              resetStatus(option);
+
+            }
+
+
           },
           style: ButtonStyle(
             shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
@@ -256,6 +263,7 @@ void checkResult(Question question, int choice) {
         );
       }
     });
+    isChoose = false;
     });
   }
 }

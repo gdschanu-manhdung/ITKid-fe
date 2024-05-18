@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/home/course.dart';
 
 class CardCategory extends StatelessWidget {
-  final int type;
-   const CardCategory(this.type, {super.key} );
+  final String name;
+   const CardCategory(this.name, {super.key} );
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +24,44 @@ class CardCategory extends StatelessWidget {
 
               // Ảnh trong thẻ
               ClipRRect(
-                borderRadius: BorderRadius.all( Radius.circular(15.0)),
-                child: Image.asset(
-                  'assets/images/img_course.jpeg',
-                  width: 130,
-                  height: 120,
-                  fit: BoxFit.cover,
-                ),
+                borderRadius: const BorderRadius.all( Radius.circular(15.0)),
+                child: getImage(name),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text('Course Name',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
+                    child: Text("$name" ' Course',style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
                   ),
-                  SizedBox(height: 10,),
-                 getButton(this.type),
+                  const SizedBox(height: 10,),
+                 Row(
+
+                   children: [
+                     const SizedBox(width: 100,),
+                     TextButton(
+                       onPressed:(){
+                         Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(builder: (context) => Course( true, name)),
+                         );
+                       } ,
+                       style: ButtonStyle(
+                         shape: MaterialStateProperty.all(
+                           RoundedRectangleBorder(
+                             borderRadius: BorderRadius.circular(30.0),
+                           ),
+                         ),
+                         backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                       ),
+                       child: const Padding(
+                         padding: EdgeInsets.fromLTRB(16,0,16,0),
+                         child: Text('Learn', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                       ),
+
+                     )
+                   ],
+                 ),
 
                 ],
               )
@@ -51,61 +73,51 @@ class CardCategory extends StatelessWidget {
       ),
     );
   }
-  Widget getButton(int type) {
-    final buttons = {
-      1: TextButton(
-        onPressed:(){
-        } ,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.fromLTRB(16,0,16,0),
-          child: Text('Continue', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-        ),
 
+  Widget getImage(String name_course) {
+    final image = {
+      'Java': Image.asset(
+        'assets/images/logo_java.png',
+        width: 140,
+        height: 110,
+        fit: BoxFit.cover,
       ),
-      2: TextButton(
-        onPressed:(){
-        } ,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.all(Colors.green),
-        ),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16,0,16,0),
-          child: Text('Start', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-        ),
-
+      'Python': Image.asset(
+        'assets/images/logo_python.png',
+        width: 130,
+        height: 120,
+        fit: BoxFit.cover,
       ),
-      3: TextButton(
-        onPressed:(){
-        } ,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.all(Colors.orangeAccent),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16,0,16,0),
-          child: Text('Review', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-        ),
-
+      'C++': Image.asset(
+        'assets/images/C++.png',
+        width: 130,
+        height: 120,
+        fit: BoxFit.cover,
+      ),
+      'C#': Image.asset(
+        'assets/images/C#.png',
+        width: 130,
+        height: 120,
+        fit: BoxFit.cover,
+      ),
+      'Dart': Image.asset(
+        'assets/images/logo_dart.png',
+        width: 130,
+        height: 120,
+        fit: BoxFit.cover,
+      ),
+      'JavaScript': Image.asset(
+        'assets/images/javascript.png',
+        width: 130,
+        height: 120,
+        fit: BoxFit.cover,
       ),
     };
-
-    return buttons[type] ?? Text('Invalid type');
+    return image[name_course] ?? Image.asset(
+      'assets/images/img_course.jpeg',
+      width: 130,
+      height: 120,
+      fit: BoxFit.cover,
+    );
   }
 }

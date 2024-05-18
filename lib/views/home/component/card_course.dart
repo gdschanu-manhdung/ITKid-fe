@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../course.dart';
 
@@ -29,25 +30,40 @@ class CardCourse extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    name_course,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        name_course,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                // Ảnh trong thẻ
-                ClipRRect(
-                  borderRadius: const BorderRadius.all( Radius.circular(15.0)),
-                  child: getImage(name_course),
-                ),
-                // Tiêu đề trong thẻ
+                    // Ảnh trong thẻ
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: ClipRRect(
+                      borderRadius: const BorderRadius.all( Radius.circular(15.0)),
+                      child: getImage(name_course),
+                                        ),
+                    ),
+                    // Tiêu đề trong thẻ
 
+                  ],
+                ),
+                Positioned(
+                  top: 30,
+                  right: 30,
+                  child: Visibility (
+                      visible: !((isFree)?? false),
+                      child: const Icon(Icons.diamond, color: Colors.orange, size: 35,)),
+                )
               ],
             ),
           ),

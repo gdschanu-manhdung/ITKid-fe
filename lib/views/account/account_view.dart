@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/account/account_change_password.dart';
 import 'package:frontend/views/account/account_edit_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../wallet/wallet.dart';
 
@@ -17,18 +18,25 @@ class _AccountState extends State<Account> {
   TextEditingController lgInputController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  int coin = 0;
 
   @override
   void initState() {
     super.initState();
-
+loadCoin();
     emailController.text = "huakhanhdoan@gmail.com";
     lgInputController.text = "30/02/2024";
     phoneNumberController.text = "0123456789";
   }
+  Future<void> loadCoin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      coin = prefs.getInt('coin') ?? 400;
+    });
 
+  }
   void _navigateToEditProfile(BuildContext context) async {
-    final Map<String, dynamic>? newValues = await Navigator.push(
+    final Map<String, dynamic>? newValues = await Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => AccountEditProfile()),
     );
@@ -182,11 +190,11 @@ class _AccountState extends State<Account> {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "250 ITK",
+              "$coin" " ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold
@@ -195,7 +203,7 @@ class _AccountState extends State<Account> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => Wallet()),
               );

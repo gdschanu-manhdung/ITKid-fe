@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/component/card_course.dart';
 import 'package:frontend/views/home/component/search_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-import 'category.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,11 +17,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+ int coin = 0;
 
-  int coin = 400;
+@override
+void initState() {
+  loadCoin();
+  super.initState();
+}
 
+Future<void> loadCoin() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  setState(() {
+    coin = prefs.getInt('coin') ?? 400;
+  });
 
-
+}
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -53,44 +64,35 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0,10,0,10),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Category()),
-                      );
-                    },
+                  child: Container(
+                    color: const Color.fromRGBO(207, 254, 255, 1.0),
+                    width: 200,
+                    height: 220,
+                    child: Column(
 
-                    child: Container(
-                      color: const Color.fromRGBO(207, 254, 255, 1.0),
-                      width: 200,
-                      height: 220,
-                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Text(' Trending ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            Icon(Icons.trending_up, size: 40,color: Colors.orange,)
+                          ],
+                        ),
+                        Expanded(
 
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Text(' Trending ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
-                              Icon(Icons.trending_up, size: 40,color: Colors.orange,)
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: const [
+
+                              CardCourse(false,'Java'),
+
+                              CardCourse(false, 'Python'),
+                              CardCourse(false,'C++'),
+                              CardCourse(false,'C#'),
                             ],
                           ),
-                          Expanded(
-
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: const [
-
-                                CardCourse(false,'Java'),
-
-                                CardCourse(false, 'Python'),
-                                CardCourse(false,'C++'),
-                                CardCourse(false,'C#'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
