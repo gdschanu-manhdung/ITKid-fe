@@ -168,8 +168,6 @@ class _Course extends State<Course> {
   }
   Widget getCard(String name_course, String _lesson) {
 
-    // String first_lession= _lesson.substring(0, 10);
-    // String second_lession= _lesson.substring(10, _lesson.length);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -208,17 +206,7 @@ class _Course extends State<Course> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(_lesson,style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
-                    // Column(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Text('$first_lession',
-                    //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                    //       ),),
-                    //     Text('$second_lession',
-                    //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                    //       ),),
-                    //   ],
-                    // ),
+
                   ),
                   Row(
                     // crossAxisAlignment: CrossAxisAlignment.end,
