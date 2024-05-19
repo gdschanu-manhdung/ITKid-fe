@@ -233,8 +233,10 @@ class _LessonSummary extends State<LessonSummary> {
           )),
     );
   }
-void checkResult(Question question, int choice) {
+
+  void checkResult(Question question, int choice) {
     setState(() {
+      listColorButton[question.correctAnswer ?? 0] = Colors.green;
       if(question.correctAnswer == choice) {
         listColorButton[choice] = Colors.green;
         point++;
@@ -242,25 +244,24 @@ void checkResult(Question question, int choice) {
         listColorButton[choice] = Colors.red;
       }
     });
+  }
 
-
-}
   void resetStatus(int option) {
     Future.delayed(const Duration(seconds: 2), () {
-    setState(() {
-      if(count<9) {
-
-          listColorButton[option] =Colors.white;
+      setState(() {
+        if(count<9) {
+          listColorButton = [Colors.white, Colors.white, Colors.white, Colors.white, Colors.white];
           count++;
           progress = (count)/10;
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LessonResultSummary(title: widget.title, point: point,)),
-        );
-      }
-    });
-    isChoose = false;
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LessonResultSummary(title: widget.title, point: point,)),
+          );
+        }
+      });
+      isChoose = false;
     });
   }
 }
+

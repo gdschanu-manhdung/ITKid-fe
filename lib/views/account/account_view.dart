@@ -38,9 +38,11 @@ class _AccountState extends State<Account> {
   }
 
   void _navigateToEditProfile(BuildContext context) async {
-    final Map<String, dynamic>? newValues = await Navigator.pushReplacement(
+    final Map<String, dynamic>? newValues = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AccountEditProfile()),
+      MaterialPageRoute(
+        builder: (context) => AccountEditProfile(),
+      ),
     );
     if (newValues != null) {
       setState(() {
@@ -63,103 +65,101 @@ class _AccountState extends State<Account> {
 
   @override
   Widget build(BuildContext context) {
-    return
-          Column(
-            children: [
-              const SizedBox(height: 80,),
-              SizedBox(
-              width: SizeUtils.width,
-              child: SingleChildScrollView(
+    return Column(
+      children: [
+        const SizedBox(height: 80,),
+        SizedBox(
+            width: SizeUtils.width,
+            child: SingleChildScrollView(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom
                 ),
                 child: Form(
-                  child: SizedBox(
-                    width: double.maxFinite,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 10.v),
-                        SizedBox(height: 15.v),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.h),
-                          child: AccountInput(
-                            context,
-                            leftText: "Name",
-                            rightText: "Hua Khanh Doan",
-                          )
-                        ),
-                        SizedBox(height: 20.v),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.h),
-                            child: AccountInput(
-                              context,
-                              leftText: "Email",
-                              rightText: "${emailController.text}",
-                            )
-                        ),
-                        SizedBox(height: 20.v),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.h),
-                            child: AccountInput(
-                              context,
-                              leftText: "Dob",
-                              rightText: "${lgInputController.text}",
-                            )
-                        ),
-                        SizedBox(height: 20.v),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.h),
-                            child: AccountInput(
-                              context,
-                              leftText: "Phone",
-                              rightText: "${phoneNumberController.text}",
-                            )
-                        ),
-                        SizedBox(height: 20.v),
-                        AccountInputMore(context),
-                        SizedBox(height: 25.v),
-                        AccountButton(context),
-                        SizedBox(height: 75.v),
-                      ]
+                    child: SizedBox(
+                        width: double.maxFinite,
+                        child: Column(
+                            children: [
+                              SizedBox(height: 10.v),
+                              SizedBox(height: 15.v),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10.h),
+                                  child: AccountInput(
+                                    context,
+                                    leftText: "Name",
+                                    rightText: "Hua Khanh Doan",
+                                  )
+                              ),
+                              SizedBox(height: 20.v),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10.h),
+                                  child: AccountInput(
+                                    context,
+                                    leftText: "Email",
+                                    rightText: emailController.text,
+                                  )
+                              ),
+                              SizedBox(height: 20.v),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10.h),
+                                  child: AccountInput(
+                                    context,
+                                    leftText: "Dob",
+                                    rightText: lgInputController.text,
+                                  )
+                              ),
+                              SizedBox(height: 20.v),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10.h),
+                                  child: AccountInput(
+                                    context,
+                                    leftText: "Phone",
+                                    rightText: phoneNumberController.text,
+                                  )
+                              ),
+                              SizedBox(height: 20.v),
+                              AccountInputMore(context),
+                              SizedBox(height: 25.v),
+                              AccountButton(context),
+                              SizedBox(height: 75.v),
+                            ]
+                        )
                     )
-                  )
                 )
-              )
-                      ),
-            ],
-          );
-
+            )
+        ),
+      ],
+    );
   }
 
   /// AccountLine
   Widget AccountInput(BuildContext context, {required String leftText, required String rightText}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 9.h, vertical: 10.v),
-      decoration: AppDecoration.outlineBlueGray.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder20
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 13.h, bottom: 1.v),
-            child: Text(
-              leftText,
-              style: theme.textTheme.titleMedium!.copyWith(
-                color: appTheme.black900,
-                fontWeight: FontWeight.bold
+        padding: EdgeInsets.symmetric(horizontal: 9.h, vertical: 10.v),
+        decoration: AppDecoration.outlineBlueGray.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder20
+        ),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 13.h, bottom: 1.v),
+                child: Text(
+                  leftText,
+                  style: theme.textTheme.titleMedium!.copyWith(
+                      color: appTheme.black900,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
               ),
-            ),
-          ),
-          Text(
-              rightText,
-              style: theme.textTheme.titleMedium!.copyWith(
-                color: appTheme.black900,
-                fontWeight: FontWeight.bold
-              ),
-          )
-        ]
-      )
+              Text(
+                rightText,
+                style: theme.textTheme.titleMedium!.copyWith(
+                    color: appTheme.black900,
+                    fontWeight: FontWeight.bold
+                ),
+              )
+            ]
+        )
     );
   }
 
@@ -169,7 +169,7 @@ class _AccountState extends State<Account> {
       margin: EdgeInsets.symmetric(horizontal: 10.h),
       padding: EdgeInsets.symmetric(vertical: 10.v),
       decoration: AppDecoration.outlineBlueGray.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder20
+          borderRadius: BorderRadiusStyle.roundedBorder20
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -190,7 +190,7 @@ class _AccountState extends State<Account> {
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "$coin" " ITK",
+              "$coin ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold
@@ -221,66 +221,68 @@ class _AccountState extends State<Account> {
   /// Button
   Widget AccountButton(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 10.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          GestureDetector(
-            onTap: () {
-              _navigateToEditProfile(context);
-            },
-          child: Container  (
-            margin: EdgeInsets.only(top: 2.v, right: 10.h, bottom: 2.v),
-            decoration: AppDecoration.outlineBlueGray.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder20
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 33.h, vertical: 10.v),
-              decoration: AppDecoration.fillTeal.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder20
+        padding: EdgeInsets.only(left: 10.h),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  _navigateToEditProfile(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 2.v, right: 10.h, bottom: 2.v),
+                  decoration: AppDecoration.outlineBlueGray.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder20
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 33.h, vertical: 10.v),
+                    decoration: AppDecoration.fillTeal.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder20
+                    ),
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 1.v),
+                          Text(
+                            "Edit Profile",
+                            style: CustomTextStyles.titleMediumWhiteA700,
+                          )
+                        ]
+                    ),
+                  ),
+                ),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 1.v),
-                  Text(
-                    "Edit Profile",
-                    style: CustomTextStyles.titleMediumWhiteA700,
-                  )
-                ]
-              ),
-            ),
-          ),),
-          GestureDetector(
-            onTap: () {
-              _navigateToChangePassword(context);
-            },
-          child: Container(
-            margin: EdgeInsets.only(top: 2.v, right: 10.h, bottom: 2.v),
-            decoration: AppDecoration.outlineBlueGray.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder20
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.v),
-              decoration: AppDecoration.fillPink.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder20
-              ),
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 1.v),
-                    Text(
-                      "Change Password",
-                      style: CustomTextStyles.titleMediumWhiteA700,
-                    )
-                  ]
-              ),
-            ),
-          ),)
-        ]
-      )
+              GestureDetector(
+                onTap: () {
+                  _navigateToChangePassword(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 2.v, right: 10.h, bottom: 2.v),
+                  decoration: AppDecoration.outlineBlueGray.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder20
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.v),
+                    decoration: AppDecoration.fillPink.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder20
+                    ),
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 1.v),
+                          Text(
+                            "Change Password",
+                            style: CustomTextStyles.titleMediumWhiteA700,
+                          )
+                        ]
+                    ),
+                  ),
+                ),
+              )
+            ]
+        )
     );
   }
 }
