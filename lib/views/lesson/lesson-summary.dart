@@ -238,6 +238,7 @@ List <Color> listColorButton = [Colors.white, Colors.white, Colors.white, Colors
   }
 void checkResult(Question question, int choice) {
     setState(() {
+      listColorButton[question.correctAnswer ?? 0] = Colors.green;
       if(question.correctAnswer == choice) {
         listColorButton[choice] = Colors.green;
         point++;
@@ -253,7 +254,8 @@ void checkResult(Question question, int choice) {
     setState(() {
       if(count<9) {
 
-          listColorButton[option] =Colors.white;
+        listColorButton = [Colors.white, Colors.white, Colors.white, Colors.white, Colors.white];
+
           count++;
           progress = (count)/10;
       } else {
