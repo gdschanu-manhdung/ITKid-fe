@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -63,7 +62,7 @@ class CardCourse extends StatelessWidget {
                   right: 30,
                   child: Visibility (
                       visible: !((isFree)?? false),
-                      child: const Icon(Icons.diamond, color: Colors.orange, size: 35,)),
+                      child: const Icon(Icons.diamond_outlined, color: Colors.orange, size: 35,)),
                 )
               ],
             ),

@@ -84,6 +84,38 @@ class _MyGameState extends State<MyGame> {
       option: ["Semicolon (;) required", "Enter key", "Line break", "Commas"],
       correctAnswer: 1,
     ),
+    Question(
+      question: "What is the common file extension for Python scripts?",
+      option: [".py", ".cpp", ".js", ".java"],
+      correctAnswer: 0,
+    ),
+    Question(
+      question: "In comments, how do you write a single line in Python?",
+      option: [
+        "// This is a comment",
+        "# This is a comment",
+        "; This is a comment",
+        "* This is a comment"
+      ],
+      correctAnswer: 1,
+    ),
+    Question(
+      question:
+      "Which of these operators is used for printing output in Python?",
+      option: ["print()", "echo()", "output()", "display()"],
+      correctAnswer: 0,
+    ),
+    Question(
+      question: " What is the keyword used to define a function in Python?",
+      option: ["function", "define", "def", "create"],
+      correctAnswer: 2,
+    ),
+    Question(
+      question:
+      "How do you indicate the end of a line of code in Python (assuming no semicolon is used)?",
+      option: ["Semicolon (;) required", "Enter key", "Line break", "Commas"],
+      correctAnswer: 1,
+    ),
   ];
   int count = 0;
   late var game;

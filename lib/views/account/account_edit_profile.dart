@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/app_export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../base.dart';
 import '../home/component/status_bar.dart';
 import 'account_view.dart';
@@ -16,21 +17,26 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
   TextEditingController lgInputController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  int coin = 0;
 
-  void _showSuccessDialog(BuildContext context) {
+  @override
+  void initState() {
+    super.initState();
+    loadCoin();
+  }
+
+  Future<void> loadCoin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      coin = prefs.getInt('coin') ?? 400;
+    });
+  }
+
+  void _showSuccessDialog(BuildContext context, Map<String, dynamic> updatedValues) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(context).pop();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Menu(index: 2,),
-            ),
-          );
-        });
         return Dialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 20),
           shape: RoundedRectangleBorder(
@@ -39,15 +45,21 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
           backgroundColor: Colors.transparent,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
-            height: 200,
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Icon(
+                  Icons.check_circle,
+                  color: appTheme.blue400,
+                  size: 50.0,
+                ),
+                SizedBox(height: 20.0),
                 Text(
                   'Edit Profile Successful!',
                   textAlign: TextAlign.center,
@@ -55,6 +67,14 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
                     color: appTheme.blue400,
                     fontSize: 18.0,
                   ),
+                ),
+                SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                    Navigator.pop(context, updatedValues); // Trả lại dữ liệu cập nhật về Account
+                  },
+                  child: Text('OK'),
                 ),
               ],
             ),
@@ -80,8 +100,7 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
       print("New Dob: $newDob");
       print("New Phone Number: $newPhoneNumber");
 
-      Navigator.pop(context, newValues);
-      _showSuccessDialog(context);
+      _showSuccessDialog(context, newValues);
     }
   }
 
@@ -185,7 +204,7 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
                         bottom: MediaQuery.of(context).viewInsets.bottom
                     ),
                     child: Form(
-                      key: _formKey,
+                        key: _formKey,
                         child: SizedBox(
                             width: double.maxFinite,
                             child: Column(
@@ -398,7 +417,7 @@ class _AccountEditProfileState extends State<AccountEditProfile> {
           Padding(
             padding: EdgeInsets.only(bottom: 1.v),
             child: Text(
-              "250 ITK",
+              "$coin" " ITK",
               style: theme.textTheme.titleMedium!.copyWith(
                   color: appTheme.black900,
                   fontWeight: FontWeight.bold

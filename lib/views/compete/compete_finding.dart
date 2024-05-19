@@ -3,6 +3,7 @@ import 'package:frontend/base.dart';
 import 'package:frontend/core/app_export.dart';
 import 'package:frontend/views/compete/compete_inmatch.dart';
 import 'package:frontend/views/home/component/status_bar.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../core/theme/theme_helper.dart';
 import '../../core/utils/size_utils.dart';
 
@@ -112,24 +113,24 @@ class _CompeteFindingState extends State<CompeteFinding> {
         borderRadius: BorderRadiusStyle.roundedBorder20,
         color: const Color(0xFFFCFCFC),
       ),
-      child: Padding(
-          padding:EdgeInsets.only(top: 1.v),
+      child: Container(
+          padding:EdgeInsets.only(top: 15.v),
+          height: SizeUtils.height * 0.15,
           child: Column(
             children: [
               const Text(
-                "Waiting for your opponent",
+                "Waiting for your opponent...",
                 style: TextStyle(
                   color: Color(0XFFFF6F8E),
-                  fontSize: 24,
+                  fontSize: 21,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4.v),
-              const Icon(
-                Icons.search,
-                size: 100,
+              SizedBox(height: 10.v),
+              LoadingAnimationWidget.discreteCircle(
                 color: Color(0XFFFF6F8E),
-              )
+                size: 50,
+              ),
             ],
           ),
       ),
