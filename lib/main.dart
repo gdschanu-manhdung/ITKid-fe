@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/homePage.dart';
+import 'package:frontend/views/auth/auth_login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'base.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool hasUserData = prefs.getBool('hasUserData') ?? false;
+
+  runApp(MyApp(hasUserData: hasUserData));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool hasUserData;
 
-  // This widget is the root of your application.
+  const MyApp({Key? key, required this.hasUserData}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
-        useMaterial3: true,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            padding: const EdgeInsets.all(10.0),
+          ),
+        ),
       ),
-      home: const MyHomePage(title: 'ITKIT'),
+      home: hasUserData ? Menu() : AuthLogin(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
